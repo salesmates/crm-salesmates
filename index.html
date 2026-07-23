@@ -73,9 +73,7 @@
       display: flex;
       align-items: center;
       min-height: 62px;
-      padding: 3px 11px 23px;
-      margin-bottom: 17px;
-      border-bottom: 1px solid rgba(255,255,255,.12);
+      padding: 3px 11px 18px;
     }
 
     .brand-logo {
@@ -87,6 +85,44 @@
 
     .brand-logo strong { font-weight: 850; }
     .brand-logo span { color: #b8b8b8; font-weight: 350; }
+
+    /* TENANT SELECTOR */
+    .tenant-container {
+      padding: 0 11px 18px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+    .tenant-label {
+      display: block;
+      color: #8c8c8c;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .tenant-select {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 8px;
+      background: rgba(255,255,255,.07);
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
+      transition: border .2s, background .2s;
+    }
+    .tenant-select:focus {
+      border-color: rgba(255,255,255,.35);
+      background: rgba(255,255,255,.12);
+    }
+    .tenant-select option {
+      background: #171717;
+      color: white;
+      padding: 8px;
+    }
 
     .menu-label {
       padding: 10px 12px 7px;
@@ -999,7 +1035,8 @@
       .brand { justify-content: center; padding: 4px 0 20px; }
       .brand-logo { font-size: 0; }
       .brand-logo strong, .brand-logo span, .menu-label,
-      .nav-button span:not(.nav-icon), .user-box > div:last-child { display: none; }
+      .nav-button span:not(.nav-icon), .user-box > div:last-child,
+      .tenant-container { display: none; }
       .nav-button { justify-content: center; padding: 12px; }
       .sidebar-footer { display: flex; justify-content: center; }
       .user-box { padding: 5px; }
@@ -1029,7 +1066,7 @@
       }
 
       .brand-logo { display: none; }
-      .menu-label, .sidebar-footer { display: none; }
+      .menu-label, .sidebar-footer, .tenant-container { display: none; }
 
       .nav-button {
         width: auto;
@@ -1067,6 +1104,16 @@
         <div class="brand-logo">
           <strong>Sales</strong><span>Mates</span>
         </div>
+      </div>
+
+      <!-- Tenant Select -->
+      <div class="tenant-container">
+        <label class="tenant-label">Organização / Tenant</label>
+        <select id="tenantSelect" class="tenant-select" onchange="changeTenant(this.value)">
+          <option value="all">Todas as Contas</option>
+          <option value="matriz">Matriz Curitiba</option>
+          <option value="filial">Filial São Paulo</option>
+        </select>
       </div>
 
       <div class="menu-label">Operação</div>
@@ -1938,6 +1985,7 @@
         source: "Site",
         tags: "inbound, prioridade",
         status: "open",
+        tenant: "matriz",
         createdAt: "2026-07-23T08:30:00",
         timeline: [
           { title: "Negócio criado", description: "Oportunidade incluída por Victor.", date: "2026-07-23T08:30:00" }
@@ -1957,6 +2005,7 @@
         source: "WhatsApp",
         tags: "prospecção",
         status: "open",
+        tenant: "filial",
         createdAt: "2026-07-20T10:20:00",
         timeline: [
           { title: "WhatsApp enviado", description: "Apresentação comercial enviada ao contato.", date: "2026-07-20T10:20:00" }
@@ -1976,6 +2025,7 @@
         source: "Indicação",
         tags: "saúde, decisor",
         status: "open",
+        tenant: "matriz",
         createdAt: "2026-07-17T09:00:00",
         timeline: [
           { title: "Reunião realizada", description: "Necessidade identificada: CRM para equipe de 12 vendedores.", date: "2026-07-22T16:00:00" }
@@ -1995,6 +2045,7 @@
         source: "Prospecção ativa",
         tags: "construção",
         status: "open",
+        tenant: "filial",
         createdAt: "2026-07-15T15:20:00",
         timeline: [
           { title: "Proposta enviada", description: "Proposta comercial enviada por e-mail e WhatsApp.", date: "2026-07-22T10:00:00" }
@@ -2014,6 +2065,7 @@
         source: "Evento",
         tags: "alta prioridade",
         status: "open",
+        tenant: "matriz",
         createdAt: "2026-07-10T11:10:00",
         timeline: [
           { title: "Negociação em fechamento", description: "Cliente solicitou ajuste de condições comerciais.", date: "2026-07-22T14:00:00" }
@@ -2031,6 +2083,7 @@
         date: "2026-07-23T14:00",
         priority: "Alta",
         description: "Validar participantes da reunião de diagnóstico.",
+        tenant: "matriz",
         status: "Agendada"
       },
       {
@@ -2042,6 +2095,7 @@
         date: "2026-07-22T10:00",
         priority: "Alta",
         description: "Inserir condições comerciais revisadas.",
+        tenant: "filial",
         status: "Agendada"
       },
       {
@@ -2053,6 +2107,7 @@
         date: "2026-07-23T16:30",
         priority: "Média",
         description: "Confirmar retorno da proposta revisada.",
+        tenant: "matriz",
         status: "Agendada"
       },
       {
@@ -2064,14 +2119,80 @@
         date: "2026-07-23T09:30",
         priority: "Baixa",
         description: "",
+        tenant: "matriz",
         status: "Concluída"
       }
     ];
 
-    let stages = JSON.parse(localStorage.getItem("salesmates_stages_v3")) || DEFAULT_STAGES;
-    let deals = JSON.parse(localStorage.getItem("salesmates_deals_v3")) || defaultDeals;
-    let activities = JSON.parse(localStorage.getItem("salesmates_activities_v3")) || defaultActivities;
-    let forecastGoal = Number(localStorage.getItem("salesmates_goal_v3")) || 80000;
+    // Bloco de carregamento seguro e higienização dos dados do LocalStorage
+    let stages = DEFAULT_STAGES;
+    let deals = defaultDeals;
+    let activities = defaultActivities;
+    let forecastGoal = 80000;
+    let currentTenant = localStorage.getItem("salesmates_tenant_v3") || "all";
+
+    try {
+      const storedStages = localStorage.getItem("salesmates_stages_v3");
+      if (storedStages) {
+        const parsed = JSON.parse(storedStages);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          stages = parsed.map((item, i) => {
+            if (typeof item === 'string') {
+              return { name: item, probability: DEFAULT_STAGES[i] ? DEFAULT_STAGES[i].probability : 50 };
+            } else if (item && typeof item === 'object') {
+              return {
+                name: item.name || `Etapa ${i + 1}`,
+                probability: typeof item.probability !== 'undefined' ? Number(item.probability) : 50
+              };
+            }
+            return null;
+          }).filter(Boolean);
+        }
+      }
+    } catch (e) {
+      console.error("Erro ao processar etapas, restaurando padrão:", e);
+      stages = DEFAULT_STAGES;
+    }
+    if (!stages || stages.length === 0) stages = DEFAULT_STAGES;
+
+    try {
+      const storedDeals = localStorage.getItem("salesmates_deals_v3");
+      if (storedDeals) {
+        const parsed = JSON.parse(storedDeals);
+        if (Array.isArray(parsed)) {
+          deals = parsed.filter(Boolean);
+        }
+      }
+    } catch (e) {
+      console.error("Erro ao carregar negócios:", e);
+      deals = defaultDeals;
+    }
+
+    try {
+      const storedActivities = localStorage.getItem("salesmates_activities_v3");
+      if (storedActivities) {
+        const parsed = JSON.parse(storedActivities);
+        if (Array.isArray(parsed)) {
+          activities = parsed.filter(Boolean);
+        }
+      }
+    } catch (e) {
+      console.error("Erro ao carregar atividades:", e);
+      activities = defaultActivities;
+    }
+
+    try {
+      const storedGoal = localStorage.getItem("salesmates_goal_v3");
+      if (storedGoal) {
+        const parsedGoal = Number(storedGoal);
+        if (!isNaN(parsedGoal) && parsedGoal >= 0) {
+          forecastGoal = parsedGoal;
+        }
+      }
+    } catch (e) {
+      console.error("Erro ao carregar meta:", e);
+      forecastGoal = 80000;
+    }
 
     let selectedDate = new Date("2026-07-23T12:00:00");
     let calendarCursor = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
@@ -2079,12 +2200,29 @@
     let pipelineView = "kanban";
     let currentDetailDealId = null;
 
+    // Helper functions para controle e filtro de Tenants (Multi-organização)
+    function getTenantDeals() {
+      if (currentTenant === "all") return deals;
+      return deals.filter(deal => !deal.tenant || deal.tenant === currentTenant);
+    }
+
+    function getTenantActivities() {
+      if (currentTenant === "all") return activities;
+      return activities.filter(act => !act.tenant || act.tenant === currentTenant);
+    }
+
+    function changeTenant(value) {
+      currentTenant = value;
+      localStorage.setItem("salesmates_tenant_v3", value);
+      refreshAll();
+    }
+
     function stageNames() {
-      return stages.map((stage) => stage.name);
+      return stages.map((stage) => stage ? stage.name : "").filter(Boolean);
     }
 
     function getStageData(name) {
-      return stages.find((stage) => stage.name === name) || stages[0];
+      return stages.find((stage) => stage && stage.name === name) || stages[0] || DEFAULT_STAGES[0];
     }
 
     function migrateOldDeals() {
@@ -2098,14 +2236,27 @@
       };
 
       deals.forEach((deal) => {
+        if (!deal) return;
         if (oldMap[deal.stage]) {
           deal.stage = oldMap[deal.stage];
           deal.probability = getStageData(deal.stage).probability;
         }
 
         if (!stageNames().includes(deal.stage)) {
-          deal.stage = stages[0].name;
-          deal.probability = stages[0].probability;
+          deal.stage = stages[0] ? stages[0].name : DEFAULT_STAGES[0].name;
+          deal.probability = stages[0] ? stages[0].probability : DEFAULT_STAGES[0].probability;
+        }
+        
+        // Garante que todo negócio legado tenha pelo menos uma unidade/tenant atrelada
+        if (!deal.tenant) {
+          deal.tenant = "matriz";
+        }
+      });
+
+      // Garante que todas atividades legadas tenham uma unidade/tenant atrelada
+      activities.forEach((act) => {
+        if (act && !act.tenant) {
+          act.tenant = "matriz";
         }
       });
     }
@@ -2148,8 +2299,9 @@
 
     function formatDate(date, options = {}) {
       if (!date) return "Não informado";
-
-      return new Date(date).toLocaleDateString("pt-BR", {
+      const d = new Date(date);
+      if (isNaN(d.getTime())) return "Não informado";
+      return d.toLocaleDateString("pt-BR", {
         day: "2-digit",
         month: "2-digit",
         year: "numeric",
@@ -2159,8 +2311,9 @@
 
     function formatDateTime(date) {
       if (!date) return "Não informado";
-
-      return new Date(date).toLocaleString("pt-BR", {
+      const d = new Date(date);
+      if (isNaN(d.getTime())) return "Não informado";
+      return d.toLocaleString("pt-BR", {
         day: "2-digit",
         month: "2-digit",
         year: "numeric",
@@ -2170,7 +2323,9 @@
     }
 
     function dateKey(date) {
+      if (!date) return "";
       const d = new Date(date);
+      if (isNaN(d.getTime())) return "";
       const year = d.getFullYear();
       const month = String(d.getMonth() + 1).padStart(2, "0");
       const day = String(d.getDate()).padStart(2, "0");
@@ -2182,10 +2337,11 @@
     }
 
     function getDealActivities(dealId) {
-      return activities.filter((activity) => Number(activity.dealId) === Number(dealId));
+      return getTenantActivities().filter((activity) => activity && Number(activity.dealId) === Number(dealId));
     }
 
     function getActivityStatus(activity) {
+      if (!activity) return "Cancelada";
       if (activity.status === "Concluída") return "Concluída";
       if (activity.status === "Cancelada") return "Cancelada";
       return new Date(activity.date) < CURRENT_DATE ? "Atrasada" : "Agendada";
@@ -2198,6 +2354,7 @@
     }
 
     function addTimelineEvent(deal, title, description) {
+      if (!deal) return;
       if (!deal.timeline) deal.timeline = [];
 
       deal.timeline.unshift({
@@ -2288,8 +2445,11 @@
       document.querySelectorAll(".view").forEach((view) => view.classList.remove("active"));
       document.querySelectorAll(".nav-button").forEach((button) => button.classList.remove("active"));
 
-      document.getElementById(viewId).classList.add("active");
-      document.querySelector(`[data-view="${viewId}"]`)?.classList.add("active");
+      const targetView = document.getElementById(viewId);
+      if (targetView) targetView.classList.add("active");
+      
+      const targetNav = document.querySelector(`[data-view="${viewId}"]`);
+      if (targetNav) targetNav.classList.add("active");
 
       if (viewId === "pipeline") renderKanban();
       if (viewId === "activities") {
@@ -2299,7 +2459,10 @@
       if (viewId === "forecast") renderForecast();
       if (viewId === "team") renderTeam();
       if (viewId === "reports") renderReports();
-      if (viewId === "settings") document.getElementById("goalInput").value = forecastGoal;
+      if (viewId === "settings") {
+        const goalInput = document.getElementById("goalInput");
+        if (goalInput) goalInput.value = forecastGoal;
+      }
     }
 
     document.querySelectorAll(".nav-button").forEach((button) => {
@@ -2310,9 +2473,10 @@
       const container = document.getElementById(containerId);
       if (!container) return;
 
-      const openDeals = deals.filter((deal) => deal.status === "open");
+      const openDeals = getTenantDeals().filter((deal) => deal && deal.status === "open");
 
       container.innerHTML = stages.map((stage, index) => {
+        if (!stage) return "";
         const currentCount = openDeals.filter((deal) => deal.stage === stage.name).length;
         const previousCount = index === 0
           ? currentCount
@@ -2356,15 +2520,17 @@
 
     function renderDashboard() {
       const currentDay = dateKey(CURRENT_DATE);
+      const tenantActs = getTenantActivities();
+      const tenantDeals = getTenantDeals();
 
-      const completedToday = activities.filter((activity) =>
+      const completedToday = tenantActs.filter((activity) =>
         getActivityStatus(activity) === "Concluída" && dateKey(activity.date) === currentDay
       ).length;
 
-      const pending = activities.filter((activity) => getActivityStatus(activity) === "Agendada").length;
-      const overdue = activities.filter((activity) => getActivityStatus(activity) === "Atrasada").length;
+      const pending = tenantActs.filter((activity) => getActivityStatus(activity) === "Agendada").length;
+      const overdue = tenantActs.filter((activity) => getActivityStatus(activity) === "Atrasada").length;
 
-      const weightedForecast = deals
+      const weightedForecast = tenantDeals
         .filter((deal) => deal.status === "open")
         .reduce((total, deal) => {
           return total + Number(deal.value || 0) * (Number(deal.probability || 0) / 100);
@@ -2377,7 +2543,7 @@
 
       renderConversionRows("conversionDashboard");
 
-      const nextActivities = [...activities]
+      const nextActivities = [...tenantActs]
         .filter((activity) => !["Concluída", "Cancelada"].includes(getActivityStatus(activity)))
         .sort((a, b) => new Date(a.date) - new Date(b.date))
         .slice(0, 4);
@@ -2408,7 +2574,8 @@
       const status = document.getElementById("pipelineStatus")?.value || "open";
       const lossReason = document.getElementById("pipelineLossReason")?.value || "";
 
-      return deals.filter((deal) => {
+      return getTenantDeals().filter((deal) => {
+        if (!deal) return false;
         const matchesStatus = status === "all" || deal.status === status;
 
         const fields = [
@@ -2490,6 +2657,7 @@
       const activeStatus = document.getElementById("pipelineStatus")?.value || "open";
 
       board.innerHTML = stages.map((stage) => {
+        if (!stage) return "";
         const stageDeals = filteredDeals.filter((deal) => deal.stage === stage.name);
         const stageTotal = stageDeals.reduce((sum, deal) => sum + Number(deal.value || 0), 0);
 
@@ -2589,23 +2757,26 @@
       const container = document.getElementById("stageEditor");
       if (!container) return;
 
-      container.innerHTML = stages.map((stage, index) => `
-        <div class="stage-editor-card">
-          <strong title="${escapeHTML(stage.name)}">${escapeHTML(stage.name)}</strong>
-          <small style="display:block;margin-bottom:9px;color:#737373;font-size:10px">
-            Probabilidade sugerida: ${stage.probability}%
-          </small>
+      container.innerHTML = stages.map((stage, index) => {
+        if (!stage) return "";
+        return `
+          <div class="stage-editor-card">
+            <strong title="${escapeHTML(stage.name)}">${escapeHTML(stage.name)}</strong>
+            <small style="display:block;margin-bottom:9px;color:#737373;font-size:10px">
+              Probabilidade sugerida: ${stage.probability}%
+            </small>
 
-          <div class="stage-editor-actions">
-            <button class="icon-button" title="Mover para esquerda" ${index === 0 ? "disabled" : ""} onclick="moveStage(${index}, -1)">←</button>
-            <button class="icon-button" title="Editar etapa" onclick="openStageModal(${index})">✎</button>
-            <button class="icon-button" title="Mover para direita" ${index === stages.length - 1 ? "disabled" : ""} onclick="moveStage(${index}, 1)">→</button>
-            <button class="icon-button danger" title="Excluir etapa" onclick="deleteStage(${index})">×</button>
+            <div class="stage-editor-actions">
+              <button class="icon-button" title="Mover para esquerda" ${index === 0 ? "disabled" : ""} onclick="moveStage(${index}, -1)">←</button>
+              <button class="icon-button" title="Editar etapa" onclick="openStageModal(${index})">✎</button>
+              <button class="icon-button" title="Mover para direita" ${index === stages.length - 1 ? "disabled" : ""} onclick="moveStage(${index}, 1)">→</button>
+              <button class="icon-button danger" title="Excluir etapa" onclick="deleteStage(${index})">×</button>
+            </div>
           </div>
-        </div>
 
-        <button class="stage-add-between" title="Criar nova etapa aqui" onclick="openStageModal(null, ${index + 1})">＋</button>
-      `).join("");
+          <button class="stage-add-between" title="Criar nova etapa aqui" onclick="openStageModal(null, ${index + 1})">＋</button>
+        `;
+      }).join("");
 
       container.insertAdjacentHTML(
         "afterbegin",
@@ -2614,7 +2785,10 @@
     }
 
     function openStageModal(index = null, insertAt = null) {
-      document.getElementById("stageEditIndex").value = index === null ? `new:${insertAt}` : index;
+      const stageEditIndexInput = document.getElementById("stageEditIndex");
+      if (!stageEditIndexInput) return;
+
+      stageEditIndexInput.value = index === null ? `new:${insertAt}` : index;
       document.getElementById("stageModalTitle").textContent = index === null ? "Criar etapa" : "Editar etapa";
 
       if (index === null) {
@@ -2638,7 +2812,7 @@
         return;
       }
 
-      if (stages.some((stage, index) => stage.name.toLowerCase() === name.toLowerCase() && String(index) !== reference)) {
+      if (stages.some((stage, index) => stage && stage.name.toLowerCase() === name.toLowerCase() && String(index) !== reference)) {
         alert("Já existe uma etapa com este nome.");
         return;
       }
@@ -2653,7 +2827,7 @@
         stages[index] = { name, probability };
 
         deals.forEach((deal) => {
-          if (deal.stage === oldName) {
+          if (deal && deal.stage === oldName) {
             deal.stage = name;
             deal.probability = probability;
             addTimelineEvent(deal, "Etapa renomeada", `${oldName} → ${name}.`);
@@ -2690,7 +2864,7 @@
       }
 
       deals.forEach((deal) => {
-        if (deal.stage === stage.name) {
+        if (deal && deal.stage === stage.name) {
           deal.stage = destination.name;
           deal.probability = destination.probability;
           addTimelineEvent(deal, "Etapa removida", `${stage.name} foi removida do funil. Negócio movido para ${destination.name}.`);
@@ -2724,10 +2898,12 @@
         html += `<span class="calendar-day empty-day"></span>`;
       }
 
+      const tenantActs = getTenantActivities();
+
       for (let day = 1; day <= lastDate; day++) {
         const thisDate = new Date(year, month, day, 12, 0, 0);
         const key = dateKey(thisDate);
-        const hasActivity = activities.some((activity) => dateKey(activity.date) === key);
+        const hasActivity = tenantActs.some((activity) => dateKey(activity.date) === key);
         const selected = dateKey(selectedDate) === key;
         const today = dateKey(CURRENT_DATE) === key;
 
@@ -2841,7 +3017,9 @@
       const statusFilter = document.getElementById("activityStatusFilter")?.value || "";
       const search = document.getElementById("activitySearch")?.value.trim().toLowerCase() || "";
 
-      const filtered = activities
+      const tenantActs = getTenantActivities();
+
+      const filtered = tenantActs
         .map((activity) => ({ ...activity, calculatedStatus: getActivityStatus(activity) }))
         .filter((activity) => {
           const deal = getDeal(activity.dealId);
@@ -2862,10 +3040,10 @@
 
       document.getElementById("agendaDateLabel").textContent = getAgendaLabel();
 
-      const periodActivities = activities.filter((activity) => isInAgendaPeriod(activity.date));
-      const scheduled = activities.filter((activity) => getActivityStatus(activity) === "Agendada").length;
-      const overdue = activities.filter((activity) => getActivityStatus(activity) === "Atrasada").length;
-      const completed = activities.filter((activity) => getActivityStatus(activity) === "Concluída").length;
+      const periodActivities = tenantActs.filter((activity) => isInAgendaPeriod(activity.date));
+      const scheduled = tenantActs.filter((activity) => getActivityStatus(activity) === "Agendada").length;
+      const overdue = tenantActs.filter((activity) => getActivityStatus(activity) === "Atrasada").length;
+      const completed = tenantActs.filter((activity) => getActivityStatus(activity) === "Concluída").length;
 
       document.getElementById("agendaScheduled").textContent = scheduled;
       document.getElementById("agendaOverdue").textContent = overdue;
@@ -2940,8 +3118,8 @@
     function renderForecast() {
       const owner = document.getElementById("forecastOwnerFilter")?.value || "";
 
-      const openDeals = deals.filter((deal) => {
-        return deal.status === "open" && (!owner || deal.owner === owner);
+      const openDeals = getTenantDeals().filter((deal) => {
+        return deal && deal.status === "open" && (!owner || deal.owner === owner);
       });
 
       const dealsWithValue = openDeals.filter((deal) => Number(deal.value) > 0);
@@ -2995,6 +3173,7 @@
       `;
 
       document.getElementById("forecastStages").innerHTML = stages.map((stage) => {
+        if (!stage) return "";
         const stageDeals = openDeals.filter((deal) => deal.stage === stage.name);
         const stageGross = stageDeals.reduce((sum, deal) => sum + Number(deal.value || 0), 0);
         const stageWeighted = stageDeals.reduce((sum, deal) => {
@@ -3065,15 +3244,18 @@
     }
 
     function renderTeam() {
-      const openDeals = deals.filter((deal) => deal.status === "open");
+      const tenantDeals = getTenantDeals();
+      const tenantActs = getTenantActivities();
+
+      const openDeals = tenantDeals.filter((deal) => deal && deal.status === "open");
       const pipeline = openDeals.reduce((total, deal) => total + Number(deal.value || 0), 0);
 
-      const periodActivities = activities.filter(activityMatchesTeamPeriod);
+      const periodActivities = tenantActs.filter(activityMatchesTeamPeriod);
       const pending = periodActivities.filter((activity) => getActivityStatus(activity) === "Agendada").length;
       const overdue = periodActivities.filter((activity) => getActivityStatus(activity) === "Atrasada").length;
 
-      const won = deals
-        .filter((deal) => deal.status === "won")
+      const won = tenantDeals
+        .filter((deal) => deal && deal.status === "won")
         .reduce((sum, deal) => sum + Number(deal.value || 0), 0);
 
       document.getElementById("teamPipeline").textContent = currencyNumber(pipeline);
@@ -3141,7 +3323,7 @@
     function renderReports() {
       renderConversionRows("reportsConversion");
 
-      const losses = deals.filter((deal) => deal.status === "lost" || deal.status === "churn");
+      const losses = getTenantDeals().filter((deal) => deal && (deal.status === "lost" || deal.status === "churn"));
       const reasons = {};
 
       losses.forEach((deal) => {
@@ -3167,18 +3349,24 @@
         : `<div class="empty">Ainda não existem negócios perdidos ou churns registrados.</div>`;
     }
 
-    function fillStageOptions(selectedStage = stages[0].name) {
-      document.getElementById("dealStage").innerHTML = stages
-        .map((stage) => `
-          <option value="${escapeHTML(stage.name)}" ${stage.name === selectedStage ? "selected" : ""}>
-            ${escapeHTML(stage.name)} · ${stage.probability}%
-          </option>
-        `)
+    function fillStageOptions(selectedStage = (stages[0] ? stages[0].name : "")) {
+      const stageSelect = document.getElementById("dealStage");
+      if (!stageSelect) return;
+      stageSelect.innerHTML = stages
+        .map((stage) => {
+          if (!stage) return "";
+          return `
+            <option value="${escapeHTML(stage.name)}" ${stage.name === selectedStage ? "selected" : ""}>
+              ${escapeHTML(stage.name)} · ${stage.probability}%
+            </option>
+          `;
+        })
         .join("");
     }
 
     function openDealModal(dealId = null) {
       const form = document.getElementById("dealForm");
+      if (!form) return;
       form.reset();
 
       const isEditing = Boolean(dealId);
@@ -3191,7 +3379,7 @@
         : "Registre uma oportunidade para acompanhar pelo funil.";
 
       fillOwnerOptions();
-      fillStageOptions(deal?.stage || stages[0].name);
+      fillStageOptions(deal?.stage || (stages[0] ? stages[0].name : ""));
 
       if (deal) {
         document.getElementById("dealCompany").value = deal.company || "";
@@ -3204,14 +3392,19 @@
         document.getElementById("dealCloseDate").value = deal.closeDate || "";
         document.getElementById("dealSource").value = deal.source || "";
         document.getElementById("dealTags").value = deal.tags || "";
+        document.getElementById("dealNote").value = "";
       } else {
-        document.getElementById("dealProbability").value = stages[0].probability;
+        document.getElementById("dealProbability").value = stages[0] ? stages[0].probability : 10;
         document.getElementById("dealOwner").value = "Victor";
+        document.getElementById("dealNote").value = "";
       }
 
-      document.getElementById("dealStage").onchange = (event) => {
-        document.getElementById("dealProbability").value = getStageData(event.target.value).probability;
-      };
+      const stageSelect = document.getElementById("dealStage");
+      if (stageSelect) {
+        stageSelect.onchange = (event) => {
+          document.getElementById("dealProbability").value = getStageData(event.target.value).probability;
+        };
+      }
 
       document.getElementById("dealModal").classList.add("open");
     }
@@ -3293,6 +3486,7 @@
           source,
           tags,
           status: "open",
+          tenant: currentTenant === "all" ? "matriz" : currentTenant,
           createdAt: new Date().toISOString(),
           timeline: [
             {
@@ -3324,12 +3518,13 @@
 
     function openActivityModal(dealId = null) {
       const select = document.getElementById("activityDeal");
+      if (!select) return;
       const form = document.querySelector("#activityModal form");
 
-      form.reset();
+      if (form) form.reset();
       fillOwnerOptions();
 
-      const activeDeals = deals.filter((deal) => deal.status === "open");
+      const activeDeals = getTenantDeals().filter((deal) => deal && deal.status === "open");
 
       select.innerHTML = activeDeals.length
         ? activeDeals.map((deal) => `
@@ -3340,13 +3535,19 @@
         : `<option value="">Nenhum negócio aberto</option>`;
 
       const selectedDeal = getDeal(dealId);
-      document.getElementById("activityOwner").value = selectedDeal?.owner || "Victor";
+      const ownerInput = document.getElementById("activityOwner");
+      if (ownerInput) {
+        ownerInput.value = selectedDeal?.owner || "Victor";
+      }
 
       const defaultDate = new Date(CURRENT_DATE);
       defaultDate.setHours(defaultDate.getHours() + 1);
 
-      document.getElementById("activityDate").value =
-        `${dateKey(defaultDate)}T${String(defaultDate.getHours()).padStart(2, "0")}:${String(defaultDate.getMinutes()).padStart(2, "0")}`;
+      const activityDateInput = document.getElementById("activityDate");
+      if (activityDateInput) {
+        activityDateInput.value =
+          `${dateKey(defaultDate)}T${String(defaultDate.getHours()).padStart(2, "0")}:${String(defaultDate.getMinutes()).padStart(2, "0")}`;
+      }
 
       document.getElementById("activityModal").classList.add("open");
     }
@@ -3366,6 +3567,7 @@
         priority: document.getElementById("activityPriority").value,
         owner: document.getElementById("activityOwner").value,
         description: document.getElementById("activityDescription").value.trim(),
+        tenant: currentTenant === "all" ? "matriz" : currentTenant,
         status: "Agendada"
       };
 
@@ -3410,9 +3612,10 @@
           </p>
 
           <div class="stage-line">
-            ${stages.map((stage) => `
-              <span class="stage ${stage.name === deal.stage ? "current" : ""}">${escapeHTML(stage.name)}</span>
-            `).join("")}
+            ${stages.map((stage) => {
+              if (!stage) return "";
+              return `<span class="stage ${stage.name === deal.stage ? "current" : ""}">${escapeHTML(stage.name)}</span>`;
+            }).join("")}
           </div>
         </div>
 
@@ -3632,7 +3835,8 @@
     }
 
     function closeModal(id) {
-      document.getElementById(id).classList.remove("open");
+      const modal = document.getElementById(id);
+      if (modal) modal.classList.remove("open");
     }
 
     document.querySelectorAll(".modal-backdrop").forEach((backdrop) => {
@@ -3643,12 +3847,27 @@
       });
     });
 
-    migrateOldDeals();
-    saveData();
-    fillOwnerOptions();
-    renderCalendar();
-    refreshAll();
+    // Inicialização protegida e segura da aplicação
+    try {
+      migrateOldDeals();
+      saveData();
+      fillOwnerOptions();
+      
+      const tenantSelectEl = document.getElementById("tenantSelect");
+      if (tenantSelectEl) {
+        tenantSelectEl.value = currentTenant;
+      }
+      
+      renderCalendar();
+      refreshAll();
+    } catch (e) {
+      console.error("Erro crítico de inicialização, limpando dados parciais para recuperação automática:", e);
+      // Fallback em caso extremo de dados completamente corrompidos
+      localStorage.removeItem("salesmates_stages_v3");
+      stages = DEFAULT_STAGES;
+      saveData();
+      refreshAll();
+    }
   </script>
 </body>
 </html>
-
