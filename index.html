@@ -21,6 +21,27 @@
       --info: #3977e8;
       --radius: 14px;
       --shadow: 0 8px 26px rgba(0, 0, 0, 0.055);
+      --card-bg: #ffffff;
+      --kanban-col-bg: #eeeeef;
+      --tab-active-bg: #f3f4f6;
+    }
+
+    body.dark-theme {
+      --bg: #0d0d0e;
+      --surface: #18181b;
+      --sidebar: #09090b;
+      --text: #f4f4f5;
+      --muted: #a1a1aa;
+      --border: #27272a;
+      --primary: #f4f4f5;
+      --primary-hover: #e4e4e7;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --info: #3b82f6;
+      --card-bg: #27272a;
+      --kanban-col-bg: #1f1f23;
+      --tab-active-bg: #27272a;
     }
 
     * { box-sizing: border-box; }
@@ -31,23 +52,25 @@
       background: var(--bg);
       color: var(--text);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      transition: background .3s, color .3s;
     }
 
     button, input, select, textarea { font: inherit; }
     button { border: 0; cursor: pointer; }
+    
     input, select, textarea {
       width: 100%;
       outline: none;
       border: 1px solid var(--border);
       border-radius: 10px;
-      background: #fff;
+      background: var(--surface);
       color: var(--text);
       transition: border .2s, box-shadow .2s;
     }
 
     input:focus, select:focus, textarea:focus {
       border-color: #8d8d8d;
-      box-shadow: 0 0 0 3px rgba(0,0,0,.07);
+      box-shadow: 0 0 0 3px rgba(125,125,125,.15);
     }
 
     textarea { resize: vertical; }
@@ -72,6 +95,7 @@
     .brand {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       min-height: 62px;
       padding: 3px 11px 23px;
       margin-bottom: 17px;
@@ -123,6 +147,11 @@
       background: #fff;
     }
 
+    body.dark-theme .nav-button.active {
+      color: #fff;
+      background: #27272a;
+    }
+
     .nav-icon {
       width: 19px;
       text-align: center;
@@ -138,12 +167,18 @@
 
     .user-box {
       display: flex;
-      align-items: center;
+      flex-direction: column;
       gap: 10px;
       padding: 10px;
       border-radius: 10px;
       color: #d6d6d6;
       font-size: 12px;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .avatar, .small-avatar {
@@ -163,6 +198,21 @@
 
     .user-box strong { color: white; font-size: 13px; }
     .user-box small { color: #939393; }
+
+    /* Theme Toggle */
+    .theme-toggle-btn {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: 650;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      width: fit-content;
+    }
 
     /* MAIN */
     .main {
@@ -215,9 +265,10 @@
 
     .button:hover { transform: translateY(-1px); }
     .button-primary { color: white; background: var(--primary); }
+    body.dark-theme .button-primary { color: #111; background: var(--primary); }
     .button-primary:hover { background: var(--primary-hover); }
-    .button-secondary { border: 1px solid var(--border); background: white; color: var(--text); }
-    .button-secondary:hover { background: #f7f7f7; }
+    .button-secondary { border: 1px solid var(--border); background: var(--surface); color: var(--text); }
+    .button-secondary:hover { background: var(--tab-active-bg); }
     .button-danger { color: white; background: var(--danger); }
     .button-success { color: white; background: var(--success); }
     .button-small { padding: 7px 10px; font-size: 12px; }
@@ -229,12 +280,12 @@
       place-items: center;
       border: 1px solid var(--border);
       border-radius: 9px;
-      background: white;
+      background: var(--surface);
       color: var(--text);
       font-size: 15px;
     }
 
-    .icon-button:hover { background: #f5f5f5; }
+    .icon-button:hover { background: var(--tab-active-bg); }
     .icon-button.danger { color: var(--danger); }
 
     .panel, .metric-card {
@@ -296,13 +347,13 @@
       height: 8px;
       overflow: hidden;
       border-radius: 99px;
-      background: #ededed;
+      background: var(--border);
     }
 
     .progress-bar {
       height: 100%;
       border-radius: inherit;
-      background: #171717;
+      background: var(--primary);
     }
 
     .badge {
@@ -320,7 +371,7 @@
     .badge-red { color: #b72e2e; background: #ffe4e4; }
     .badge-blue { color: #245bc4; background: #e3edff; }
     .badge-yellow { color: #a15c00; background: #fff1d4; }
-    .badge-gray { color: #656565; background: #eeeeee; }
+    .badge-gray { color: #656565; background: var(--border); }
 
     .activity-item {
       display: flex;
@@ -339,7 +390,7 @@
       flex: 0 0 auto;
       place-items: center;
       border-radius: 9px;
-      background: #f1f1f1;
+      background: var(--border);
       font-size: 15px;
     }
 
@@ -378,16 +429,16 @@
       padding: 9px 11px;
       border: 1px solid var(--border);
       border-radius: 9px;
-      color: #555;
-      background: white;
+      color: var(--text);
+      background: var(--surface);
       font-size: 12px;
       font-weight: 650;
     }
 
     .filter.active, .view-toggle.active {
-      border-color: #171717;
-      color: white;
-      background: #171717;
+      border-color: var(--primary);
+      color: var(--bg);
+      background: var(--primary);
     }
 
     /* SALES RHYTHM */
@@ -397,7 +448,7 @@
       padding: 12px;
       border: 1px solid var(--border);
       border-radius: 11px;
-      background: #fcfcfc;
+      background: var(--surface);
     }
 
     .conversion-top {
@@ -415,14 +466,14 @@
       font-size: 10px;
     }
 
-    /* PIPELINE */
+    /* PIPELINE STAGES & HORIZONTAL SCROLL */
     .pipeline-manager {
       display: none;
       margin-bottom: 18px;
       padding: 16px;
       border: 1px dashed #bcbcbc;
       border-radius: var(--radius);
-      background: #fafafa;
+      background: var(--surface);
     }
 
     .pipeline-manager.open { display: block; }
@@ -440,7 +491,7 @@
       padding: 11px;
       border: 1px solid var(--border);
       border-radius: 11px;
-      background: white;
+      background: var(--surface);
     }
 
     .stage-editor-card strong {
@@ -467,32 +518,41 @@
       place-items: center;
       border: 1px dashed #a7a7a7;
       border-radius: 50%;
-      background: white;
-      color: #444;
+      background: var(--surface);
+      color: var(--text);
       font-size: 20px;
       font-weight: 500;
     }
 
     .stage-add-between:hover {
-      color: white;
-      background: #171717;
-      border-color: #171717;
+      color: var(--bg);
+      background: var(--primary);
+      border-color: var(--primary);
     }
 
+    /* REAL HORIZONTAL SCROLL KANBAN BOARD */
     .kanban-board {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(235px, 1fr));
-      gap: 12px;
+      display: flex;
+      gap: 14px;
       overflow-x: auto;
-      padding-bottom: 10px;
+      padding-bottom: 16px;
+      align-items: flex-start;
+      min-height: calc(100vh - 280px);
     }
 
     .kanban-column {
-      min-height: 515px;
+      flex: 0 0 290px;
+      min-width: 290px;
+      max-width: 290px;
       padding: 10px;
       border: 1px solid var(--border);
       border-radius: 13px;
-      background: #eeeeef;
+      background: var(--kanban-col-bg);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 80vh;
+      overflow-y: auto;
     }
 
     .column-header {
@@ -502,6 +562,10 @@
       padding: 6px 4px 13px;
       font-size: 12px;
       font-weight: 800;
+      position: sticky;
+      top: 0;
+      background: var(--kanban-col-bg);
+      z-index: 2;
     }
 
     .column-title {
@@ -523,19 +587,23 @@
       padding: 3px 8px;
       border-radius: 99px;
       color: #555;
-      background: white;
+      background: var(--surface);
       font-size: 10px;
     }
 
+    /* DEAL CARDS INTEGRATION */
     .deal-card {
-      margin-bottom: 9px;
       padding: 13px;
-      border: 1px solid #e4e4e4;
+      border: 1px solid var(--border);
       border-radius: 11px;
-      background: white;
+      background: var(--card-bg);
       box-shadow: 0 2px 6px rgba(0,0,0,.035);
       cursor: pointer;
+      position: relative;
       transition: .18s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
 
     .deal-card:hover {
@@ -546,11 +614,12 @@
     .deal-card-top, .deal-card-footer {
       display: flex;
       justify-content: space-between;
+      align-items: flex-start;
       gap: 8px;
     }
 
     .deal-card h3 {
-      margin: 0 0 5px;
+      margin: 0;
       font-size: 13px;
       letter-spacing: -.015em;
     }
@@ -564,8 +633,25 @@
       white-space: nowrap;
     }
 
+    .deal-meta-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 10px;
+      color: var(--muted);
+      border-top: 1px dashed var(--border);
+      padding-top: 6px;
+      margin-top: 4px;
+    }
+
+    .deal-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
     .deal-value {
-      margin-top: 14px;
+      margin-top: 5px;
       font-size: 14px;
       font-weight: 800;
     }
@@ -576,9 +662,46 @@
       font-weight: 650;
     }
 
+    /* Colored Activity Indicators & Quick Complete button */
+    .activity-indicators {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .status-dot.red { background: var(--danger); }
+    .status-dot.yellow { background: var(--warning); }
+    .status-dot.blue { background: var(--info); }
+    .status-dot.green { background: var(--success); }
+
+    .quick-check-btn {
+      background: var(--border);
+      color: var(--text);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 10px;
+      font-weight: bold;
+      transition: background .15s, color .15s;
+    }
+
+    .quick-check-btn:hover {
+      background: var(--success);
+      color: white;
+    }
+
     .next-activity {
-      margin-top: 11px;
-      padding-top: 10px;
+      margin-top: 4px;
+      padding-top: 6px;
       overflow: hidden;
       border-top: 1px solid var(--border);
       color: var(--muted);
@@ -596,7 +719,39 @@
       overflow: hidden;
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      background: white;
+      background: var(--surface);
+    }
+
+    /* MODAL TABS */
+    .modal-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      padding: 0 24px;
+      gap: 18px;
+    }
+
+    .tab-button {
+      padding: 14px 4px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      background: transparent;
+      border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+
+    .tab-button.active {
+      color: var(--text);
+      border-bottom-color: var(--text);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
     }
 
     /* TABLE */
@@ -604,7 +759,7 @@
       overflow: auto;
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      background: white;
+      background: var(--surface);
     }
 
     table { width: 100%; border-collapse: collapse; }
@@ -618,14 +773,14 @@
 
     th {
       color: var(--muted);
-      background: #fbfbfb;
+      background: var(--bg);
       font-size: 10px;
       letter-spacing: .06em;
       text-transform: uppercase;
     }
 
     tr:last-child td { border-bottom: 0; }
-    tbody tr:hover { background: #fcfcfc; }
+    tbody tr:hover { background: var(--tab-active-bg); }
 
     .link-button {
       padding: 0;
@@ -685,14 +840,14 @@
       place-items: center;
       border-radius: 7px;
       background: transparent;
-      color: #444;
+      color: var(--text);
       font-size: 11px;
     }
 
-    .calendar-day:hover { background: #ededed; }
+    .calendar-day:hover { background: var(--border); }
     .calendar-day.empty-day { pointer-events: none; }
-    .calendar-day.today { border: 1px solid #171717; font-weight: 800; }
-    .calendar-day.selected { color: white; background: #171717; }
+    .calendar-day.today { border: 1px solid var(--text); font-weight: 800; }
+    .calendar-day.selected { color: var(--bg); background: var(--text); }
 
     .calendar-day.has-activity::after {
       content: "";
@@ -704,7 +859,7 @@
       background: var(--info);
     }
 
-    .calendar-day.selected.has-activity::after { background: white; }
+    .calendar-day.selected.has-activity::after { background: var(--bg); }
 
     .agenda-summary {
       display: grid;
@@ -716,7 +871,7 @@
     .agenda-summary div {
       padding: 9px;
       border-radius: 9px;
-      background: #f5f5f5;
+      background: var(--bg);
       font-size: 10px;
     }
 
@@ -753,7 +908,7 @@
       padding: 13px;
       border: 1px solid var(--border);
       border-radius: 11px;
-      background: white;
+      background: var(--surface);
     }
 
     .chart-card span {
@@ -797,7 +952,8 @@
     .small-avatar {
       width: 27px;
       height: 27px;
-      background: #e9e9e9;
+      background: var(--border);
+      color: var(--text);
       font-size: 10px;
     }
 
@@ -820,8 +976,9 @@
       margin: 25px auto;
       overflow: hidden;
       border-radius: 17px;
-      background: white;
+      background: var(--surface);
       box-shadow: 0 28px 90px rgba(0,0,0,.27);
+      color: var(--text);
     }
 
     .modal.small-modal { width: min(530px, 100%); }
@@ -856,8 +1013,8 @@
       flex: 0 0 auto;
       place-items: center;
       border-radius: 9px;
-      background: #f1f1f1;
-      color: #333;
+      background: var(--border);
+      color: var(--text);
       font-size: 21px;
     }
 
@@ -900,7 +1057,7 @@
     .deal-details {
       padding: 21px;
       border-right: 1px solid var(--border);
-      background: #fafafa;
+      background: var(--bg);
     }
 
     .detail-title {
@@ -932,7 +1089,7 @@
       padding: 6px 8px;
       border-radius: 7px;
       color: #777;
-      background: #eeeeee;
+      background: var(--border);
       font-size: 10px;
       font-weight: 800;
     }
@@ -957,9 +1114,9 @@
       left: -5px;
       width: 8px;
       height: 8px;
-      border: 2px solid white;
+      border: 2px solid var(--surface);
       border-radius: 50%;
-      background: #171717;
+      background: var(--text);
     }
 
     .timeline-event strong, .timeline-event small { display: block; }
@@ -980,6 +1137,11 @@
       background: #f1fcf5;
     }
 
+    body.dark-theme .whatsapp-box {
+      border-color: #123e27;
+      background: #0d1e15;
+    }
+
     .whatsapp-box strong {
       display: block;
       margin-bottom: 5px;
@@ -994,10 +1156,22 @@
       line-height: 1.4;
     }
 
+    /* Warning Block */
+    .warning-alert-box {
+      background: rgba(232, 141, 16, 0.1);
+      border: 1px solid var(--warning);
+      color: var(--warning);
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 11px;
+      margin-top: 10px;
+      font-weight: 600;
+    }
+
     @media (max-width: 1100px) {
       .sidebar { width: 72px; padding: 19px 8px; }
       .brand { justify-content: center; padding: 4px 0 20px; }
-      .brand-logo { font-size: 0; }
+      .brand-logo, .theme-toggle-btn span { font-size: 0; }
       .brand-logo strong, .brand-logo span, .menu-label,
       .nav-button span:not(.nav-icon), .user-box > div:last-child { display: none; }
       .nav-button { justify-content: center; padding: 12px; }
@@ -1103,11 +1277,17 @@
 
       <div class="sidebar-footer">
         <div class="user-box">
-          <div class="avatar">V</div>
-          <div>
-            <strong>Victor</strong><br />
-            <small>Administrador</small>
+          <div class="user-info">
+            <div class="avatar" id="avatarChar">V</div>
+            <div>
+              <strong id="loggedUserName">Victor</strong><br />
+              <small id="loggedUserRole">Administrador Master</small>
+            </div>
           </div>
+          
+          <button class="theme-toggle-btn" onclick="toggleTheme()">
+            <span id="themeToggleIcon">🌙</span> <span id="themeToggleText">Modo Escuro</span>
+          </button>
         </div>
       </div>
     </aside>
@@ -1117,11 +1297,22 @@
       <section class="view active" id="dashboard">
         <div class="topbar">
           <div class="page-title">
-            <h1>Olá, Victor.</h1>
+            <h1>Olá, <span class="user-name-placeholder">Victor</span>.</h1>
             <p>Uma visão rápida da sua operação comercial.</p>
           </div>
 
           <div class="actions">
+            <!-- Simulated Tenant Switcher (Acesso Master / Impersonate) -->
+            <div class="field" style="flex-direction:row; align-items:center; gap:8px;">
+              <label style="font-size:11px; font-weight:800; white-space:nowrap;">Tenant:</label>
+              <select class="filter" id="tenantSelector" onchange="changeTenant(this.value)" style="padding: 7px; width: 180px;">
+                <option value="all">Todos (Visão Master)</option>
+                <option value="tenant_a">Cliente A (Tech Startup)</option>
+                <option value="tenant_b">Cliente B (Health Group)</option>
+                <option value="tenant_c">Cliente C (E-commerce Express)</option>
+              </select>
+            </div>
+
             <button class="button button-secondary" onclick="showView('activities')">Agenda</button>
             <button class="button button-primary" onclick="openActivityModal()">＋ Nova atividade</button>
           </div>
@@ -1189,7 +1380,7 @@
           </div>
 
           <div class="actions">
-            <button class="button button-secondary" onclick="togglePipelineManager()">⚙ Editar funil</button>
+            <button class="button button-secondary admin-only" onclick="togglePipelineManager()">⚙ Editar funil</button>
             <button class="button button-primary" onclick="openDealModal()">＋ Novo negócio</button>
           </div>
         </div>
@@ -1583,7 +1774,7 @@
           <div class="panel-header">
             <div>
               <h2>Integrações e campos padrão</h2>
-              <p class="panel-subtitle">Base pronta para conexão futura com Supabase e WhatsApp Business API.</p>
+              <p class="panel-subtitle">Base pronta para conexão futura com Supabase e exportação de backups.</p>
             </div>
           </div>
 
@@ -1594,12 +1785,29 @@
             </div>
 
             <div class="field">
+              <label>Simular Cargo do Usuário Atual</label>
+              <select id="roleSelector" onchange="changeUserRole(this.value)">
+                <option value="admin">Victor (Master Admin) - Todas permissões</option>
+                <option value="vendedor">Gustavo (Vendedor) - Bloquear painéis administrativos</option>
+              </select>
+            </div>
+
+            <div class="field">
               <label>Canal de WhatsApp</label>
               <select>
                 <option>Preparado para integração futura</option>
                 <option>WhatsApp Business API</option>
                 <option>Cloud API da Meta</option>
               </select>
+            </div>
+
+            <div class="field">
+              <label>Backup e Portabilidade (JSON Front-end)</label>
+              <div style="display: flex; gap: 8px;">
+                <button class="button button-secondary" onclick="exportDataToJSON()">💾 Exportar Backup</button>
+                <button class="button button-secondary" onclick="document.getElementById('importFile').click()">📂 Importar Backup</button>
+                <input type="file" id="importFile" style="display:none;" accept=".json" onchange="importDataFromJSON(event)" />
+              </div>
             </div>
           </div>
 
@@ -1647,9 +1855,43 @@
               <input id="dealEmail" type="email" placeholder="contato@empresa.com" />
             </div>
 
+            <!-- NOVOS CAMPOS DO CLIENTE -->
             <div class="field">
-              <label>Valor estimado</label>
+              <label>Nicho / Segmento</label>
+              <select id="dealNiche">
+                <option value="">Não informado</option>
+                <option value="Tecnologia">Tecnologia / SaaS</option>
+                <option value="Saúde">Saúde / Clínicas</option>
+                <option value="Indústria">Indústria / Manufatura</option>
+                <option value="Serviços">Prestador de Serviços</option>
+                <option value="E-commerce">Varejo / E-commerce</option>
+                <option value="Outro">Outro</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Produto / Serviço Contratado</label>
+              <input id="dealProduct" placeholder="Ex: Licença Enterprise, Mentoria Gold" />
+            </div>
+
+            <div class="field">
+              <label>Valor Mensal Estimado / Recorrente (MRR)</label>
               <input id="dealValue" type="number" min="0" step="0.01" placeholder="Deixe em branco se ainda não souber" />
+            </div>
+
+            <div class="field">
+              <label>Vencimento do Contrato</label>
+              <input id="dealContractExpiry" type="date" min="1960-01-01" max="2090-12-31" />
+            </div>
+
+            <div class="field">
+              <label>Status do Relacionamento</label>
+              <select id="dealRelationshipStatus">
+                <option value="Excelente">Excelente (Atendimento fluido)</option>
+                <option value="Ativo" selected>Ativo (Regular)</option>
+                <option value="Em risco">⚠️ Em risco (Problemas de entrega)</option>
+                <option value="Frio">Frio (Inativo)</option>
+              </select>
             </div>
 
             <div class="field">
@@ -1783,14 +2025,48 @@
     </div>
   </div>
 
-  <!-- MODAL: DEAL DETAIL -->
+  <!-- MODAL: DEAL DETAIL WITH TABS -->
   <div class="modal-backdrop" id="detailModal">
-    <div class="modal">
+    <div class="modal" style="width: min(1150px, 100%);">
       <div class="modal-header" id="detailHeader"></div>
 
-      <div class="modal-content">
-        <aside class="deal-details" id="dealDetails"></aside>
-        <section class="timeline" id="dealTimeline"></section>
+      <!-- Navigation Tabs inside details -->
+      <div class="modal-tabs">
+        <button class="tab-button active" onclick="switchDetailTab('tabGeral')">Histórico e Detalhes</button>
+        <button class="tab-button" onclick="switchDetailTab('tabContrato')">Contrato & Finanças</button>
+        <button class="tab-button" onclick="switchDetailTab('tabRelacionamento')">Relacionamento & NPS</button>
+      </div>
+
+      <div class="modal-content" style="grid-template-columns: 1fr;">
+        <!-- TAB 1: GERAL -->
+        <div id="tabGeral" class="tab-content active">
+          <div style="display: grid; grid-template-columns: 310px 1fr;">
+            <aside class="deal-details" id="dealDetails" style="border-right: 1px solid var(--border);"></aside>
+            <section class="timeline" id="dealTimeline" style="background: var(--surface);"></section>
+          </div>
+        </div>
+
+        <!-- TAB 2: CONTRATO -->
+        <div id="tabContrato" class="tab-content" style="padding: 24px;">
+          <div class="panel-header">
+            <div>
+              <h2>Informações do Contrato</h2>
+              <p class="panel-subtitle">Gestão de prazos, recorrência de receita, renovações e auditorias.</p>
+            </div>
+          </div>
+          <div id="contractTabContent"></div>
+        </div>
+
+        <!-- TAB 3: RELACIONAMENTO -->
+        <div id="tabRelacionamento" class="tab-content" style="padding: 24px;">
+          <div class="panel-header">
+            <div>
+              <h2>Índice de Saúde e Sucesso do Cliente</h2>
+              <p class="panel-subtitle">Monitore a frequência de contatos e alertas de churn em risco.</p>
+            </div>
+          </div>
+          <div id="relationshipTabContent"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -1939,6 +2215,12 @@
         tags: "inbound, prioridade",
         status: "open",
         createdAt: "2026-07-23T08:30:00",
+        niche: "Indústria",
+        product: "SaaS CRM Enterprise",
+        contractExpiry: "2027-01-15",
+        relationshipStatus: "Excelente",
+        relationshipNotes: "Victor mantém alinhamento semanal estruturado.",
+        tenantId: "tenant_a",
         timeline: [
           { title: "Negócio criado", description: "Oportunidade incluída por Victor.", date: "2026-07-23T08:30:00" }
         ]
@@ -1958,6 +2240,12 @@
         tags: "prospecção",
         status: "open",
         createdAt: "2026-07-20T10:20:00",
+        niche: "Serviços",
+        product: "Módulo Financeiro",
+        contractExpiry: "",
+        relationshipStatus: "Ativo",
+        relationshipNotes: "Aguardando confirmação sobre os fluxos internos.",
+        tenantId: "tenant_b",
         timeline: [
           { title: "WhatsApp enviado", description: "Apresentação comercial enviada ao contato.", date: "2026-07-20T10:20:00" }
         ]
@@ -1977,6 +2265,12 @@
         tags: "saúde, decisor",
         status: "open",
         createdAt: "2026-07-17T09:00:00",
+        niche: "Saúde",
+        product: "SalesMates Consultoria",
+        contractExpiry: "2026-08-05", // Near Expiry!
+        relationshipStatus: "Em risco",
+        relationshipNotes: "Atrasos na última entrega geraram instabilidade.",
+        tenantId: "tenant_b",
         timeline: [
           { title: "Reunião realizada", description: "Necessidade identificada: CRM para equipe de 12 vendedores.", date: "2026-07-22T16:00:00" }
         ]
@@ -1996,6 +2290,12 @@
         tags: "construção",
         status: "open",
         createdAt: "2026-07-15T15:20:00",
+        niche: "Indústria",
+        product: "CRM API Integration",
+        contractExpiry: "2026-11-20",
+        relationshipStatus: "Ativo",
+        relationshipNotes: "Rafael aprovou a estimativa técnica do projeto.",
+        tenantId: "tenant_c",
         timeline: [
           { title: "Proposta enviada", description: "Proposta comercial enviada por e-mail e WhatsApp.", date: "2026-07-22T10:00:00" }
         ]
@@ -2015,6 +2315,12 @@
         tags: "alta prioridade",
         status: "open",
         createdAt: "2026-07-10T11:10:00",
+        niche: "Serviços",
+        product: "Enterprise Training",
+        contractExpiry: "2026-07-20", // Overdue Contract!
+        relationshipStatus: "Frio",
+        relationshipNotes: "Pouco engajamento após as apresentações principais.",
+        tenantId: "tenant_a",
         timeline: [
           { title: "Negociação em fechamento", description: "Cliente solicitou ajuste de condições comerciais.", date: "2026-07-22T14:00:00" }
         ]
@@ -2072,6 +2378,10 @@
     let deals = JSON.parse(localStorage.getItem("salesmates_deals_v3")) || defaultDeals;
     let activities = JSON.parse(localStorage.getItem("salesmates_activities_v3")) || defaultActivities;
     let forecastGoal = Number(localStorage.getItem("salesmates_goal_v3")) || 80000;
+    
+    // User Roles & simulated Tenants
+    let userRole = localStorage.getItem("salesmates_role_v3") || "admin"; 
+    let currentTenant = localStorage.getItem("salesmates_tenant_v3") || "all";
 
     let selectedDate = new Date("2026-07-23T12:00:00");
     let calendarCursor = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
@@ -2098,6 +2408,11 @@
       };
 
       deals.forEach((deal) => {
+        if (!deal.tenantId) deal.tenantId = "tenant_a";
+        if (!deal.niche) deal.niche = "Tecnologia";
+        if (!deal.product) deal.product = "SaaS Platform";
+        if (!deal.relationshipStatus) deal.relationshipStatus = "Ativo";
+
         if (oldMap[deal.stage]) {
           deal.stage = oldMap[deal.stage];
           deal.probability = getStageData(deal.stage).probability;
@@ -2115,6 +2430,8 @@
       localStorage.setItem("salesmates_deals_v3", JSON.stringify(deals));
       localStorage.setItem("salesmates_activities_v3", JSON.stringify(activities));
       localStorage.setItem("salesmates_goal_v3", String(forecastGoal));
+      localStorage.setItem("salesmates_role_v3", userRole);
+      localStorage.setItem("salesmates_tenant_v3", currentTenant);
     }
 
     function escapeHTML(value) {
@@ -2273,6 +2590,63 @@
       });
     }
 
+    // SIMULATED MULTI-TENANT FILTERING
+    function getTenantDeals() {
+      if (currentTenant === "all") return deals;
+      return deals.filter(deal => deal.tenantId === currentTenant);
+    }
+
+    function getTenantActivities() {
+      const filteredDeals = getTenantDeals();
+      const dealIds = filteredDeals.map(d => d.id);
+      return activities.filter(activity => dealIds.includes(activity.dealId));
+    }
+
+    function changeTenant(value) {
+      currentTenant = value;
+      saveData();
+      refreshAll();
+    }
+
+    function changeUserRole(value) {
+      userRole = value;
+      saveData();
+      
+      const isVendedor = value === "vendedor";
+      document.getElementById("loggedUserRole").textContent = isVendedor ? "Vendedor (Gustavo)" : "Administrador Master";
+      document.getElementById("avatarChar").textContent = isVendedor ? "G" : "V";
+      document.getElementById("loggedUserName").textContent = isVendedor ? "Gustavo" : "Victor";
+      document.querySelectorAll(".user-name-placeholder").forEach(el => el.textContent = isVendedor ? "Gustavo" : "Victor");
+
+      // Hide or show admin features
+      document.querySelectorAll(".admin-only").forEach(el => {
+        el.style.display = isVendedor ? "none" : "inline-flex";
+      });
+
+      refreshAll();
+    }
+
+    // LIGHT / DARK MODE TOGGLE
+    function toggleTheme() {
+      const isDark = document.body.classList.toggle("dark-theme");
+      localStorage.setItem("salesmates_theme_v3", isDark ? "dark" : "light");
+      document.getElementById("themeToggleIcon").textContent = isDark ? "☀️" : "🌙";
+      document.getElementById("themeToggleText").textContent = isDark ? "Modo Claro" : "Modo Escuro";
+    }
+
+    function initTheme() {
+      const savedTheme = localStorage.getItem("salesmates_theme_v3") || "light";
+      if (savedTheme === "dark") {
+        document.body.classList.add("dark-theme");
+        document.getElementById("themeToggleIcon").textContent = "☀️";
+        document.getElementById("themeToggleText").textContent = "Modo Claro";
+      } else {
+        document.body.classList.remove("dark-theme");
+        document.getElementById("themeToggleIcon").textContent = "🌙";
+        document.getElementById("themeToggleText").textContent = "Modo Escuro";
+      }
+    }
+
     function refreshAll() {
       fillOwnerOptions();
       renderDashboard();
@@ -2299,7 +2673,10 @@
       if (viewId === "forecast") renderForecast();
       if (viewId === "team") renderTeam();
       if (viewId === "reports") renderReports();
-      if (viewId === "settings") document.getElementById("goalInput").value = forecastGoal;
+      if (viewId === "settings") {
+        document.getElementById("goalInput").value = forecastGoal;
+        document.getElementById("roleSelector").value = userRole;
+      }
     }
 
     document.querySelectorAll(".nav-button").forEach((button) => {
@@ -2310,7 +2687,8 @@
       const container = document.getElementById(containerId);
       if (!container) return;
 
-      const openDeals = deals.filter((deal) => deal.status === "open");
+      const tenantDeals = getTenantDeals();
+      const openDeals = tenantDeals.filter((deal) => deal.status === "open");
 
       container.innerHTML = stages.map((stage, index) => {
         const currentCount = openDeals.filter((deal) => deal.stage === stage.name).length;
@@ -2356,15 +2734,17 @@
 
     function renderDashboard() {
       const currentDay = dateKey(CURRENT_DATE);
+      const tenantActivities = getTenantActivities();
+      const tenantDeals = getTenantDeals();
 
-      const completedToday = activities.filter((activity) =>
+      const completedToday = tenantActivities.filter((activity) =>
         getActivityStatus(activity) === "Concluída" && dateKey(activity.date) === currentDay
       ).length;
 
-      const pending = activities.filter((activity) => getActivityStatus(activity) === "Agendada").length;
-      const overdue = activities.filter((activity) => getActivityStatus(activity) === "Atrasada").length;
+      const pending = tenantActivities.filter((activity) => getActivityStatus(activity) === "Agendada").length;
+      const overdue = tenantActivities.filter((activity) => getActivityStatus(activity) === "Atrasada").length;
 
-      const weightedForecast = deals
+      const weightedForecast = tenantDeals
         .filter((deal) => deal.status === "open")
         .reduce((total, deal) => {
           return total + Number(deal.value || 0) * (Number(deal.probability || 0) / 100);
@@ -2377,7 +2757,7 @@
 
       renderConversionRows("conversionDashboard");
 
-      const nextActivities = [...activities]
+      const nextActivities = [...tenantActivities]
         .filter((activity) => !["Concluída", "Cancelada"].includes(getActivityStatus(activity)))
         .sort((a, b) => new Date(a.date) - new Date(b.date))
         .slice(0, 4);
@@ -2408,7 +2788,9 @@
       const status = document.getElementById("pipelineStatus")?.value || "open";
       const lossReason = document.getElementById("pipelineLossReason")?.value || "";
 
-      return deals.filter((deal) => {
+      const tenantDeals = getTenantDeals();
+
+      return tenantDeals.filter((deal) => {
         const matchesStatus = status === "all" || deal.status === status;
 
         const fields = [
@@ -2417,6 +2799,8 @@
           deal.phone,
           deal.email,
           deal.tags,
+          deal.niche,
+          deal.product,
           deal.lossReason
         ].join(" ").toLowerCase();
 
@@ -2436,6 +2820,7 @@
       });
     }
 
+    // ADVANCED INTEGRATED CARD LAYOUT & RENDER KANBAN
     function renderKanban() {
       const board = document.getElementById("kanbanBoard");
       const list = document.getElementById("pipelineList");
@@ -2444,7 +2829,7 @@
 
       const filteredDeals = getFilteredPipelineDeals();
 
-      board.style.display = pipelineView === "kanban" ? "grid" : "none";
+      board.style.display = pipelineView === "kanban" ? "flex" : "none";
       list.style.display = pipelineView === "list" ? "block" : "none";
 
       if (pipelineView === "list") {
@@ -2455,6 +2840,7 @@
                 <th>Negócio</th>
                 <th>Status</th>
                 <th>Etapa</th>
+                <th>Nicho/Produto</th>
                 <th>Responsável</th>
                 <th>Valor</th>
                 <th>Próxima ação</th>
@@ -2473,6 +2859,7 @@
                     </td>
                     <td>${badgeForStatus(dealStatusLabel(deal.status))}</td>
                     <td>${escapeHTML(deal.stage)}</td>
+                    <td>${escapeHTML(deal.niche || "N/I")} / ${escapeHTML(deal.product || "N/I")}</td>
                     <td>${escapeHTML(deal.owner)}</td>
                     <td>${currency(deal.value)}</td>
                     <td class="${nextStatus === "Atrasada" ? "next-activity overdue" : ""}">
@@ -2480,7 +2867,7 @@
                     </td>
                   </tr>
                 `;
-              }).join("") : `<tr><td colspan="6"><div class="empty">Nenhum negócio encontrado.</div></td></tr>`}
+              }).join("") : `<tr><td colspan="7"><div class="empty">Nenhum negócio encontrado.</div></td></tr>`}
             </tbody>
           </table>
         `;
@@ -2511,6 +2898,27 @@
               const next = getNextActivity(deal.id);
               const nextStatus = next ? getActivityStatus(next) : null;
 
+              // Color dot definition
+              let dotColor = "green"; // All cleared/Finished
+              if (next) {
+                if (nextStatus === "Atrasada") dotColor = "red";
+                else if (dateKey(next.date) === dateKey(CURRENT_DATE)) dotColor = "yellow";
+                else dotColor = "blue";
+              }
+
+              // Contract Status Alerts
+              let contractAlert = "";
+              if (deal.contractExpiry) {
+                const expiryDate = new Date(deal.contractExpiry);
+                const diffTime = expiryDate - CURRENT_DATE;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                if (diffDays < 0) {
+                  contractAlert = `<span class="badge badge-red" style="font-size:9px; padding:2px 6px;">Contrato Vencido</span>`;
+                } else if (diffDays <= 30) {
+                  contractAlert = `<span class="badge badge-yellow" style="font-size:9px; padding:2px 6px;">Expira em ${diffDays}d</span>`;
+                }
+              }
+
               return `
                 <article
                   class="deal-card"
@@ -2519,19 +2927,40 @@
                   onclick="openDealDetail(${deal.id})"
                 >
                   <div class="deal-card-top">
-                    <div style="min-width:0">
+                    <div style="min-width:0; flex: 1;">
+                      <div class="activity-indicators" style="margin-bottom: 4px;">
+                        <span class="status-dot ${dotColor}" title="${next ? 'Ação pendente' : 'Tudo resolvido'}"></span>
+                        <span class="badge badge-gray" style="font-size: 8px; padding: 2px 5px;">${escapeHTML(deal.niche || "Geral")}</span>
+                      </div>
                       <h3>${escapeHTML(deal.company)}</h3>
                       <p>${escapeHTML(deal.contact || "Sem contato informado")}</p>
                     </div>
 
-                    <span title="${nextStatus === "Atrasada" ? "Atividade vencida" : next ? "Atividade agendada" : "Sem atividade"}">
-                      ${nextStatus === "Atrasada" ? "●" : next ? "◌" : "○"}
-                    </span>
+                    <!-- Quick Action Complete Task -->
+                    ${next ? `
+                      <button class="quick-check-btn" title="Concluir '${escapeHTML(next.title)}' sem abrir modal" onclick="quickComplete(event, ${next.id}, ${deal.id})">
+                        ✓
+                      </button>
+                    ` : ""}
+                  </div>
+
+                  <!-- Product and Contract Meta details on front of the Card -->
+                  <div class="deal-meta-info">
+                    <div class="deal-meta-row">
+                      <span>Prod: <strong>${escapeHTML(deal.product || "Licença padrão")}</strong></span>
+                      <span>Resp: <strong>${escapeHTML(deal.owner)}</strong></span>
+                    </div>
+                    ${deal.relationshipStatus === "Em risco" ? `
+                      <div class="deal-meta-row" style="color:var(--danger); font-weight:700;">
+                        <span>⚠️ Relacionamento Em Risco</span>
+                      </div>
+                    ` : ""}
+                    ${contractAlert ? `<div class="deal-meta-row">${contractAlert}</div>` : ""}
                   </div>
 
                   ${dealValueHTML(deal)}
 
-                  <div class="deal-card-footer" style="margin-top:10px;align-items:center">
+                  <div class="deal-card-footer" style="margin-top:2px;align-items:center">
                     <span class="badge badge-gray">${deal.probability}%</span>
                     <small style="color:#737373;font-size:10px">${escapeHTML(deal.owner)}</small>
                   </div>
@@ -2547,6 +2976,12 @@
           </div>
         `;
       }).join("");
+    }
+
+    // QUICK COMPLETE AT WORK
+    function quickComplete(event, activityId, dealId) {
+      event.stopPropagation(); // Avoid opening modal
+      completeActivity(activityId);
     }
 
     function setPipelineView(view) {
@@ -2581,6 +3016,10 @@
     }
 
     function togglePipelineManager() {
+      if (userRole === "vendedor") {
+        alert("Acesso restrito ao administrador comercial.");
+        return;
+      }
       document.getElementById("pipelineManager").classList.toggle("open");
       renderStageEditor();
     }
@@ -2724,10 +3163,12 @@
         html += `<span class="calendar-day empty-day"></span>`;
       }
 
+      const tenantActivities = getTenantActivities();
+
       for (let day = 1; day <= lastDate; day++) {
         const thisDate = new Date(year, month, day, 12, 0, 0);
         const key = dateKey(thisDate);
-        const hasActivity = activities.some((activity) => dateKey(activity.date) === key);
+        const hasActivity = tenantActivities.some((activity) => dateKey(activity.date) === key);
         const selected = dateKey(selectedDate) === key;
         const today = dateKey(CURRENT_DATE) === key;
 
@@ -2841,7 +3282,9 @@
       const statusFilter = document.getElementById("activityStatusFilter")?.value || "";
       const search = document.getElementById("activitySearch")?.value.trim().toLowerCase() || "";
 
-      const filtered = activities
+      const tenantActivities = getTenantActivities();
+
+      const filtered = tenantActivities
         .map((activity) => ({ ...activity, calculatedStatus: getActivityStatus(activity) }))
         .filter((activity) => {
           const deal = getDeal(activity.dealId);
@@ -2862,10 +3305,10 @@
 
       document.getElementById("agendaDateLabel").textContent = getAgendaLabel();
 
-      const periodActivities = activities.filter((activity) => isInAgendaPeriod(activity.date));
-      const scheduled = activities.filter((activity) => getActivityStatus(activity) === "Agendada").length;
-      const overdue = activities.filter((activity) => getActivityStatus(activity) === "Atrasada").length;
-      const completed = activities.filter((activity) => getActivityStatus(activity) === "Concluída").length;
+      const periodActivities = tenantActivities.filter((activity) => isInAgendaPeriod(activity.date));
+      const scheduled = tenantActivities.filter((activity) => getActivityStatus(activity) === "Agendada").length;
+      const overdue = tenantActivities.filter((activity) => getActivityStatus(activity) === "Atrasada").length;
+      const completed = tenantActivities.filter((activity) => getActivityStatus(activity) === "Concluída").length;
 
       document.getElementById("agendaScheduled").textContent = scheduled;
       document.getElementById("agendaOverdue").textContent = overdue;
@@ -2939,8 +3382,9 @@
 
     function renderForecast() {
       const owner = document.getElementById("forecastOwnerFilter")?.value || "";
+      const tenantDeals = getTenantDeals();
 
-      const openDeals = deals.filter((deal) => {
+      const openDeals = tenantDeals.filter((deal) => {
         return deal.status === "open" && (!owner || deal.owner === owner);
       });
 
@@ -3065,14 +3509,15 @@
     }
 
     function renderTeam() {
-      const openDeals = deals.filter((deal) => deal.status === "open");
+      const openDeals = getTenantDeals().filter((deal) => deal.status === "open");
       const pipeline = openDeals.reduce((total, deal) => total + Number(deal.value || 0), 0);
 
-      const periodActivities = activities.filter(activityMatchesTeamPeriod);
+      const tenantActivities = getTenantActivities();
+      const periodActivities = tenantActivities.filter(activityMatchesTeamPeriod);
       const pending = periodActivities.filter((activity) => getActivityStatus(activity) === "Agendada").length;
       const overdue = periodActivities.filter((activity) => getActivityStatus(activity) === "Atrasada").length;
 
-      const won = deals
+      const won = getTenantDeals()
         .filter((deal) => deal.status === "won")
         .reduce((sum, deal) => sum + Number(deal.value || 0), 0);
 
@@ -3141,7 +3586,7 @@
     function renderReports() {
       renderConversionRows("reportsConversion");
 
-      const losses = deals.filter((deal) => deal.status === "lost" || deal.status === "churn");
+      const losses = getTenantDeals().filter((deal) => deal.status === "lost" || deal.status === "churn");
       const reasons = {};
 
       losses.forEach((deal) => {
@@ -3204,6 +3649,10 @@
         document.getElementById("dealCloseDate").value = deal.closeDate || "";
         document.getElementById("dealSource").value = deal.source || "";
         document.getElementById("dealTags").value = deal.tags || "";
+        document.getElementById("dealNiche").value = deal.niche || "";
+        document.getElementById("dealProduct").value = deal.product || "";
+        document.getElementById("dealContractExpiry").value = deal.contractExpiry || "";
+        document.getElementById("dealRelationshipStatus").value = deal.relationshipStatus || "Ativo";
       } else {
         document.getElementById("dealProbability").value = stages[0].probability;
         document.getElementById("dealOwner").value = "Victor";
@@ -3234,6 +3683,12 @@
       const tags = document.getElementById("dealTags").value.trim();
       const note = document.getElementById("dealNote").value.trim();
 
+      // NOVOS CAMPOS
+      const niche = document.getElementById("dealNiche").value;
+      const product = document.getElementById("dealProduct").value.trim();
+      const contractExpiry = document.getElementById("dealContractExpiry").value;
+      const relationshipStatus = document.getElementById("dealRelationshipStatus").value;
+
       if (editingId) {
         const deal = getDeal(editingId);
         if (!deal) return;
@@ -3254,7 +3709,11 @@
           owner,
           closeDate,
           source,
-          tags
+          tags,
+          niche,
+          product,
+          contractExpiry,
+          relationshipStatus
         });
 
         addTimelineEvent(deal, "Negócio atualizado", "Informações da oportunidade foram atualizadas.");
@@ -3292,6 +3751,11 @@
           closeDate,
           source,
           tags,
+          niche,
+          product,
+          contractExpiry,
+          relationshipStatus,
+          tenantId: currentTenant === "all" ? "tenant_a" : currentTenant, // set default tenant logically
           status: "open",
           createdAt: new Date().toISOString(),
           timeline: [
@@ -3329,7 +3793,7 @@
       form.reset();
       fillOwnerOptions();
 
-      const activeDeals = deals.filter((deal) => deal.status === "open");
+      const activeDeals = getTenantDeals().filter((deal) => deal.status === "open");
 
       select.innerHTML = activeDeals.length
         ? activeDeals.map((deal) => `
@@ -3390,6 +3854,17 @@
       }
     }
 
+    // MULTI-TAB CONTROLS INSIDE DETAILS
+    function switchDetailTab(tabId) {
+      document.querySelectorAll(".tab-button").forEach(btn => btn.classList.remove("active"));
+      document.querySelectorAll(".tab-content").forEach(content => content.classList.remove("active"));
+      
+      const currentBtn = Array.from(document.querySelectorAll(".tab-button")).find(btn => btn.getAttribute("onclick").includes(tabId));
+      if (currentBtn) currentBtn.classList.add("active");
+      document.getElementById(tabId).classList.add("active");
+    }
+
+    // DETAILED MODAL VIEWS WITH AUTOMATION & RENEWALS
     function openDealDetail(dealId) {
       const deal = getDeal(dealId);
       if (!deal) return;
@@ -3397,6 +3872,9 @@
       currentDetailDealId = deal.id;
 
       const nextActivity = getNextActivity(deal.id);
+
+      // Active main tab initially
+      switchDetailTab('tabGeral');
 
       document.getElementById("detailHeader").innerHTML = `
         <div>
@@ -3422,6 +3900,7 @@
         </div>
       `;
 
+      // TAB 1: GERAL CONTROLS
       document.getElementById("dealDetails").innerHTML = `
         <div class="detail-title">Informações</div>
 
@@ -3429,7 +3908,7 @@
         <div class="detail-value"><strong>Telefone</strong><br>${escapeHTML(deal.phone || "Não informado")}</div>
         <div class="detail-value"><strong>E-mail</strong><br>${escapeHTML(deal.email || "Não informado")}</div>
         <div class="detail-value"><strong>Responsável</strong><br>${escapeHTML(deal.owner)}</div>
-        <div class="detail-value"><strong>Valor</strong><br>${currency(deal.value)}</div>
+        <div class="detail-value"><strong>Valor Mensal (MRR)</strong><br>${currency(deal.value)}</div>
         <div class="detail-value"><strong>Probabilidade</strong><br>${deal.probability}%</div>
         <div class="detail-value"><strong>Fechamento previsto</strong><br>${deal.closeDate ? formatDate(deal.closeDate) : "Não informado"}</div>
         <div class="detail-value"><strong>Próxima atividade</strong><br>${nextActivity ? escapeHTML(nextActivity.title) : "Nenhuma agendada"}</div>
@@ -3469,6 +3948,7 @@
         </div>
       `;
 
+      // TIMELINE EVENTS
       const timelineEvents = [
         ...(deal.timeline || []),
         ...getDealActivities(deal.id).map((activity) => ({
@@ -3479,7 +3959,7 @@
       ].sort((a, b) => new Date(b.date) - new Date(a.date));
 
       document.getElementById("dealTimeline").innerHTML = `
-        <div class="panel-header">
+        <div class="panel-header" style="margin-bottom: 12px;">
           <div>
             <h2>Timeline comercial</h2>
             <p class="panel-subtitle">Histórico completo da oportunidade.</p>
@@ -3494,6 +3974,96 @@
             <small>${formatDateTime(event.date)}</small>
           </div>
         `).join("") : `<div class="empty">Ainda não há eventos neste negócio.</div>`}
+      `;
+
+      // TAB 2: CONTRACT CONTENT (WITH ALERT CALCULATIONS)
+      let contractStatusHTML = "";
+      if (deal.contractExpiry) {
+        const expiryDate = new Date(deal.contractExpiry);
+        const diffTime = expiryDate - CURRENT_DATE;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        if (diffDays < 0) {
+          contractStatusHTML = `
+            <div class="warning-alert-box" style="border-color:var(--danger); color:var(--danger); background:rgba(232,74,74,0.1);">
+              🚨 CONTRATO EXPIRADO HÁ ${Math.abs(diffDays)} DIA(S)! Necessita renovação urgente de serviços e reajuste comercial.
+            </div>`;
+        } else if (diffDays <= 30) {
+          contractStatusHTML = `
+            <div class="warning-alert-box">
+              ⚠️ ATENÇÃO: Contrato vence em ${diffDays} dias (${formatDate(deal.contractExpiry)}). Recomenda-se iniciar o fluxo de renovação ativo.
+            </div>`;
+        } else {
+          contractStatusHTML = `
+            <div class="warning-alert-box" style="border-color:var(--success); color:var(--success); background:rgba(23,163,107,0.1);">
+              ✅ Contrato saudável e ativo. Vence em ${diffDays} dias (${formatDate(deal.contractExpiry)}).
+            </div>`;
+        }
+      } else {
+        contractStatusHTML = `<div class="warning-alert-box" style="color:var(--muted); border-color:var(--border); background:transparent;">Sem vencimento de contrato cadastrado.</div>`;
+      }
+
+      document.getElementById("contractTabContent").innerHTML = `
+        <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:18px;">
+          <div class="metric-card">
+            <div class="metric-label">Produto / Serviço Contratado</div>
+            <div class="metric-value" style="font-size:20px; font-weight:750; margin-top:5px;">${escapeHTML(deal.product || "Não informado")}</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Valor Mensal (Recorrente)</div>
+            <div class="metric-value" style="font-size:20px; font-weight:750; margin-top:5px;">${currency(deal.value)}</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Nicho / Segmento do Cliente</div>
+            <div style="font-size:14px; font-weight:700; margin-top:5px;">${escapeHTML(deal.niche || "Não informado")}</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Data de Expiração</div>
+            <div style="font-size:14px; font-weight:700; margin-top:5px;">${deal.contractExpiry ? formatDate(deal.contractExpiry) : "Não cadastrada"}</div>
+          </div>
+        </div>
+        ${contractStatusHTML}
+        
+        <div style="margin-top:20px;">
+          <h3>Automação de Vencimento</h3>
+          <p style="font-size:12px; color:var(--muted); line-height:1.4;">
+            As regras de aviso visual disparam notificações automáticas no funil comercial a cada 30 dias de antecedência ao vencimento. 
+            Você pode atualizar as informações contratuais a qualquer momento na edição do negócio.
+          </p>
+        </div>
+      `;
+
+      // TAB 3: RELATIONSHIP CONTENT
+      let relBadgeClass = "badge-green";
+      if (deal.relationshipStatus === "Em risco") relBadgeClass = "badge-red";
+      else if (deal.relationshipStatus === "Frio") relBadgeClass = "badge-yellow";
+
+      document.getElementById("relationshipTabContent").innerHTML = `
+        <div style="display:grid; grid-template-columns: 200px 1fr; gap:18px; align-items:center;">
+          <div class="metric-card" style="text-align:center;">
+            <div class="metric-label">Saúde do Cliente</div>
+            <div style="margin-top:10px;">
+              <span class="badge ${relBadgeClass}" style="font-size:12px; padding:6px 12px;">${escapeHTML(deal.relationshipStatus || "Ativo")}</span>
+            </div>
+          </div>
+          <div class="panel" style="padding:15px; margin:0;">
+            <strong style="font-size:13px; display:block; margin-bottom:5px;">Comentários e Histórico de Sucesso:</strong>
+            <p style="font-size:12px; margin:0; line-height:1.5;">${escapeHTML(deal.relationshipNotes || "Nenhuma nota de relacionamento salva até o momento.")}</p>
+          </div>
+        </div>
+
+        ${deal.relationshipStatus === "Em risco" ? `
+          <div class="warning-alert-box" style="border-color:var(--danger); color:var(--danger); background:rgba(232,74,74,0.1); margin-top:15px;">
+            ⚠️ ALERTA DE CHURN: Este cliente está com relacionamento marcado como "Em Risco". Recomenda-se uma ligação imediata de alinhamento com os decisores.
+          </div>
+        ` : ""}
+
+        <div style="margin-top:24px;">
+          <h3>Registro de Reuniões e Feedbacks (NPS)</h3>
+          <p style="font-size:12px; color:var(--muted); line-height:1.4;">
+            Acompanhe o grau de satisfação de entrega e mantenha o time integrado. Atualmente, os relatórios unificam as métricas de conversão com o índice de saúde para que você tome decisões preventivas contra cancelamentos indesejados.
+          </p>
+        </div>
       `;
 
       document.getElementById("detailModal").classList.add("open");
@@ -3617,37 +4187,4 @@
       window.open(`https://wa.me/55${cleanPhone}?text=${message}`, "_blank");
     }
 
-    function saveGoal() {
-      const value = Number(document.getElementById("goalInput").value);
-
-      if (Number.isNaN(value) || value < 0) {
-        alert("Informe uma meta válida.");
-        return;
-      }
-
-      forecastGoal = value;
-      saveData();
-      refreshAll();
-      alert("Configurações salvas com sucesso.");
-    }
-
-    function closeModal(id) {
-      document.getElementById(id).classList.remove("open");
-    }
-
-    document.querySelectorAll(".modal-backdrop").forEach((backdrop) => {
-      backdrop.addEventListener("click", (event) => {
-        if (event.target === backdrop) {
-          backdrop.classList.remove("open");
-        }
-      });
-    });
-
-    migrateOldDeals();
-    saveData();
-    fillOwnerOptions();
-    renderCalendar();
-    refreshAll();
-  </script>
-</body>
-</html>
+    
