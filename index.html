@@ -9,7 +9,6 @@
     :root {
       --bg: #f7f7f8;
       --surface: #ffffff;
-      --surface-soft: #f3f4f6;
       --sidebar: #050505;
       --text: #171717;
       --muted: #737373;
@@ -79,55 +78,15 @@
       border-bottom: 1px solid rgba(255,255,255,.12);
     }
 
-    /*
-      Caso envie a logo em arquivo, substitua esta marca por:
-      <img src="logo-salesmates.png" class="brand-logo-image" alt="SalesMates">
-    */
     .brand-logo {
-      display: flex;
-      align-items: center;
-      gap: 8px;
       color: white;
       letter-spacing: -.06em;
-      font-size: 24px;
+      font-size: 25px;
       line-height: 1;
     }
 
     .brand-logo strong { font-weight: 850; }
     .brand-logo span { color: #b8b8b8; font-weight: 350; }
-
-    .brand-mark {
-      width: 31px;
-      height: 31px;
-      position: relative;
-      display: inline-block;
-      margin-right: 2px;
-    }
-
-    .brand-mark::before {
-      content: "";
-      position: absolute;
-      width: 22px;
-      height: 13px;
-      top: 3px;
-      left: 3px;
-      border-top: 3px solid white;
-      border-right: 3px solid white;
-      transform: rotate(-42deg);
-    }
-
-    .brand-mark::after {
-      content: "▮ ▮ ▮";
-      position: absolute;
-      left: 2px;
-      bottom: 0;
-      color: white;
-      font-size: 19px;
-      line-height: 1;
-      letter-spacing: 1px;
-      transform: scaleX(.78);
-      transform-origin: left;
-    }
 
     .menu-label {
       padding: 10px 12px 7px;
@@ -187,16 +146,19 @@
       font-size: 12px;
     }
 
+    .avatar, .small-avatar {
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #fff;
+      color: #111;
+      font-weight: 800;
+    }
+
     .avatar {
       width: 32px;
       height: 32px;
-      display: grid;
       flex: 0 0 auto;
-      place-items: center;
-      border-radius: 50%;
-      color: #111;
-      background: #fff;
-      font-weight: 800;
     }
 
     .user-box strong { color: white; font-size: 13px; }
@@ -261,18 +223,19 @@
     .button-small { padding: 7px 10px; font-size: 12px; }
 
     .icon-button {
-      width: 37px;
-      height: 37px;
+      width: 35px;
+      height: 35px;
       display: inline-grid;
       place-items: center;
       border: 1px solid var(--border);
       border-radius: 9px;
       background: white;
       color: var(--text);
-      font-size: 16px;
+      font-size: 15px;
     }
 
     .icon-button:hover { background: #f5f5f5; }
+    .icon-button.danger { color: var(--danger); }
 
     .panel, .metric-card {
       border: 1px solid var(--border);
@@ -281,27 +244,8 @@
       box-shadow: var(--shadow);
     }
 
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(150px, 1fr));
-      gap: 14px;
-      margin-bottom: 18px;
-    }
-
-    .metric-card { padding: 18px; }
-    .metric-label { color: var(--muted); font-size: 12px; font-weight: 650; }
-    .metric-value { margin: 9px 0 5px; font-size: 25px; font-weight: 800; letter-spacing: -.04em; }
-    .metric-note { color: var(--muted); font-size: 11px; font-weight: 600; }
-    .metric-note.danger { color: var(--danger); }
-    .metric-note.success { color: var(--success); }
-
-    .content-grid {
-      display: grid;
-      grid-template-columns: 1.45fr 1fr;
-      gap: 18px;
-    }
-
     .panel { padding: 20px; }
+
     .panel-header {
       display: flex;
       align-items: center;
@@ -313,10 +257,53 @@
     .panel-header h2 { margin: 0; font-size: 16px; letter-spacing: -.025em; }
     .panel-subtitle { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
 
-    .progress-row { margin: 18px 0; }
-    .progress-top { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 8px; font-size: 12px; }
-    .progress-track { height: 8px; overflow: hidden; border-radius: 99px; background: #ededed; }
-    .progress-bar { height: 100%; border-radius: inherit; background: #161616; }
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(150px, 1fr));
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .metric-card { padding: 18px; }
+    .metric-label { color: var(--muted); font-size: 12px; font-weight: 650; }
+    .metric-value {
+      margin: 9px 0 5px;
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: -.04em;
+    }
+
+    .metric-note { color: var(--muted); font-size: 11px; font-weight: 600; }
+    .metric-note.danger { color: var(--danger); }
+    .metric-note.success { color: var(--success); }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1.45fr 1fr;
+      gap: 18px;
+    }
+
+    .progress-row { margin: 17px 0; }
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 12px;
+    }
+
+    .progress-track {
+      height: 8px;
+      overflow: hidden;
+      border-radius: 99px;
+      background: #ededed;
+    }
+
+    .progress-bar {
+      height: 100%;
+      border-radius: inherit;
+      background: #171717;
+    }
 
     .badge {
       display: inline-flex;
@@ -344,6 +331,7 @@
     }
 
     .activity-item:last-child { border-bottom: 0; }
+
     .activity-icon {
       width: 33px;
       height: 33px;
@@ -357,8 +345,18 @@
 
     .activity-info { min-width: 0; flex: 1; }
     .activity-info strong, .activity-info small { display: block; }
-    .activity-info strong { overflow: hidden; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
-    .activity-info small { margin-top: 4px; color: var(--muted); font-size: 11px; }
+    .activity-info strong {
+      overflow: hidden;
+      font-size: 12px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .activity-info small {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 11px;
+    }
 
     /* FILTERS */
     .toolbar {
@@ -370,12 +368,13 @@
     }
 
     .search-input {
-      min-width: 230px;
+      min-width: 245px;
       padding: 10px 12px;
       font-size: 13px;
     }
 
     .filter, .view-toggle {
+      width: auto;
       padding: 9px 11px;
       border: 1px solid var(--border);
       border-radius: 9px;
@@ -391,7 +390,95 @@
       background: #171717;
     }
 
+    /* SALES RHYTHM */
+    .conversion-list { display: grid; gap: 12px; }
+
+    .conversion-row {
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: #fcfcfc;
+    }
+
+    .conversion-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+      font-size: 12px;
+    }
+
+    .conversion-top strong { font-size: 12px; }
+    .conversion-meta {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
     /* PIPELINE */
+    .pipeline-manager {
+      display: none;
+      margin-bottom: 18px;
+      padding: 16px;
+      border: 1px dashed #bcbcbc;
+      border-radius: var(--radius);
+      background: #fafafa;
+    }
+
+    .pipeline-manager.open { display: block; }
+
+    .stage-editor {
+      display: flex;
+      align-items: stretch;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 6px 0;
+    }
+
+    .stage-editor-card {
+      min-width: 205px;
+      padding: 11px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: white;
+    }
+
+    .stage-editor-card strong {
+      display: block;
+      margin-bottom: 8px;
+      overflow: hidden;
+      font-size: 12px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .stage-editor-actions {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .stage-add-between {
+      width: 36px;
+      min-width: 36px;
+      height: 36px;
+      align-self: center;
+      display: grid;
+      place-items: center;
+      border: 1px dashed #a7a7a7;
+      border-radius: 50%;
+      background: white;
+      color: #444;
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .stage-add-between:hover {
+      color: white;
+      background: #171717;
+      border-color: #171717;
+    }
+
     .kanban-board {
       display: grid;
       grid-template-columns: repeat(5, minmax(235px, 1fr));
@@ -401,7 +488,7 @@
     }
 
     .kanban-column {
-      min-height: 550px;
+      min-height: 515px;
       padding: 10px;
       border: 1px solid var(--border);
       border-radius: 13px;
@@ -417,8 +504,28 @@
       font-weight: 800;
     }
 
-    .column-total { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; font-weight: 600; }
-    .column-count { padding: 3px 8px; border-radius: 99px; color: #555; background: white; font-size: 10px; }
+    .column-title {
+      max-width: 170px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .column-total {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .column-count {
+      padding: 3px 8px;
+      border-radius: 99px;
+      color: #555;
+      background: white;
+      font-size: 10px;
+    }
 
     .deal-card {
       margin-bottom: 9px;
@@ -431,12 +538,44 @@
       transition: .18s ease;
     }
 
-    .deal-card:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,.08); }
-    .deal-card-top, .deal-card-footer { display: flex; justify-content: space-between; gap: 8px; }
-    .deal-card h3 { margin: 0 0 5px; font-size: 13px; letter-spacing: -.015em; }
-    .deal-card p { margin: 0; overflow: hidden; color: var(--muted); font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
-    .deal-value { margin-top: 14px; font-size: 14px; font-weight: 800; }
-    .deal-no-value { color: #9a9a9a; font-size: 12px; font-weight: 650; }
+    .deal-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(0,0,0,.08);
+    }
+
+    .deal-card-top, .deal-card-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .deal-card h3 {
+      margin: 0 0 5px;
+      font-size: 13px;
+      letter-spacing: -.015em;
+    }
+
+    .deal-card p {
+      margin: 0;
+      overflow: hidden;
+      color: var(--muted);
+      font-size: 11px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .deal-value {
+      margin-top: 14px;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .deal-no-value {
+      color: #9a9a9a;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
     .next-activity {
       margin-top: 11px;
       padding-top: 10px;
@@ -448,7 +587,10 @@
       white-space: nowrap;
     }
 
-    .next-activity.overdue { color: var(--danger); font-weight: 800; }
+    .next-activity.overdue {
+      color: var(--danger);
+      font-weight: 800;
+    }
 
     .pipeline-list {
       overflow: hidden;
@@ -466,8 +608,22 @@
     }
 
     table { width: 100%; border-collapse: collapse; }
-    th, td { padding: 14px 15px; border-bottom: 1px solid var(--border); text-align: left; font-size: 12px; }
-    th { color: var(--muted); background: #fbfbfb; font-size: 10px; letter-spacing: .06em; text-transform: uppercase; }
+
+    th, td {
+      padding: 14px 15px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      font-size: 12px;
+    }
+
+    th {
+      color: var(--muted);
+      background: #fbfbfb;
+      font-size: 10px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
     tr:last-child td { border-bottom: 0; }
     tbody tr:hover { background: #fcfcfc; }
 
@@ -479,7 +635,12 @@
       text-align: left;
     }
 
-    .empty { padding: 35px; color: var(--muted); text-align: center; font-size: 13px; }
+    .empty {
+      padding: 35px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 13px;
+    }
 
     /* CALENDAR */
     .agenda-layout {
@@ -489,12 +650,37 @@
     }
 
     .calendar-mini { padding: 16px; }
-    .calendar-navigation { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-    .calendar-title { font-size: 13px; font-weight: 800; text-transform: capitalize; }
-    .weekdays, .days-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
-    .weekdays span { padding-bottom: 6px; color: var(--muted); text-align: center; font-size: 10px; font-weight: 800; }
+
+    .calendar-navigation {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .calendar-title {
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: capitalize;
+    }
+
+    .weekdays, .days-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 3px;
+    }
+
+    .weekdays span {
+      padding-bottom: 6px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
     .calendar-day {
       aspect-ratio: 1;
+      position: relative;
       display: grid;
       place-items: center;
       border-radius: 7px;
@@ -507,32 +693,113 @@
     .calendar-day.empty-day { pointer-events: none; }
     .calendar-day.today { border: 1px solid #171717; font-weight: 800; }
     .calendar-day.selected { color: white; background: #171717; }
+
     .calendar-day.has-activity::after {
       content: "";
+      position: absolute;
+      bottom: 4px;
       width: 3px;
       height: 3px;
-      position: absolute;
-      margin-top: 20px;
       border-radius: 50%;
       background: var(--info);
     }
 
-    .calendar-day { position: relative; }
+    .calendar-day.selected.has-activity::after { background: white; }
 
-    .agenda-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 18px; }
-    .agenda-summary div { padding: 9px; border-radius: 9px; background: #f5f5f5; font-size: 10px; }
-    .agenda-summary strong { display: block; margin-top: 4px; font-size: 16px; }
+    .agenda-summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .agenda-summary div {
+      padding: 9px;
+      border-radius: 9px;
+      background: #f5f5f5;
+      font-size: 10px;
+    }
+
+    .agenda-summary strong {
+      display: block;
+      margin-top: 4px;
+      font-size: 16px;
+    }
 
     .agenda-main { min-width: 0; }
-    .agenda-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 13px; }
-    .agenda-date-label { font-size: 15px; font-weight: 800; text-transform: capitalize; }
+
+    .agenda-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 13px;
+    }
+
+    .agenda-date-label {
+      font-size: 15px;
+      font-weight: 800;
+      text-transform: capitalize;
+    }
+
+    .activity-chart {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .chart-card {
+      padding: 13px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: white;
+    }
+
+    .chart-card span {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .chart-card strong {
+      display: block;
+      margin: 6px 0 8px;
+      font-size: 21px;
+    }
 
     /* TEAM */
-    .team-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 18px; }
-    .team-row { display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 8px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 12px; }
+    .team-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 18px;
+    }
+
+    .team-row {
+      display: grid;
+      grid-template-columns: 1.4fr repeat(4, 1fr);
+      gap: 8px;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+    }
+
     .team-row:last-child { border-bottom: 0; }
-    .team-person { display: flex; align-items: center; gap: 9px; font-weight: 750; }
-    .small-avatar { width: 27px; height: 27px; display: grid; place-items: center; border-radius: 50%; background: #e9e9e9; font-size: 10px; }
+
+    .team-person {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 750;
+    }
+
+    .small-avatar {
+      width: 27px;
+      height: 27px;
+      background: #e9e9e9;
+      font-size: 10px;
+    }
 
     /* MODALS */
     .modal-backdrop {
@@ -547,7 +814,6 @@
 
     .modal-backdrop.open { display: block; }
     #activityModal { z-index: 130; }
-    #confirmModal { z-index: 150; }
 
     .modal {
       width: min(1050px, 100%);
@@ -559,6 +825,7 @@
     }
 
     .modal.small-modal { width: min(530px, 100%); }
+
     .modal-header {
       display: flex;
       align-items: flex-start;
@@ -568,8 +835,18 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .modal-header h2 { margin: 0; font-size: 19px; letter-spacing: -.03em; }
-    .modal-header p { margin: 6px 0 0; color: var(--muted); font-size: 12px; }
+    .modal-header h2 {
+      margin: 0;
+      font-size: 19px;
+      letter-spacing: -.03em;
+    }
+
+    .modal-header p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
     .modal-body { padding: 23px 24px; }
 
     .close-button {
@@ -584,11 +861,26 @@
       font-size: 21px;
     }
 
-    .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    .field { display: flex; flex-direction: column; gap: 6px; }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
     .field.full { grid-column: 1 / -1; }
     .field label { font-size: 11px; font-weight: 800; }
-    .field input, .field select, .field textarea { padding: 10px 11px; font-size: 13px; }
+
+    .field input, .field select, .field textarea {
+      padding: 10px 11px;
+      font-size: 13px;
+    }
+
     .field textarea { min-height: 90px; }
 
     .modal-actions {
@@ -599,19 +891,65 @@
       margin-top: 22px;
     }
 
-    .modal-content { display: grid; grid-template-columns: 295px 1fr; min-height: 510px; }
-    .deal-details { padding: 21px; border-right: 1px solid var(--border); background: #fafafa; }
-    .detail-title { margin: 19px 0 8px; color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-    .detail-value { margin-bottom: 13px; font-size: 12px; line-height: 1.5; }
+    .modal-content {
+      display: grid;
+      grid-template-columns: 295px 1fr;
+      min-height: 510px;
+    }
+
+    .deal-details {
+      padding: 21px;
+      border-right: 1px solid var(--border);
+      background: #fafafa;
+    }
+
+    .detail-title {
+      margin: 19px 0 8px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .detail-value {
+      margin-bottom: 13px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
     .detail-value strong { font-size: 11px; }
     .detail-actions { display: grid; gap: 7px; }
 
-    .stage-line { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 13px; }
-    .stage { padding: 6px 8px; border-radius: 7px; color: #777; background: #eeeeee; font-size: 10px; font-weight: 800; }
-    .stage.current { color: white; background: #171717; }
+    .stage-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 13px;
+    }
+
+    .stage {
+      padding: 6px 8px;
+      border-radius: 7px;
+      color: #777;
+      background: #eeeeee;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .stage.current {
+      color: white;
+      background: #171717;
+    }
 
     .timeline { padding: 22px; }
-    .timeline-event { position: relative; padding: 0 0 20px 23px; border-left: 1px solid #dedede; }
+
+    .timeline-event {
+      position: relative;
+      padding: 0 0 20px 23px;
+      border-left: 1px solid #dedede;
+    }
+
     .timeline-event::before {
       content: "";
       position: absolute;
@@ -626,7 +964,13 @@
 
     .timeline-event strong, .timeline-event small { display: block; }
     .timeline-event strong { font-size: 12px; }
-    .timeline-event small { margin-top: 4px; color: var(--muted); font-size: 11px; line-height: 1.45; }
+
+    .timeline-event small {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.45;
+    }
 
     .whatsapp-box {
       padding: 12px;
@@ -636,14 +980,26 @@
       background: #f1fcf5;
     }
 
-    .whatsapp-box strong { display: block; margin-bottom: 5px; color: #087846; font-size: 11px; }
-    .whatsapp-box p { margin: 0 0 9px; color: #357058; font-size: 10px; line-height: 1.4; }
+    .whatsapp-box strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #087846;
+      font-size: 11px;
+    }
+
+    .whatsapp-box p {
+      margin: 0 0 9px;
+      color: #357058;
+      font-size: 10px;
+      line-height: 1.4;
+    }
 
     @media (max-width: 1100px) {
       .sidebar { width: 72px; padding: 19px 8px; }
       .brand { justify-content: center; padding: 4px 0 20px; }
-      .brand-logo span, .brand-logo strong, .menu-label, .nav-button span:not(.nav-icon), .user-box > div:last-child { display: none; }
-      .brand-mark { margin: 0; }
+      .brand-logo { font-size: 0; }
+      .brand-logo strong, .brand-logo span, .menu-label,
+      .nav-button span:not(.nav-icon), .user-box > div:last-child { display: none; }
       .nav-button { justify-content: center; padding: 12px; }
       .sidebar-footer { display: flex; justify-content: center; }
       .user-box { padding: 5px; }
@@ -654,6 +1010,7 @@
 
     @media (max-width: 760px) {
       .main { margin-left: 0; padding: 20px 14px 35px; }
+
       .sidebar {
         position: static;
         width: 100%;
@@ -664,14 +1021,33 @@
         overflow-x: auto;
       }
 
-      .brand { min-height: 0; padding: 0 12px 0 2px; margin: 0 4px 0 0; border: 0; }
-      .brand-logo strong, .brand-logo span, .menu-label, .sidebar-footer { display: none; }
-      .nav-button { width: auto; flex: 0 0 auto; margin: 0; padding: 10px; }
+      .brand {
+        min-height: 0;
+        padding: 0 12px 0 2px;
+        margin: 0 4px 0 0;
+        border: 0;
+      }
+
+      .brand-logo { display: none; }
+      .menu-label, .sidebar-footer { display: none; }
+
+      .nav-button {
+        width: auto;
+        flex: 0 0 auto;
+        margin: 0;
+        padding: 10px;
+      }
+
       .nav-button span:not(.nav-icon) { display: none; }
-      .topbar, .toolbar, .agenda-heading { align-items: flex-start; flex-direction: column; }
+
+      .topbar, .toolbar, .agenda-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
       .topbar .actions { width: 100%; }
       .topbar .actions .button { flex: 1; }
-      .dashboard-grid { grid-template-columns: 1fr; }
+      .dashboard-grid, .activity-chart { grid-template-columns: 1fr; }
       .agenda-layout, .modal-content { grid-template-columns: 1fr; }
       .deal-details { border-right: 0; border-bottom: 1px solid var(--border); }
       .form-grid { grid-template-columns: 1fr; }
@@ -679,6 +1055,7 @@
       .modal-backdrop { padding: 10px; }
       .modal { margin: 8px auto; }
       .search-input { min-width: 100%; }
+      .team-row { min-width: 650px; }
     }
   </style>
 </head>
@@ -688,7 +1065,6 @@
     <aside class="sidebar">
       <div class="brand" title="SalesMates">
         <div class="brand-logo">
-          <i class="brand-mark"></i>
           <strong>Sales</strong><span>Mates</span>
         </div>
       </div>
@@ -782,30 +1158,12 @@
             <div class="panel-header">
               <div>
                 <h2>Ritmo comercial</h2>
-                <p class="panel-subtitle">Acompanhamento semanal de execução.</p>
+                <p class="panel-subtitle">Conversão atual entre as etapas do funil comercial.</p>
               </div>
-              <span class="badge badge-gray">Semana atual</span>
+              <button class="button button-secondary button-small" onclick="showView('pipeline')">Ver funil</button>
             </div>
 
-            <div class="progress-row">
-              <div class="progress-top"><span>Atividades concluídas</span><strong id="activityProgressText">0 / 40</strong></div>
-              <div class="progress-track"><div class="progress-bar" id="activityProgress" style="width:0%"></div></div>
-            </div>
-
-            <div class="progress-row">
-              <div class="progress-top"><span>Propostas enviadas</span><strong>5 / 10</strong></div>
-              <div class="progress-track"><div class="progress-bar" style="width:50%;background:#5d80d5"></div></div>
-            </div>
-
-            <div class="progress-row">
-              <div class="progress-top"><span>Follow-ups realizados</span><strong>14 / 20</strong></div>
-              <div class="progress-track"><div class="progress-bar" style="width:70%;background:#1aa56f"></div></div>
-            </div>
-
-            <div class="progress-row">
-              <div class="progress-top"><span>Fechamentos</span><strong>3 / 5</strong></div>
-              <div class="progress-track"><div class="progress-bar" style="width:60%;background:#e79b2d"></div></div>
-            </div>
+            <div id="conversionDashboard" class="conversion-list"></div>
           </section>
 
           <section class="panel">
@@ -816,6 +1174,7 @@
               </div>
               <button class="button button-secondary button-small" onclick="showView('activities')">Ver agenda</button>
             </div>
+
             <div id="dashboardActivities"></div>
           </section>
         </div>
@@ -826,27 +1185,66 @@
         <div class="topbar">
           <div class="page-title">
             <h1>Funil comercial</h1>
-            <p>Oportunidades, próximos passos e evolução de cada negociação.</p>
+            <p>Gerencie oportunidades, responsáveis, etapas e evolução da negociação.</p>
           </div>
 
           <div class="actions">
+            <button class="button button-secondary" onclick="togglePipelineManager()">⚙ Editar funil</button>
             <button class="button button-primary" onclick="openDealModal()">＋ Novo negócio</button>
           </div>
         </div>
 
+        <section class="pipeline-manager" id="pipelineManager">
+          <div class="panel-header">
+            <div>
+              <h2>Editar etapas do funil</h2>
+              <p class="panel-subtitle">Você pode criar, editar, excluir e alterar a posição de cada etapa.</p>
+            </div>
+            <button class="close-button" onclick="togglePipelineManager()">×</button>
+          </div>
+
+          <div class="stage-editor" id="stageEditor"></div>
+
+          <div style="margin-top:14px;color:var(--muted);font-size:11px;line-height:1.5">
+            Ao excluir uma etapa, os negócios dela serão movidos para a etapa anterior. É necessário manter ao menos duas etapas no funil.
+          </div>
+        </section>
+
         <div class="toolbar">
           <div class="filters">
-            <input class="search-input" id="pipelineSearch" placeholder="Buscar empresa ou contato..." oninput="renderKanban()" />
+            <input
+              class="search-input"
+              id="pipelineSearch"
+              placeholder="Empresa, contato, telefone ou e-mail..."
+              oninput="renderKanban()"
+            />
+
             <select class="filter" id="pipelineOwner" onchange="renderKanban()">
               <option value="">Todos os responsáveis</option>
-              <option>Victor</option>
-              <option>Gustavo</option>
-              <option>Ana</option>
             </select>
+
             <select class="filter" id="pipelineActivity" onchange="renderKanban()">
               <option value="">Todas as atividades</option>
               <option value="overdue">Com atividade vencida</option>
               <option value="none">Sem próxima atividade</option>
+            </select>
+
+            <select class="filter" id="pipelineStatus" onchange="renderKanban()">
+              <option value="open">Ativos</option>
+              <option value="lost">Perdidos</option>
+              <option value="churn">Churn</option>
+              <option value="won">Ganhos</option>
+              <option value="all">Todos os status</option>
+            </select>
+
+            <select class="filter" id="pipelineLossReason" onchange="renderKanban()">
+              <option value="">Todas as perdas</option>
+              <option>Preço</option>
+              <option>Sem retorno do cliente</option>
+              <option>Concorrência</option>
+              <option>Sem fit</option>
+              <option>Timing inadequado</option>
+              <option>Outro</option>
             </select>
           </div>
 
@@ -896,13 +1294,30 @@
           </aside>
 
           <section class="agenda-main">
+            <div class="activity-chart">
+              <div class="chart-card">
+                <span>Pendentes no período</span>
+                <strong id="chartPending">0</strong>
+                <div class="progress-track"><div id="chartPendingBar" class="progress-bar" style="width:0%;background:#3977e8"></div></div>
+              </div>
+
+              <div class="chart-card">
+                <span>Vencidas no período</span>
+                <strong id="chartOverdue">0</strong>
+                <div class="progress-track"><div id="chartOverdueBar" class="progress-bar" style="width:0%;background:#e84a4a"></div></div>
+              </div>
+
+              <div class="chart-card">
+                <span>Concluídas no período</span>
+                <strong id="chartCompleted">0</strong>
+                <div class="progress-track"><div id="chartCompletedBar" class="progress-bar" style="width:0%;background:#17a36b"></div></div>
+              </div>
+            </div>
+
             <div class="toolbar">
               <div class="filters">
                 <select class="filter" id="activityOwnerFilter" onchange="renderActivities()">
                   <option value="">Todos responsáveis</option>
-                  <option>Victor</option>
-                  <option>Gustavo</option>
-                  <option>Ana</option>
                 </select>
 
                 <select class="filter" id="activityTypeFilter" onchange="renderActivities()">
@@ -929,10 +1344,12 @@
 
             <div class="agenda-heading">
               <strong class="agenda-date-label" id="agendaDateLabel"></strong>
+
               <div class="filters">
                 <button class="view-toggle active" id="agendaDayToggle" onclick="setAgendaView('day')">Dia</button>
                 <button class="view-toggle" id="agendaWeekToggle" onclick="setAgendaView('week')">Semana</button>
                 <button class="view-toggle" id="agendaMonthToggle" onclick="setAgendaView('month')">Mês</button>
+                <button class="view-toggle" id="agendaYearToggle" onclick="setAgendaView('year')">Ano</button>
                 <button class="view-toggle" id="agendaListToggle" onclick="setAgendaView('list')">Lista</button>
               </div>
             </div>
@@ -962,15 +1379,12 @@
         <div class="topbar">
           <div class="page-title">
             <h1>Forecast comercial</h1>
-            <p>Visibilidade sobre receita, meta e projeção das oportunidades abertas.</p>
+            <p>Atualizado automaticamente conforme valor, etapa e probabilidade dos negócios.</p>
           </div>
 
           <div class="actions">
             <select class="filter" id="forecastOwnerFilter" onchange="renderForecast()">
               <option value="">Toda a equipe</option>
-              <option>Victor</option>
-              <option>Gustavo</option>
-              <option>Ana</option>
             </select>
           </div>
         </div>
@@ -985,7 +1399,7 @@
           <article class="metric-card">
             <div class="metric-label">Pipeline total</div>
             <div class="metric-value" id="grossForecast">R$ 0</div>
-            <div class="metric-note">Negócios com valor definido</div>
+            <div class="metric-note">Negócios abertos com valor</div>
           </article>
 
           <article class="metric-card">
@@ -1001,11 +1415,35 @@
           </article>
         </div>
 
-        <section class="panel">
+        <div class="content-grid">
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Impacto por etapa</h2>
+                <p class="panel-subtitle">Conversão e previsão ponderada dentro do pipeline.</p>
+              </div>
+            </div>
+
+            <div id="forecastStages" class="conversion-list"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Resumo do período</h2>
+                <p class="panel-subtitle">Indicadores gerados a partir das oportunidades ativas.</p>
+              </div>
+            </div>
+
+            <div id="forecastSummary"></div>
+          </section>
+        </div>
+
+        <section class="panel" style="margin-top:18px">
           <div class="panel-header">
             <div>
               <h2>Oportunidades no forecast</h2>
-              <p class="panel-subtitle">Negócios sem valor ficam separados e não distorcem a projeção.</p>
+              <p class="panel-subtitle">Negócios sem valor não distorcem a projeção.</p>
             </div>
             <span class="badge badge-gray" id="dealsWithoutValue">0 sem valor</span>
           </div>
@@ -1033,9 +1471,16 @@
         <div class="topbar">
           <div class="page-title">
             <h1>Visão de equipe</h1>
-            <p>Dados simulados preparados para receber usuários e equipes do Supabase.</p>
+            <p>Pipeline, produtividade, metas e atividades por responsável.</p>
           </div>
-          <span class="badge badge-gray">Dados demonstrativos</span>
+
+          <div class="actions">
+            <select class="filter" id="teamPeriod" onchange="renderTeam()">
+              <option value="month">Mês atual</option>
+              <option value="week">Semana atual</option>
+              <option value="all">Histórico completo</option>
+            </select>
+          </div>
         </div>
 
         <div class="dashboard-grid">
@@ -1044,20 +1489,23 @@
             <div class="metric-value" id="teamPipeline">R$ 0</div>
             <div class="metric-note">Oportunidades em aberto</div>
           </article>
+
           <article class="metric-card">
             <div class="metric-label">Atividades pendentes</div>
             <div class="metric-value" id="teamPending">0</div>
             <div class="metric-note">Ações planejadas</div>
           </article>
+
           <article class="metric-card">
             <div class="metric-label">Atividades vencidas</div>
             <div class="metric-value" id="teamOverdue">0</div>
             <div class="metric-note danger">Acompanhar com prioridade</div>
           </article>
+
           <article class="metric-card">
             <div class="metric-label">Receita ganha</div>
-            <div class="metric-value" id="teamWon">R$ 25.000</div>
-            <div class="metric-note success">Resultado demonstrativo</div>
+            <div class="metric-value" id="teamWon">R$ 0</div>
+            <div class="metric-note success">Negócios fechados como ganho</div>
           </article>
         </div>
 
@@ -1065,11 +1513,14 @@
           <section class="panel">
             <div class="panel-header">
               <div>
-                <h2>Resultado por vendedor</h2>
-                <p class="panel-subtitle">Pipeline, atividades e acompanhamento individual.</p>
+                <h2>Ranking comercial</h2>
+                <p class="panel-subtitle">Pipeline, atividades, atrasos e forecast individual.</p>
               </div>
             </div>
-            <div id="teamRanking"></div>
+
+            <div style="overflow:auto">
+              <div id="teamRanking"></div>
+            </div>
           </section>
 
           <section class="panel">
@@ -1079,6 +1530,7 @@
                 <p class="panel-subtitle">Atividades que precisam de acompanhamento.</p>
               </div>
             </div>
+
             <div id="teamAlerts"></div>
           </section>
         </div>
@@ -1093,13 +1545,29 @@
           </div>
         </div>
 
-        <section class="panel">
-          <h2 style="margin-top:0">Relatórios em preparação</h2>
-          <p style="color:var(--muted);font-size:13px;line-height:1.6">
-            Esta área será conectada futuramente aos dados reais para exibir conversão por etapa,
-            origem de leads, atividades por comercial, motivos de perda, receita ganha e desempenho por equipe.
-          </p>
-        </section>
+        <div class="content-grid">
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Conversão por etapa</h2>
+                <p class="panel-subtitle">Dados calculados com base nas oportunidades cadastradas.</p>
+              </div>
+            </div>
+
+            <div id="reportsConversion" class="conversion-list"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Motivos de perda</h2>
+                <p class="panel-subtitle">Visibilidade sobre os motivos mais recorrentes.</p>
+              </div>
+            </div>
+
+            <div id="lossReports"></div>
+          </section>
+        </div>
       </section>
 
       <!-- SETTINGS -->
@@ -1112,12 +1580,32 @@
         </div>
 
         <section class="panel">
-          <h2 style="margin-top:0">Administração da operação</h2>
-          <p style="color:var(--muted);font-size:13px;line-height:1.6">
-            Na integração com Supabase, esta área permitirá gerenciar usuários, equipes,
-            pipelines, etapas, permissões, metas, tipos de atividade, campos personalizados,
-            tags e integrações oficiais.
-          </p>
+          <div class="panel-header">
+            <div>
+              <h2>Integrações e campos padrão</h2>
+              <p class="panel-subtitle">Base pronta para conexão futura com Supabase e WhatsApp Business API.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="field">
+              <label>Meta mensal da operação</label>
+              <input id="goalInput" type="number" min="0" value="80000" />
+            </div>
+
+            <div class="field">
+              <label>Canal de WhatsApp</label>
+              <select>
+                <option>Preparado para integração futura</option>
+                <option>WhatsApp Business API</option>
+                <option>Cloud API da Meta</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button class="button button-primary" onclick="saveGoal()">Salvar configurações</button>
+          </div>
         </section>
       </section>
     </main>
@@ -1183,11 +1671,7 @@
 
             <div class="field">
               <label>Responsável</label>
-              <select id="dealOwner">
-                <option>Victor</option>
-                <option>Gustavo</option>
-                <option>Ana</option>
-              </select>
+              <select id="dealOwner"></select>
             </div>
 
             <div class="field">
@@ -1267,7 +1751,7 @@
 
             <div class="field">
               <label>Data e hora *</label>
-              <input id="activityDate" required type="datetime-local" min="1960-01-01T00:00" max="2090-12-31T23:59" />
+              <input id="activityDate" required type="datetime-local" />
             </div>
 
             <div class="field">
@@ -1281,11 +1765,7 @@
 
             <div class="field">
               <label>Responsável</label>
-              <select id="activityOwner">
-                <option>Victor</option>
-                <option>Gustavo</option>
-                <option>Ana</option>
-              </select>
+              <select id="activityOwner"></select>
             </div>
 
             <div class="field full">
@@ -1328,13 +1808,10 @@
 
       <div class="modal-body">
         <input type="hidden" id="transferDealId" />
+
         <div class="field">
           <label>Novo responsável</label>
-          <select id="transferOwner">
-            <option>Victor</option>
-            <option>Gustavo</option>
-            <option>Ana</option>
-          </select>
+          <select id="transferOwner"></select>
         </div>
 
         <div class="modal-actions">
@@ -1350,16 +1827,25 @@
     <div class="modal small-modal">
       <div class="modal-header">
         <div>
-          <h2>Marcar como perdido</h2>
-          <p>Informe o motivo para melhorar os relatórios futuros.</p>
+          <h2>Marcar negócio</h2>
+          <p>Informe se a oportunidade foi perdida ou representa churn.</p>
         </div>
         <button class="close-button" onclick="closeModal('lossModal')">×</button>
       </div>
 
       <div class="modal-body">
         <input type="hidden" id="lossDealId" />
+
         <div class="field">
-          <label>Motivo da perda</label>
+          <label>Status</label>
+          <select id="lossStatus">
+            <option value="lost">Perdido</option>
+            <option value="churn">Churn</option>
+          </select>
+        </div>
+
+        <div class="field" style="margin-top:14px">
+          <label>Motivo</label>
           <select id="lossReason">
             <option>Preço</option>
             <option>Sem retorno do cliente</option>
@@ -1372,17 +1858,70 @@
 
         <div class="modal-actions">
           <button class="button button-secondary" onclick="closeModal('lossModal')">Cancelar</button>
-          <button class="button button-danger" onclick="markDealLost()">Confirmar perda</button>
+          <button class="button button-danger" onclick="markDealLost()">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: STAGE -->
+  <div class="modal-backdrop" id="stageModal">
+    <div class="modal small-modal">
+      <div class="modal-header">
+        <div>
+          <h2 id="stageModalTitle">Nova etapa</h2>
+          <p>Defina o nome da etapa no funil comercial.</p>
+        </div>
+        <button class="close-button" onclick="closeModal('stageModal')">×</button>
+      </div>
+
+      <div class="modal-body">
+        <input type="hidden" id="stageEditIndex" />
+
+        <div class="field">
+          <label>Nome da etapa *</label>
+          <input id="stageName" placeholder="Ex.: Diagnóstico técnico" />
+        </div>
+
+        <div class="field" style="margin-top:14px">
+          <label>Probabilidade sugerida</label>
+          <select id="stageProbability">
+            <option value="10">10%</option>
+            <option value="20">20%</option>
+            <option value="30">30%</option>
+            <option value="40">40%</option>
+            <option value="50">50%</option>
+            <option value="60">60%</option>
+            <option value="70">70%</option>
+            <option value="80">80%</option>
+            <option value="90">90%</option>
+            <option value="100">100%</option>
+          </select>
+        </div>
+
+        <div class="modal-actions">
+          <button class="button button-secondary" onclick="closeModal('stageModal')">Cancelar</button>
+          <button class="button button-primary" onclick="saveStage()">Salvar etapa</button>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    const CURRENT_DATE = new Date("2026-07-23T10:00:00");
-    const stages = ["Prospecção", "Primeiro contato", "Qualificação", "Diagnóstico", "Proposta", "Negociação"];
+    const CURRENT_DATE = new Date("2026-07-23T14:12:00");
+
+    const DEFAULT_STAGES = [
+      { name: "Novos leads para tentativa de contato", probability: 10 },
+      { name: "Contato realizado", probability: 20 },
+      { name: "Contato com o decisor", probability: 35 },
+      { name: "Reunião", probability: 50 },
+      { name: "Proposta enviada", probability: 65 },
+      { name: "FUP", probability: 75 },
+      { name: "FUP de fechamento", probability: 85 },
+      { name: "Proposta aceita", probability: 100 }
+    ];
+
     const owners = ["Victor", "Gustavo", "Ana"];
-    const forecastGoal = 80000;
 
     const defaultDeals = [
       {
@@ -1392,8 +1931,8 @@
         phone: "41 99999-1111",
         email: "mariana@grupohorizonte.com.br",
         value: 12000,
-        probability: 25,
-        stage: "Prospecção",
+        probability: 10,
+        stage: "Novos leads para tentativa de contato",
         owner: "Victor",
         closeDate: "2026-07-30",
         source: "Site",
@@ -1401,8 +1940,7 @@
         status: "open",
         createdAt: "2026-07-23T08:30:00",
         timeline: [
-          { title: "Negócio criado", description: "Oportunidade incluída por Victor.", date: "2026-07-23T08:30:00" },
-          { title: "Lead recebido", description: "Origem: formulário do site.", date: "2026-07-23T08:20:00" }
+          { title: "Negócio criado", description: "Oportunidade incluída por Victor.", date: "2026-07-23T08:30:00" }
         ]
       },
       {
@@ -1412,8 +1950,8 @@
         phone: "41 98888-2222",
         email: "",
         value: null,
-        probability: 25,
-        stage: "Primeiro contato",
+        probability: 20,
+        stage: "Contato realizado",
         owner: "Gustavo",
         closeDate: "",
         source: "WhatsApp",
@@ -1431,8 +1969,8 @@
         phone: "41 97777-3333",
         email: "fernanda@vidamais.com.br",
         value: 18000,
-        probability: 60,
-        stage: "Qualificação",
+        probability: 50,
+        stage: "Reunião",
         owner: "Victor",
         closeDate: "2026-07-25",
         source: "Indicação",
@@ -1440,8 +1978,7 @@
         status: "open",
         createdAt: "2026-07-17T09:00:00",
         timeline: [
-          { title: "Reunião realizada", description: "Necessidade identificada: CRM para equipe de 12 vendedores.", date: "2026-07-22T16:00:00" },
-          { title: "Movido para qualificação", description: "Lead possui perfil para avançar.", date: "2026-07-21T10:00:00" }
+          { title: "Reunião realizada", description: "Necessidade identificada: CRM para equipe de 12 vendedores.", date: "2026-07-22T16:00:00" }
         ]
       },
       {
@@ -1451,8 +1988,8 @@
         phone: "41 96666-4444",
         email: "rafael@alpha.com.br",
         value: 25000,
-        probability: 60,
-        stage: "Proposta",
+        probability: 65,
+        stage: "Proposta enviada",
         owner: "Ana",
         closeDate: "2026-07-26",
         source: "Prospecção ativa",
@@ -1460,8 +1997,7 @@
         status: "open",
         createdAt: "2026-07-15T15:20:00",
         timeline: [
-          { title: "Proposta enviada", description: "Proposta comercial enviada por e-mail e WhatsApp.", date: "2026-07-22T10:00:00" },
-          { title: "Movido para proposta", description: "Aguardando retorno do decisor.", date: "2026-07-21T09:00:00" }
+          { title: "Proposta enviada", description: "Proposta comercial enviada por e-mail e WhatsApp.", date: "2026-07-22T10:00:00" }
         ]
       },
       {
@@ -1471,8 +2007,8 @@
         phone: "41 95555-5555",
         email: "joao@logisticaparana.com.br",
         value: 30000,
-        probability: 80,
-        stage: "Negociação",
+        probability: 85,
+        stage: "FUP de fechamento",
         owner: "Victor",
         closeDate: "2026-07-24",
         source: "Evento",
@@ -1480,8 +2016,7 @@
         status: "open",
         createdAt: "2026-07-10T11:10:00",
         timeline: [
-          { title: "Negociação iniciada", description: "Cliente solicitou ajuste de condições comerciais.", date: "2026-07-22T14:00:00" },
-          { title: "Reunião realizada", description: "Decisor participou da apresentação final.", date: "2026-07-21T15:00:00" }
+          { title: "Negociação em fechamento", description: "Cliente solicitou ajuste de condições comerciais.", date: "2026-07-22T14:00:00" }
         ]
       }
     ];
@@ -1533,8 +2068,10 @@
       }
     ];
 
-    let deals = JSON.parse(localStorage.getItem("salesmates_deals_v2")) || defaultDeals;
-    let activities = JSON.parse(localStorage.getItem("salesmates_activities_v2")) || defaultActivities;
+    let stages = JSON.parse(localStorage.getItem("salesmates_stages_v3")) || DEFAULT_STAGES;
+    let deals = JSON.parse(localStorage.getItem("salesmates_deals_v3")) || defaultDeals;
+    let activities = JSON.parse(localStorage.getItem("salesmates_activities_v3")) || defaultActivities;
+    let forecastGoal = Number(localStorage.getItem("salesmates_goal_v3")) || 80000;
 
     let selectedDate = new Date("2026-07-23T12:00:00");
     let calendarCursor = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
@@ -1542,9 +2079,42 @@
     let pipelineView = "kanban";
     let currentDetailDealId = null;
 
+    function stageNames() {
+      return stages.map((stage) => stage.name);
+    }
+
+    function getStageData(name) {
+      return stages.find((stage) => stage.name === name) || stages[0];
+    }
+
+    function migrateOldDeals() {
+      const oldMap = {
+        "Prospecção": "Novos leads para tentativa de contato",
+        "Primeiro contato": "Contato realizado",
+        "Qualificação": "Contato com o decisor",
+        "Diagnóstico": "Reunião",
+        "Proposta": "Proposta enviada",
+        "Negociação": "FUP de fechamento"
+      };
+
+      deals.forEach((deal) => {
+        if (oldMap[deal.stage]) {
+          deal.stage = oldMap[deal.stage];
+          deal.probability = getStageData(deal.stage).probability;
+        }
+
+        if (!stageNames().includes(deal.stage)) {
+          deal.stage = stages[0].name;
+          deal.probability = stages[0].probability;
+        }
+      });
+    }
+
     function saveData() {
-      localStorage.setItem("salesmates_deals_v2", JSON.stringify(deals));
-      localStorage.setItem("salesmates_activities_v2", JSON.stringify(activities));
+      localStorage.setItem("salesmates_stages_v3", JSON.stringify(stages));
+      localStorage.setItem("salesmates_deals_v3", JSON.stringify(deals));
+      localStorage.setItem("salesmates_activities_v3", JSON.stringify(activities));
+      localStorage.setItem("salesmates_goal_v3", String(forecastGoal));
     }
 
     function escapeHTML(value) {
@@ -1557,7 +2127,9 @@
     }
 
     function currency(value) {
-      if (value === null || value === undefined || value === "" || Number(value) <= 0) return "Valor a definir";
+      if (value === null || value === undefined || value === "" || Number(value) <= 0) {
+        return "Valor a definir";
+      }
 
       return new Intl.NumberFormat("pt-BR", {
         style: "currency",
@@ -1625,6 +2197,16 @@
         .sort((a, b) => new Date(a.date) - new Date(b.date))[0];
     }
 
+    function addTimelineEvent(deal, title, description) {
+      if (!deal.timeline) deal.timeline = [];
+
+      deal.timeline.unshift({
+        title,
+        description,
+        date: new Date().toISOString()
+      });
+    }
+
     function activityIcon(type) {
       const icons = {
         "Ligação": "☎",
@@ -1646,10 +2228,24 @@
         "Agendada": "badge-blue",
         "Cancelada": "badge-gray",
         "Ganho": "badge-green",
-        "Perdido": "badge-red"
+        "Perdido": "badge-red",
+        "Churn": "badge-yellow",
+        "Ativo": "badge-blue"
       };
 
       return `<span class="badge ${classes[status] || "badge-gray"}">${escapeHTML(status)}</span>`;
+    }
+
+    function dealStatusLabel(status) {
+      const labels = {
+        open: "Ativo",
+        won: "Ganho",
+        lost: "Perdido",
+        churn: "Churn",
+        archived: "Arquivado"
+      };
+
+      return labels[status] || status;
     }
 
     function dealValueHTML(deal) {
@@ -1658,21 +2254,34 @@
         : `<div class="deal-value deal-no-value">Valor a definir</div>`;
     }
 
-    function addTimelineEvent(deal, title, description) {
-      if (!deal.timeline) deal.timeline = [];
-      deal.timeline.unshift({
-        title,
-        description,
-        date: new Date().toISOString()
+    function fillOwnerOptions() {
+      const options = owners.map((owner) => `<option value="${escapeHTML(owner)}">${escapeHTML(owner)}</option>`).join("");
+
+      ["pipelineOwner", "activityOwnerFilter", "forecastOwnerFilter"].forEach((id) => {
+        const select = document.getElementById(id);
+        if (!select) return;
+
+        const current = select.value;
+        const firstOption = select.options[0]?.outerHTML || "";
+        select.innerHTML = firstOption + options;
+        select.value = current;
+      });
+
+      ["dealOwner", "activityOwner", "transferOwner"].forEach((id) => {
+        const select = document.getElementById(id);
+        if (select) select.innerHTML = options;
       });
     }
 
     function refreshAll() {
+      fillOwnerOptions();
       renderDashboard();
       renderKanban();
       renderActivities();
       renderForecast();
       renderTeam();
+      renderReports();
+      renderStageEditor();
     }
 
     function showView(viewId) {
@@ -1689,11 +2298,61 @@
       }
       if (viewId === "forecast") renderForecast();
       if (viewId === "team") renderTeam();
+      if (viewId === "reports") renderReports();
+      if (viewId === "settings") document.getElementById("goalInput").value = forecastGoal;
     }
 
     document.querySelectorAll(".nav-button").forEach((button) => {
       button.addEventListener("click", () => showView(button.dataset.view));
     });
+
+    function renderConversionRows(containerId) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+
+      const openDeals = deals.filter((deal) => deal.status === "open");
+
+      container.innerHTML = stages.map((stage, index) => {
+        const currentCount = openDeals.filter((deal) => deal.stage === stage.name).length;
+        const previousCount = index === 0
+          ? currentCount
+          : openDeals.filter((deal) => {
+              const dealIndex = stageNames().indexOf(deal.stage);
+              return dealIndex <= index - 1;
+            }).length;
+
+        const reachedCount = openDeals.filter((deal) => {
+          const dealIndex = stageNames().indexOf(deal.stage);
+          return dealIndex >= index;
+        }).length;
+
+        const conversion = index === 0
+          ? 100
+          : previousCount ? Math.round((reachedCount / previousCount) * 100) : 0;
+
+        const totalValue = openDeals
+          .filter((deal) => deal.stage === stage.name)
+          .reduce((sum, deal) => sum + Number(deal.value || 0), 0);
+
+        return `
+          <div class="conversion-row">
+            <div class="conversion-top">
+              <span>${escapeHTML(stage.name)}</span>
+              <strong>${conversion}%</strong>
+            </div>
+
+            <div class="progress-track">
+              <div class="progress-bar" style="width:${conversion}%;background:${index % 2 ? "#3977e8" : "#171717"}"></div>
+            </div>
+
+            <div class="conversion-meta">
+              ${currentCount} negócio(s) nesta etapa · ${currencyNumber(totalValue)}
+              ${index === 0 ? " · Base do funil" : ` · Conversão da etapa anterior`}
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
 
     function renderDashboard() {
       const currentDay = dateKey(CURRENT_DATE);
@@ -1707,14 +2366,16 @@
 
       const weightedForecast = deals
         .filter((deal) => deal.status === "open")
-        .reduce((total, deal) => total + Number(deal.value || 0) * (Number(deal.probability || 0) / 100), 0);
+        .reduce((total, deal) => {
+          return total + Number(deal.value || 0) * (Number(deal.probability || 0) / 100);
+        }, 0);
 
       document.getElementById("todayCompleted").textContent = completedToday;
       document.getElementById("pendingActivities").textContent = pending;
       document.getElementById("overdueActivities").textContent = overdue;
       document.getElementById("weeklyForecast").textContent = currencyNumber(weightedForecast);
-      document.getElementById("activityProgressText").textContent = `${completedToday} / 40`;
-      document.getElementById("activityProgress").style.width = `${Math.min(completedToday * 2.5, 100)}%`;
+
+      renderConversionRows("conversionDashboard");
 
       const nextActivities = [...activities]
         .filter((activity) => !["Concluída", "Cancelada"].includes(getActivityStatus(activity)))
@@ -1744,16 +2405,25 @@
       const search = document.getElementById("pipelineSearch")?.value.trim().toLowerCase() || "";
       const owner = document.getElementById("pipelineOwner")?.value || "";
       const activityFilter = document.getElementById("pipelineActivity")?.value || "";
+      const status = document.getElementById("pipelineStatus")?.value || "open";
+      const lossReason = document.getElementById("pipelineLossReason")?.value || "";
 
       return deals.filter((deal) => {
-        if (deal.status !== "open") return false;
+        const matchesStatus = status === "all" || deal.status === status;
 
-        const matchesSearch =
-          !search ||
-          deal.company.toLowerCase().includes(search) ||
-          (deal.contact || "").toLowerCase().includes(search);
+        const fields = [
+          deal.company,
+          deal.contact,
+          deal.phone,
+          deal.email,
+          deal.tags,
+          deal.lossReason
+        ].join(" ").toLowerCase();
 
+        const matchesSearch = !search || fields.includes(search);
         const matchesOwner = !owner || deal.owner === owner;
+        const matchesLossReason = !lossReason || deal.lossReason === lossReason;
+
         const next = getNextActivity(deal.id);
         const nextStatus = next ? getActivityStatus(next) : null;
 
@@ -1762,16 +2432,18 @@
           (activityFilter === "overdue" && nextStatus === "Atrasada") ||
           (activityFilter === "none" && !next);
 
-        return matchesSearch && matchesOwner && matchesActivity;
+        return matchesStatus && matchesSearch && matchesOwner && matchesLossReason && matchesActivity;
       });
     }
 
     function renderKanban() {
       const board = document.getElementById("kanbanBoard");
       const list = document.getElementById("pipelineList");
+
       if (!board || !list) return;
 
       const filteredDeals = getFilteredPipelineDeals();
+
       board.style.display = pipelineView === "kanban" ? "grid" : "none";
       list.style.display = pipelineView === "list" ? "block" : "none";
 
@@ -1781,6 +2453,7 @@
             <thead>
               <tr>
                 <th>Negócio</th>
+                <th>Status</th>
                 <th>Etapa</th>
                 <th>Responsável</th>
                 <th>Valor</th>
@@ -1794,7 +2467,11 @@
 
                 return `
                   <tr onclick="openDealDetail(${deal.id})" style="cursor:pointer">
-                    <td><strong>${escapeHTML(deal.company)}</strong><br><small style="color:#737373">${escapeHTML(deal.contact || "Sem contato")}</small></td>
+                    <td>
+                      <strong>${escapeHTML(deal.company)}</strong><br>
+                      <small style="color:#737373">${escapeHTML(deal.contact || "Sem contato")}</small>
+                    </td>
+                    <td>${badgeForStatus(dealStatusLabel(deal.status))}</td>
                     <td>${escapeHTML(deal.stage)}</td>
                     <td>${escapeHTML(deal.owner)}</td>
                     <td>${currency(deal.value)}</td>
@@ -1803,26 +2480,29 @@
                     </td>
                   </tr>
                 `;
-              }).join("") : `<tr><td colspan="5"><div class="empty">Nenhum negócio encontrado.</div></td></tr>`}
+              }).join("") : `<tr><td colspan="6"><div class="empty">Nenhum negócio encontrado.</div></td></tr>`}
             </tbody>
           </table>
         `;
         return;
       }
 
+      const activeStatus = document.getElementById("pipelineStatus")?.value || "open";
+
       board.innerHTML = stages.map((stage) => {
-        const stageDeals = filteredDeals.filter((deal) => deal.stage === stage);
+        const stageDeals = filteredDeals.filter((deal) => deal.stage === stage.name);
         const stageTotal = stageDeals.reduce((sum, deal) => sum + Number(deal.value || 0), 0);
 
         return `
-          <div class="kanban-column"
+          <div
+            class="kanban-column"
             ondragover="event.preventDefault()"
-            ondrop="dropDeal(event, '${stage}')">
-
+            ondrop="dropDeal(event, '${escapeHTML(stage.name)}')"
+          >
             <div class="column-header">
               <div>
-                <span>${escapeHTML(stage)}</span>
-                <span class="column-total">${currencyNumber(stageTotal)}</span>
+                <span class="column-title" title="${escapeHTML(stage.name)}">${escapeHTML(stage.name)}</span>
+                <span class="column-total">${currencyNumber(stageTotal)} · ${stage.probability}%</span>
               </div>
               <span class="column-count">${stageDeals.length}</span>
             </div>
@@ -1832,16 +2512,18 @@
               const nextStatus = next ? getActivityStatus(next) : null;
 
               return `
-                <article class="deal-card"
-                  draggable="true"
+                <article
+                  class="deal-card"
+                  draggable="${activeStatus === "open" ? "true" : "false"}"
                   ondragstart="dragDeal(event, ${deal.id})"
-                  onclick="openDealDetail(${deal.id})">
-
+                  onclick="openDealDetail(${deal.id})"
+                >
                   <div class="deal-card-top">
                     <div style="min-width:0">
                       <h3>${escapeHTML(deal.company)}</h3>
                       <p>${escapeHTML(deal.contact || "Sem contato informado")}</p>
                     </div>
+
                     <span title="${nextStatus === "Atrasada" ? "Atividade vencida" : next ? "Atividade agendada" : "Sem atividade"}">
                       ${nextStatus === "Atrasada" ? "●" : next ? "◌" : "○"}
                     </span>
@@ -1860,6 +2542,8 @@
                 </article>
               `;
             }).join("")}
+
+            ${!stageDeals.length ? `<div style="padding:16px 5px;color:#8b8b8b;font-size:11px;text-align:center">Sem negócios</div>` : ""}
           </div>
         `;
       }).join("");
@@ -1880,11 +2564,140 @@
       const dealId = Number(event.dataTransfer.getData("dealId"));
       const deal = getDeal(dealId);
 
-      if (!deal || deal.stage === stage) return;
+      if (!deal || deal.status !== "open" || deal.stage === stage) return;
 
       const oldStage = deal.stage;
       deal.stage = stage;
-      addTimelineEvent(deal, "Etapa alterada", `${oldStage} → ${stage}. Movimentação realizada no funil.`);
+      deal.probability = getStageData(stage).probability;
+
+      addTimelineEvent(
+        deal,
+        "Etapa alterada",
+        `${oldStage} → ${stage}. Probabilidade atualizada para ${deal.probability}%.`
+      );
+
+      saveData();
+      refreshAll();
+    }
+
+    function togglePipelineManager() {
+      document.getElementById("pipelineManager").classList.toggle("open");
+      renderStageEditor();
+    }
+
+    function renderStageEditor() {
+      const container = document.getElementById("stageEditor");
+      if (!container) return;
+
+      container.innerHTML = stages.map((stage, index) => `
+        <div class="stage-editor-card">
+          <strong title="${escapeHTML(stage.name)}">${escapeHTML(stage.name)}</strong>
+          <small style="display:block;margin-bottom:9px;color:#737373;font-size:10px">
+            Probabilidade sugerida: ${stage.probability}%
+          </small>
+
+          <div class="stage-editor-actions">
+            <button class="icon-button" title="Mover para esquerda" ${index === 0 ? "disabled" : ""} onclick="moveStage(${index}, -1)">←</button>
+            <button class="icon-button" title="Editar etapa" onclick="openStageModal(${index})">✎</button>
+            <button class="icon-button" title="Mover para direita" ${index === stages.length - 1 ? "disabled" : ""} onclick="moveStage(${index}, 1)">→</button>
+            <button class="icon-button danger" title="Excluir etapa" onclick="deleteStage(${index})">×</button>
+          </div>
+        </div>
+
+        <button class="stage-add-between" title="Criar nova etapa aqui" onclick="openStageModal(null, ${index + 1})">＋</button>
+      `).join("");
+
+      container.insertAdjacentHTML(
+        "afterbegin",
+        `<button class="stage-add-between" title="Criar primeira etapa" onclick="openStageModal(null, 0)">＋</button>`
+      );
+    }
+
+    function openStageModal(index = null, insertAt = null) {
+      document.getElementById("stageEditIndex").value = index === null ? `new:${insertAt}` : index;
+      document.getElementById("stageModalTitle").textContent = index === null ? "Criar etapa" : "Editar etapa";
+
+      if (index === null) {
+        document.getElementById("stageName").value = "";
+        document.getElementById("stageProbability").value = "50";
+      } else {
+        document.getElementById("stageName").value = stages[index].name;
+        document.getElementById("stageProbability").value = stages[index].probability;
+      }
+
+      document.getElementById("stageModal").classList.add("open");
+    }
+
+    function saveStage() {
+      const reference = document.getElementById("stageEditIndex").value;
+      const name = document.getElementById("stageName").value.trim();
+      const probability = Number(document.getElementById("stageProbability").value);
+
+      if (!name) {
+        alert("Informe um nome para a etapa.");
+        return;
+      }
+
+      if (stages.some((stage, index) => stage.name.toLowerCase() === name.toLowerCase() && String(index) !== reference)) {
+        alert("Já existe uma etapa com este nome.");
+        return;
+      }
+
+      if (reference.startsWith("new:")) {
+        const insertAt = Number(reference.split(":")[1]);
+        stages.splice(insertAt, 0, { name, probability });
+      } else {
+        const index = Number(reference);
+        const oldName = stages[index].name;
+
+        stages[index] = { name, probability };
+
+        deals.forEach((deal) => {
+          if (deal.stage === oldName) {
+            deal.stage = name;
+            deal.probability = probability;
+            addTimelineEvent(deal, "Etapa renomeada", `${oldName} → ${name}.`);
+          }
+        });
+      }
+
+      saveData();
+      closeModal("stageModal");
+      refreshAll();
+    }
+
+    function moveStage(index, direction) {
+      const newIndex = index + direction;
+
+      if (newIndex < 0 || newIndex >= stages.length) return;
+
+      [stages[index], stages[newIndex]] = [stages[newIndex], stages[index]];
+      saveData();
+      refreshAll();
+    }
+
+    function deleteStage(index) {
+      if (stages.length <= 2) {
+        alert("O funil precisa ter pelo menos duas etapas.");
+        return;
+      }
+
+      const stage = stages[index];
+      const destination = stages[index - 1] || stages[index + 1];
+
+      if (!confirm(`Excluir a etapa "${stage.name}"? Os negócios dela serão movidos para "${destination.name}".`)) {
+        return;
+      }
+
+      deals.forEach((deal) => {
+        if (deal.stage === stage.name) {
+          deal.stage = destination.name;
+          deal.probability = destination.probability;
+          addTimelineEvent(deal, "Etapa removida", `${stage.name} foi removida do funil. Negócio movido para ${destination.name}.`);
+        }
+      });
+
+      stages.splice(index, 1);
       saveData();
       refreshAll();
     }
@@ -1892,6 +2705,7 @@
     function renderCalendar() {
       const title = document.getElementById("calendarTitle");
       const container = document.getElementById("calendarDays");
+
       if (!title || !container) return;
 
       title.textContent = calendarCursor.toLocaleDateString("pt-BR", {
@@ -1920,7 +2734,8 @@
         html += `
           <button
             class="calendar-day ${selected ? "selected" : ""} ${today ? "today" : ""} ${hasActivity ? "has-activity" : ""}"
-            onclick="selectCalendarDate('${key}')">
+            onclick="selectCalendarDate('${key}')"
+          >
             ${day}
           </button>
         `;
@@ -1950,9 +2765,12 @@
 
     function setAgendaView(view) {
       agendaView = view;
-      ["day", "week", "month", "list"].forEach((item) => {
-        document.getElementById(`agenda${item.charAt(0).toUpperCase() + item.slice(1)}Toggle`)?.classList.toggle("active", item === view);
+
+      ["day", "week", "month", "year", "list"].forEach((item) => {
+        const element = document.getElementById(`agenda${item.charAt(0).toUpperCase() + item.slice(1)}Toggle`);
+        element?.classList.toggle("active", item === view);
       });
+
       renderActivities();
     }
 
@@ -1971,6 +2789,10 @@
           activityDate.getMonth() === selected.getMonth();
       }
 
+      if (agendaView === "year") {
+        return activityDate.getFullYear() === selected.getFullYear();
+      }
+
       const firstDayOfWeek = new Date(selected);
       firstDayOfWeek.setDate(selected.getDate() - selected.getDay());
       firstDayOfWeek.setHours(0, 0, 0, 0);
@@ -1984,6 +2806,10 @@
     function getAgendaLabel() {
       if (agendaView === "list") return "Todas as atividades";
 
+      if (agendaView === "year") {
+        return `Ano de ${selectedDate.getFullYear()}`;
+      }
+
       if (agendaView === "month") {
         return selectedDate.toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
       }
@@ -1991,8 +2817,10 @@
       if (agendaView === "week") {
         const first = new Date(selectedDate);
         first.setDate(selectedDate.getDate() - selectedDate.getDay());
+
         const last = new Date(first);
         last.setDate(first.getDate() + 6);
+
         return `${formatDate(first)} — ${formatDate(last)}`;
       }
 
@@ -2017,10 +2845,12 @@
         .map((activity) => ({ ...activity, calculatedStatus: getActivityStatus(activity) }))
         .filter((activity) => {
           const deal = getDeal(activity.dealId);
+
           const matchesPeriod = isInAgendaPeriod(activity.date);
           const matchesOwner = !owner || activity.owner === owner;
           const matchesType = !type || activity.type === type;
           const matchesStatus = !statusFilter || activity.calculatedStatus === statusFilter;
+
           const matchesSearch =
             !search ||
             activity.title.toLowerCase().includes(search) ||
@@ -2032,6 +2862,7 @@
 
       document.getElementById("agendaDateLabel").textContent = getAgendaLabel();
 
+      const periodActivities = activities.filter((activity) => isInAgendaPeriod(activity.date));
       const scheduled = activities.filter((activity) => getActivityStatus(activity) === "Agendada").length;
       const overdue = activities.filter((activity) => getActivityStatus(activity) === "Atrasada").length;
       const completed = activities.filter((activity) => getActivityStatus(activity) === "Concluída").length;
@@ -2039,6 +2870,18 @@
       document.getElementById("agendaScheduled").textContent = scheduled;
       document.getElementById("agendaOverdue").textContent = overdue;
       document.getElementById("agendaCompleted").textContent = completed;
+
+      const periodPending = periodActivities.filter((activity) => getActivityStatus(activity) === "Agendada").length;
+      const periodOverdue = periodActivities.filter((activity) => getActivityStatus(activity) === "Atrasada").length;
+      const periodCompleted = periodActivities.filter((activity) => getActivityStatus(activity) === "Concluída").length;
+      const max = Math.max(periodPending, periodOverdue, periodCompleted, 1);
+
+      document.getElementById("chartPending").textContent = periodPending;
+      document.getElementById("chartOverdue").textContent = periodOverdue;
+      document.getElementById("chartCompleted").textContent = periodCompleted;
+      document.getElementById("chartPendingBar").style.width = `${(periodPending / max) * 100}%`;
+      document.getElementById("chartOverdueBar").style.width = `${(periodOverdue / max) * 100}%`;
+      document.getElementById("chartCompletedBar").style.width = `${(periodCompleted / max) * 100}%`;
 
       table.innerHTML = filtered.length
         ? filtered.map((activity) => {
@@ -2060,7 +2903,7 @@
                 <td>${formatDateTime(activity.date)}</td>
                 <td>${badgeForStatus(activity.calculatedStatus)}</td>
                 <td>
-                  ${activity.calculatedStatus !== "Concluída"
+                  ${activity.calculatedStatus !== "Concluída" && activity.calculatedStatus !== "Cancelada"
                     ? `<button class="button button-primary button-small" onclick="completeActivity(${activity.id})">Concluir</button>`
                     : "—"}
                 </td>
@@ -2077,6 +2920,7 @@
       activity.status = "Concluída";
 
       const deal = getDeal(activity.dealId);
+
       if (deal) {
         addTimelineEvent(
           deal,
@@ -2095,27 +2939,91 @@
 
     function renderForecast() {
       const owner = document.getElementById("forecastOwnerFilter")?.value || "";
-      const openDeals = deals.filter((deal) => deal.status === "open" && (!owner || deal.owner === owner));
+
+      const openDeals = deals.filter((deal) => {
+        return deal.status === "open" && (!owner || deal.owner === owner);
+      });
+
       const dealsWithValue = openDeals.filter((deal) => Number(deal.value) > 0);
       const dealsWithoutValue = openDeals.filter((deal) => !Number(deal.value));
 
       const gross = dealsWithValue.reduce((total, deal) => total + Number(deal.value), 0);
-      const weighted = dealsWithValue.reduce(
-        (total, deal) => total + Number(deal.value) * (Number(deal.probability) / 100),
-        0
-      );
+
+      const weighted = dealsWithValue.reduce((total, deal) => {
+        return total + Number(deal.value) * (Number(deal.probability) / 100);
+      }, 0);
 
       const gap = Math.max(forecastGoal - weighted, 0);
+      const goalProgress = Math.min((weighted / forecastGoal) * 100, 100);
 
+      document.getElementById("forecastGoal").textContent = currencyNumber(forecastGoal);
       document.getElementById("grossForecast").textContent = currencyNumber(gross);
       document.getElementById("weightedForecast").textContent = currencyNumber(weighted);
       document.getElementById("goalGap").textContent = weighted >= forecastGoal ? "Meta atingida" : currencyNumber(gap);
-      document.getElementById("goalGapNote").textContent = weighted >= forecastGoal ? "Forecast acima da meta" : "Receita projetada que ainda falta";
+      document.getElementById("goalGapNote").textContent = weighted >= forecastGoal
+        ? "Forecast acima da meta"
+        : "Receita projetada que ainda falta";
+
       document.getElementById("dealsWithoutValue").textContent = `${dealsWithoutValue.length} sem valor`;
+
+      document.getElementById("forecastSummary").innerHTML = `
+        <div class="progress-row">
+          <div class="progress-top">
+            <span>Progresso do forecast contra a meta</span>
+            <strong>${Math.round(goalProgress)}%</strong>
+          </div>
+          <div class="progress-track">
+            <div class="progress-bar" style="width:${goalProgress}%;background:${weighted >= forecastGoal ? "#17a36b" : "#171717"}"></div>
+          </div>
+        </div>
+
+        <div class="progress-row">
+          <div class="progress-top">
+            <span>Ticket médio do pipeline</span>
+            <strong>${currencyNumber(dealsWithValue.length ? gross / dealsWithValue.length : 0)}</strong>
+          </div>
+          <div class="conversion-meta">${dealsWithValue.length} oportunidade(s) com valor definido</div>
+        </div>
+
+        <div class="progress-row">
+          <div class="progress-top">
+            <span>Probabilidade média</span>
+            <strong>${Math.round(openDeals.length ? openDeals.reduce((sum, deal) => sum + Number(deal.probability), 0) / openDeals.length : 0)}%</strong>
+          </div>
+          <div class="conversion-meta">Calculada a partir das etapas e probabilidades atuais.</div>
+        </div>
+      `;
+
+      document.getElementById("forecastStages").innerHTML = stages.map((stage) => {
+        const stageDeals = openDeals.filter((deal) => deal.stage === stage.name);
+        const stageGross = stageDeals.reduce((sum, deal) => sum + Number(deal.value || 0), 0);
+        const stageWeighted = stageDeals.reduce((sum, deal) => {
+          return sum + Number(deal.value || 0) * (Number(deal.probability || 0) / 100);
+        }, 0);
+
+        const impact = weighted ? Math.round((stageWeighted / weighted) * 100) : 0;
+
+        return `
+          <div class="conversion-row">
+            <div class="conversion-top">
+              <span>${escapeHTML(stage.name)}</span>
+              <strong>${impact}% do forecast</strong>
+            </div>
+
+            <div class="progress-track">
+              <div class="progress-bar" style="width:${impact}%;background:#3977e8"></div>
+            </div>
+
+            <div class="conversion-meta">
+              ${stageDeals.length} negócio(s) · Pipeline: ${currencyNumber(stageGross)} · Ponderado: ${currencyNumber(stageWeighted)}
+            </div>
+          </div>
+        `;
+      }).join("");
 
       document.getElementById("forecastTable").innerHTML = openDeals.length
         ? openDeals.map((deal) => {
-            const forecast = Number(deal.value || 0) * (Number(deal.probability) / 100);
+            const forecast = Number(deal.value || 0) * (Number(deal.probability || 0) / 100);
 
             return `
               <tr>
@@ -2134,30 +3042,64 @@
         : `<tr><td colspan="6"><div class="empty">Nenhuma oportunidade encontrada.</div></td></tr>`;
     }
 
+    function activityMatchesTeamPeriod(activity) {
+      const period = document.getElementById("teamPeriod")?.value || "month";
+
+      if (period === "all") return true;
+
+      const activityDate = new Date(activity.date);
+
+      if (period === "month") {
+        return activityDate.getMonth() === CURRENT_DATE.getMonth() &&
+          activityDate.getFullYear() === CURRENT_DATE.getFullYear();
+      }
+
+      const start = new Date(CURRENT_DATE);
+      start.setDate(CURRENT_DATE.getDate() - CURRENT_DATE.getDay());
+      start.setHours(0, 0, 0, 0);
+
+      const end = new Date(start);
+      end.setDate(start.getDate() + 7);
+
+      return activityDate >= start && activityDate < end;
+    }
+
     function renderTeam() {
       const openDeals = deals.filter((deal) => deal.status === "open");
       const pipeline = openDeals.reduce((total, deal) => total + Number(deal.value || 0), 0);
-      const pending = activities.filter((activity) => getActivityStatus(activity) === "Agendada").length;
-      const overdue = activities.filter((activity) => getActivityStatus(activity) === "Atrasada").length;
+
+      const periodActivities = activities.filter(activityMatchesTeamPeriod);
+      const pending = periodActivities.filter((activity) => getActivityStatus(activity) === "Agendada").length;
+      const overdue = periodActivities.filter((activity) => getActivityStatus(activity) === "Atrasada").length;
+
+      const won = deals
+        .filter((deal) => deal.status === "won")
+        .reduce((sum, deal) => sum + Number(deal.value || 0), 0);
 
       document.getElementById("teamPipeline").textContent = currencyNumber(pipeline);
       document.getElementById("teamPending").textContent = pending;
       document.getElementById("teamOverdue").textContent = overdue;
+      document.getElementById("teamWon").textContent = currencyNumber(won);
 
       document.getElementById("teamRanking").innerHTML = `
         <div class="team-row" style="color:#737373;font-size:10px;font-weight:800;text-transform:uppercase">
-          <div>Comercial</div><div>Pipeline</div><div>Atividades</div><div>Vencidas</div><div>Forecast</div>
+          <div>Comercial</div>
+          <div>Pipeline</div>
+          <div>Atividades</div>
+          <div>Vencidas</div>
+          <div>Forecast</div>
         </div>
 
-        ${owners.map((owner, index) => {
+        ${owners.map((owner) => {
           const ownerDeals = openDeals.filter((deal) => deal.owner === owner);
-          const ownerActivities = activities.filter((activity) => activity.owner === owner);
+          const ownerActivities = periodActivities.filter((activity) => activity.owner === owner);
           const ownerOverdue = ownerActivities.filter((activity) => getActivityStatus(activity) === "Atrasada").length;
+
           const ownerPipeline = ownerDeals.reduce((total, deal) => total + Number(deal.value || 0), 0);
-          const ownerForecast = ownerDeals.reduce(
-            (total, deal) => total + Number(deal.value || 0) * (deal.probability / 100),
-            0
-          );
+
+          const ownerForecast = ownerDeals.reduce((total, deal) => {
+            return total + Number(deal.value || 0) * (Number(deal.probability || 0) / 100);
+          }, 0);
 
           return `
             <div class="team-row">
@@ -2174,7 +3116,7 @@
         }).join("")}
       `;
 
-      const alerts = activities
+      const alerts = periodActivities
         .filter((activity) => getActivityStatus(activity) === "Atrasada")
         .sort((a, b) => new Date(a.date) - new Date(b.date));
 
@@ -2193,12 +3135,45 @@
               </div>
             `;
           }).join("")
-        : `<div class="empty">Não há atividades vencidas na equipe.</div>`;
+        : `<div class="empty">Não há atividades vencidas neste período.</div>`;
     }
 
-    function fillStageOptions(selectedStage = stages[0]) {
+    function renderReports() {
+      renderConversionRows("reportsConversion");
+
+      const losses = deals.filter((deal) => deal.status === "lost" || deal.status === "churn");
+      const reasons = {};
+
+      losses.forEach((deal) => {
+        const reason = deal.lossReason || "Não informado";
+        reasons[reason] = (reasons[reason] || 0) + 1;
+      });
+
+      const entries = Object.entries(reasons);
+      const max = Math.max(...entries.map(([, value]) => value), 1);
+
+      document.getElementById("lossReports").innerHTML = entries.length
+        ? entries.map(([reason, count]) => `
+            <div class="progress-row">
+              <div class="progress-top">
+                <span>${escapeHTML(reason)}</span>
+                <strong>${count}</strong>
+              </div>
+              <div class="progress-track">
+                <div class="progress-bar" style="width:${(count / max) * 100}%;background:#e84a4a"></div>
+              </div>
+            </div>
+          `).join("")
+        : `<div class="empty">Ainda não existem negócios perdidos ou churns registrados.</div>`;
+    }
+
+    function fillStageOptions(selectedStage = stages[0].name) {
       document.getElementById("dealStage").innerHTML = stages
-        .map((stage) => `<option ${stage === selectedStage ? "selected" : ""}>${escapeHTML(stage)}</option>`)
+        .map((stage) => `
+          <option value="${escapeHTML(stage.name)}" ${stage.name === selectedStage ? "selected" : ""}>
+            ${escapeHTML(stage.name)} · ${stage.probability}%
+          </option>
+        `)
         .join("");
     }
 
@@ -2215,7 +3190,8 @@
         ? "Atualize as informações da oportunidade."
         : "Registre uma oportunidade para acompanhar pelo funil.";
 
-      fillStageOptions(deal?.stage || stages[0]);
+      fillOwnerOptions();
+      fillStageOptions(deal?.stage || stages[0].name);
 
       if (deal) {
         document.getElementById("dealCompany").value = deal.company || "";
@@ -2228,7 +3204,14 @@
         document.getElementById("dealCloseDate").value = deal.closeDate || "";
         document.getElementById("dealSource").value = deal.source || "";
         document.getElementById("dealTags").value = deal.tags || "";
+      } else {
+        document.getElementById("dealProbability").value = stages[0].probability;
+        document.getElementById("dealOwner").value = "Victor";
       }
+
+      document.getElementById("dealStage").onchange = (event) => {
+        document.getElementById("dealProbability").value = getStageData(event.target.value).probability;
+      };
 
       document.getElementById("dealModal").classList.add("open");
     }
@@ -2258,8 +3241,21 @@
         const oldStage = deal.stage;
         const oldOwner = deal.owner;
         const oldValue = deal.value;
+        const oldProbability = deal.probability;
 
-        Object.assign(deal, { company, contact, phone, email, value, probability, stage, owner, closeDate, source, tags });
+        Object.assign(deal, {
+          company,
+          contact,
+          phone,
+          email,
+          value,
+          probability,
+          stage,
+          owner,
+          closeDate,
+          source,
+          tags
+        });
 
         addTimelineEvent(deal, "Negócio atualizado", "Informações da oportunidade foram atualizadas.");
 
@@ -2275,7 +3271,13 @@
           addTimelineEvent(deal, "Valor atualizado", `Valor definido como ${currency(value)}.`);
         }
 
-        if (note) addTimelineEvent(deal, "Observação adicionada", note);
+        if (oldProbability !== probability) {
+          addTimelineEvent(deal, "Probabilidade atualizada", `${oldProbability}% → ${probability}%.`);
+        }
+
+        if (note) {
+          addTimelineEvent(deal, "Observação adicionada", note);
+        }
       } else {
         const newDeal = {
           id: Date.now(),
@@ -2323,7 +3325,9 @@
     function openActivityModal(dealId = null) {
       const select = document.getElementById("activityDeal");
       const form = document.querySelector("#activityModal form");
+
       form.reset();
+      fillOwnerOptions();
 
       const activeDeals = deals.filter((deal) => deal.status === "open");
 
@@ -2335,8 +3339,12 @@
           `).join("")
         : `<option value="">Nenhum negócio aberto</option>`;
 
+      const selectedDeal = getDeal(dealId);
+      document.getElementById("activityOwner").value = selectedDeal?.owner || "Victor";
+
       const defaultDate = new Date(CURRENT_DATE);
       defaultDate.setHours(defaultDate.getHours() + 1);
+
       document.getElementById("activityDate").value =
         `${dateKey(defaultDate)}T${String(defaultDate.getHours()).padStart(2, "0")}:${String(defaultDate.getMinutes()).padStart(2, "0")}`;
 
@@ -2364,6 +3372,7 @@
       activities.push(newActivity);
 
       const deal = getDeal(dealId);
+
       if (deal) {
         addTimelineEvent(
           deal,
@@ -2386,25 +3395,29 @@
       if (!deal) return;
 
       currentDetailDealId = deal.id;
+
       const nextActivity = getNextActivity(deal.id);
 
       document.getElementById("detailHeader").innerHTML = `
         <div>
+          ${badgeForStatus(dealStatusLabel(deal.status))}
           <span class="badge badge-gray">${escapeHTML(deal.stage)}</span>
+
           <h2 style="margin-top:10px">${escapeHTML(deal.company)}</h2>
+
           <p>
             ${escapeHTML(deal.contact || "Sem contato")} · ${escapeHTML(deal.owner)} · ${currency(deal.value)}
           </p>
 
           <div class="stage-line">
             ${stages.map((stage) => `
-              <span class="stage ${stage === deal.stage ? "current" : ""}">${escapeHTML(stage)}</span>
+              <span class="stage ${stage.name === deal.stage ? "current" : ""}">${escapeHTML(stage.name)}</span>
             `).join("")}
           </div>
         </div>
 
         <div class="inline-actions">
-          <button class="button button-primary button-small" onclick="openActivityModal(${deal.id})">＋ Atividade</button>
+          ${deal.status === "open" ? `<button class="button button-primary button-small" onclick="openActivityModal(${deal.id})">＋ Atividade</button>` : ""}
           <button class="close-button" onclick="closeModal('detailModal')">×</button>
         </div>
       `;
@@ -2423,6 +3436,13 @@
         <div class="detail-value"><strong>Origem</strong><br>${escapeHTML(deal.source || "Não informada")}</div>
         <div class="detail-value"><strong>Tags</strong><br>${escapeHTML(deal.tags || "Sem tags")}</div>
 
+        ${deal.lossReason ? `
+          <div class="detail-value">
+            <strong>Motivo de ${deal.status === "churn" ? "churn" : "perda"}</strong><br>
+            ${escapeHTML(deal.lossReason)}
+          </div>
+        ` : ""}
+
         ${deal.phone ? `
           <div class="whatsapp-box">
             <strong>WhatsApp preparado</strong>
@@ -2434,11 +3454,17 @@
         <div class="detail-title">Ações</div>
 
         <div class="detail-actions">
-          <button class="button button-primary" onclick="openActivityModal(${deal.id})">Criar atividade</button>
-          <button class="button button-secondary" onclick="openDealModal(${deal.id})">Editar negócio</button>
-          <button class="button button-secondary" onclick="openTransferModal(${deal.id})">Transferir negócio</button>
-          <button class="button button-success" onclick="markDealWon(${deal.id})">Marcar como ganho</button>
-          <button class="button button-danger" onclick="openLossModal(${deal.id})">Marcar como perdido</button>
+          ${deal.status === "open" ? `
+            <button class="button button-primary" onclick="openActivityModal(${deal.id})">Criar atividade</button>
+            <button class="button button-secondary" onclick="openDealModal(${deal.id})">Editar negócio</button>
+            <button class="button button-secondary" onclick="openTransferModal(${deal.id})">Transferir negócio</button>
+            <button class="button button-success" onclick="markDealWon(${deal.id})">Marcar como ganho</button>
+            <button class="button button-danger" onclick="openLossModal(${deal.id})">Marcar como perdido / churn</button>
+          ` : `
+            <button class="button button-secondary" onclick="reopenDeal(${deal.id})">Reabrir negócio</button>
+            <button class="button button-secondary" onclick="openDealModal(${deal.id})">Editar informações</button>
+          `}
+
           <button class="button button-secondary" onclick="archiveDeal(${deal.id})">Arquivar / excluir</button>
         </div>
       `;
@@ -2477,6 +3503,8 @@
       const deal = getDeal(dealId);
       if (!deal) return;
 
+      fillOwnerOptions();
+
       document.getElementById("transferDealId").value = deal.id;
       document.getElementById("transferOwner").value = deal.owner;
       document.getElementById("transferModal").classList.add("open");
@@ -2493,9 +3521,10 @@
 
       const previousOwner = deal.owner;
       deal.owner = newOwner;
-      addTimelineEvent(deal, "Negócio transferido", `${previousOwner} → ${newOwner}.`);
-      saveData();
 
+      addTimelineEvent(deal, "Negócio transferido", `${previousOwner} → ${newOwner}.`);
+
+      saveData();
       closeModal("transferModal");
       refreshAll();
       openDealDetail(deal.id);
@@ -2509,9 +3538,10 @@
 
       deal.status = "won";
       deal.probability = 100;
-      addTimelineEvent(deal, "Negócio ganho", "Oportunidade marcada como ganha.");
-      saveData();
 
+      addTimelineEvent(deal, "Negócio ganho", "Oportunidade marcada como ganha.");
+
+      saveData();
       closeModal("detailModal");
       refreshAll();
       showView("forecast");
@@ -2519,6 +3549,7 @@
 
     function openLossModal(dealId) {
       document.getElementById("lossDealId").value = dealId;
+      document.getElementById("lossStatus").value = "lost";
       document.getElementById("lossModal").classList.add("open");
     }
 
@@ -2526,28 +3557,52 @@
       const deal = getDeal(document.getElementById("lossDealId").value);
       if (!deal) return;
 
+      const status = document.getElementById("lossStatus").value;
       const reason = document.getElementById("lossReason").value;
-      deal.status = "lost";
-      deal.lossReason = reason;
-      addTimelineEvent(deal, "Negócio perdido", `Motivo informado: ${reason}.`);
-      saveData();
 
+      deal.status = status;
+      deal.lossReason = reason;
+
+      addTimelineEvent(
+        deal,
+        status === "churn" ? "Churn registrado" : "Negócio perdido",
+        `Motivo informado: ${reason}.`
+      );
+
+      saveData();
       closeModal("lossModal");
       closeModal("detailModal");
       refreshAll();
       showView("pipeline");
     }
 
+    function reopenDeal(dealId) {
+      const deal = getDeal(dealId);
+      if (!deal) return;
+
+      deal.status = "open";
+      deal.lossReason = "";
+
+      addTimelineEvent(deal, "Negócio reaberto", "A oportunidade voltou para o pipeline ativo.");
+
+      saveData();
+      refreshAll();
+      openDealDetail(dealId);
+    }
+
     function archiveDeal(dealId) {
       const deal = getDeal(dealId);
       if (!deal) return;
 
-      if (!confirm(`Arquivar "${deal.company}"? O negócio deixará de aparecer nas visões ativas.`)) return;
+      if (!confirm(`Arquivar "${deal.company}"? O negócio deixará de aparecer nas visões ativas.`)) {
+        return;
+      }
 
       deal.status = "archived";
-      addTimelineEvent(deal, "Negócio arquivado", "Oportunidade removida das visões ativas.");
-      saveData();
 
+      addTimelineEvent(deal, "Negócio arquivado", "Oportunidade removida das visões ativas.");
+
+      saveData();
       closeModal("detailModal");
       refreshAll();
       showView("pipeline");
@@ -2555,9 +3610,25 @@
 
     function openWhatsApp(phone, company) {
       const cleanPhone = String(phone).replace(/\D/g, "");
-      const message = encodeURIComponent(`Olá! Aqui é da SalesMates. Podemos conversar sobre a oportunidade da ${company}?`);
+      const message = encodeURIComponent(
+        `Olá! Aqui é da SalesMates. Podemos conversar sobre a oportunidade da ${company}?`
+      );
 
       window.open(`https://wa.me/55${cleanPhone}?text=${message}`, "_blank");
+    }
+
+    function saveGoal() {
+      const value = Number(document.getElementById("goalInput").value);
+
+      if (Number.isNaN(value) || value < 0) {
+        alert("Informe uma meta válida.");
+        return;
+      }
+
+      forecastGoal = value;
+      saveData();
+      refreshAll();
+      alert("Configurações salvas com sucesso.");
     }
 
     function closeModal(id) {
@@ -2566,11 +3637,15 @@
 
     document.querySelectorAll(".modal-backdrop").forEach((backdrop) => {
       backdrop.addEventListener("click", (event) => {
-        if (event.target === backdrop) backdrop.classList.remove("open");
+        if (event.target === backdrop) {
+          backdrop.classList.remove("open");
+        }
       });
     });
 
-    fillStageOptions();
+    migrateOldDeals();
+    saveData();
+    fillOwnerOptions();
     renderCalendar();
     refreshAll();
   </script>
