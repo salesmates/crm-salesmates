@@ -2068,46 +2068,10 @@
       }
     ];
 
-    // CARREGAMENTO DOS DADOS COM TRATAMENTO DE ERROS DE LOCALSTORAGE
-    let stages = [];
-    try {
-      stages = JSON.parse(localStorage.getItem("salesmates_stages_v3"));
-      if (!Array.isArray(stages) || stages.length === 0) {
-        stages = [...DEFAULT_STAGES];
-      }
-    } catch (e) {
-      stages = [...DEFAULT_STAGES];
-    }
-
-    let deals = [];
-    try {
-      deals = JSON.parse(localStorage.getItem("salesmates_deals_v3"));
-      if (!Array.isArray(deals)) {
-        deals = [...defaultDeals];
-      }
-    } catch (e) {
-      deals = [...defaultDeals];
-    }
-
-    let activities = [];
-    try {
-      activities = JSON.parse(localStorage.getItem("salesmates_activities_v3"));
-      if (!Array.isArray(activities)) {
-        activities = [...defaultActivities];
-      }
-    } catch (e) {
-      activities = [...defaultActivities];
-    }
-
-    let forecastGoal = 80000;
-    try {
-      const storedGoal = localStorage.getItem("salesmates_goal_v3");
-      if (storedGoal && !isNaN(Number(storedGoal))) {
-        forecastGoal = Number(storedGoal);
-      }
-    } catch (e) {
-      forecastGoal = 80000;
-    }
+    let stages = JSON.parse(localStorage.getItem("salesmates_stages_v3")) || DEFAULT_STAGES;
+    let deals = JSON.parse(localStorage.getItem("salesmates_deals_v3")) || defaultDeals;
+    let activities = JSON.parse(localStorage.getItem("salesmates_activities_v3")) || defaultActivities;
+    let forecastGoal = Number(localStorage.getItem("salesmates_goal_v3")) || 80000;
 
     let selectedDate = new Date("2026-07-23T12:00:00");
     let calendarCursor = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
@@ -2116,17 +2080,11 @@
     let currentDetailDealId = null;
 
     function stageNames() {
-      if (!Array.isArray(stages) || stages.length === 0) {
-        stages = [...DEFAULT_STAGES];
-      }
-      return stages.map((stage) => stage?.name || "");
+      return stages.map((stage) => stage.name);
     }
 
     function getStageData(name) {
-      if (!Array.isArray(stages) || stages.length === 0) {
-        stages = [...DEFAULT_STAGES];
-      }
-      return stages.find((stage) => stage && stage.name === name) || stages[0] || DEFAULT_STAGES[0];
+      return stages.find((stage) => stage.name === name) || stages[0];
     }
 
     function migrateOldDeals() {
@@ -2138,10 +2096,6 @@
         "Proposta": "Proposta enviada",
         "Negociação": "FUP de fechamento"
       };
-
-      if (!Array.isArray(stages) || stages.length === 0) {
-        stages = [...DEFAULT_STAGES];
-      }
 
       deals.forEach((deal) => {
         if (oldMap[deal.stage]) {
@@ -3284,4 +3238,417 @@
         const deal = getDeal(editingId);
         if (!deal) return;
 
-        const
+        const oldStage = deal.stage;
+        const oldOwner = deal.owner;
+        const oldValue = deal.value;
+        const oldProbability = deal.probability;
+
+        Object.assign(deal, {
+          company,
+          contact,
+          phone,
+          email,
+          value,
+          probability,
+          stage,
+          owner,
+          closeDate,
+          source,
+          tags
+        });
+
+        addTimelineEvent(deal, "Negócio atualizado", "Informações da oportunidade foram atualizadas.");
+
+        if (oldStage !== stage) {
+          addTimelineEvent(deal, "Etapa alterada", `${oldStage} → ${stage}.`);
+        }
+
+        if (oldOwner !== owner) {
+          addTimelineEvent(deal, "Responsável alterado", `${oldOwner} → ${owner}.`);
+        }
+
+        if (Number(oldValue || 0) !== Number(value || 0)) {
+          addTimelineEvent(deal, "Valor atualizado", `Valor definido como ${currency(value)}.`);
+        }
+
+        if (oldProbability !== probability) {
+          addTimelineEvent(deal, "Probabilidade atualizada", `${oldProbability}% → ${probability}%.`);
+        }
+
+        if (note) {
+          addTimelineEvent(deal, "Observação adicionada", note);
+        }
+      } else {
+        const newDeal = {
+          id: Date.now(),
+          company,
+          contact,
+          phone,
+          email,
+          value,
+          probability,
+          stage,
+          owner,
+          closeDate,
+          source,
+          tags,
+          status: "open",
+          createdAt: new Date().toISOString(),
+          timeline: [
+            {
+              title: "Negócio criado",
+              description: `Oportunidade criada por ${owner}.`,
+              date: new Date().toISOString()
+            },
+            ...(note ? [{
+              title: "Observação inicial",
+              description: note,
+              date: new Date().toISOString()
+            }] : [])
+          ]
+        };
+
+        deals.push(newDeal);
+      }
+
+      saveData();
+      closeModal("dealModal");
+      refreshAll();
+
+      if (editingId && document.getElementById("detailModal").classList.contains("open")) {
+        openDealDetail(Number(editingId));
+      } else if (!editingId) {
+        showView("pipeline");
+      }
+    }
+
+    function openActivityModal(dealId = null) {
+      const select = document.getElementById("activityDeal");
+      const form = document.querySelector("#activityModal form");
+
+      form.reset();
+      fillOwnerOptions();
+
+      const activeDeals = deals.filter((deal) => deal.status === "open");
+
+      select.innerHTML = activeDeals.length
+        ? activeDeals.map((deal) => `
+            <option value="${deal.id}" ${Number(deal.id) === Number(dealId) ? "selected" : ""}>
+              ${escapeHTML(deal.company)}
+            </option>
+          `).join("")
+        : `<option value="">Nenhum negócio aberto</option>`;
+
+      const selectedDeal = getDeal(dealId);
+      document.getElementById("activityOwner").value = selectedDeal?.owner || "Victor";
+
+      const defaultDate = new Date(CURRENT_DATE);
+      defaultDate.setHours(defaultDate.getHours() + 1);
+
+      document.getElementById("activityDate").value =
+        `${dateKey(defaultDate)}T${String(defaultDate.getHours()).padStart(2, "0")}:${String(defaultDate.getMinutes()).padStart(2, "0")}`;
+
+      document.getElementById("activityModal").classList.add("open");
+    }
+
+    function createActivity(event) {
+      event.preventDefault();
+
+      const dealId = Number(document.getElementById("activityDeal").value);
+      if (!dealId) return;
+
+      const newActivity = {
+        id: Date.now(),
+        title: document.getElementById("activityTitle").value.trim(),
+        type: document.getElementById("activityType").value,
+        dealId,
+        date: document.getElementById("activityDate").value,
+        priority: document.getElementById("activityPriority").value,
+        owner: document.getElementById("activityOwner").value,
+        description: document.getElementById("activityDescription").value.trim(),
+        status: "Agendada"
+      };
+
+      activities.push(newActivity);
+
+      const deal = getDeal(dealId);
+
+      if (deal) {
+        addTimelineEvent(
+          deal,
+          `Atividade criada: ${newActivity.title}`,
+          `${newActivity.type} agendada para ${formatDateTime(newActivity.date)}.${newActivity.description ? ` ${newActivity.description}` : ""}`
+        );
+      }
+
+      saveData();
+      closeModal("activityModal");
+      refreshAll();
+
+      if (currentDetailDealId === dealId && document.getElementById("detailModal").classList.contains("open")) {
+        openDealDetail(dealId);
+      }
+    }
+
+    function openDealDetail(dealId) {
+      const deal = getDeal(dealId);
+      if (!deal) return;
+
+      currentDetailDealId = deal.id;
+
+      const nextActivity = getNextActivity(deal.id);
+
+      document.getElementById("detailHeader").innerHTML = `
+        <div>
+          ${badgeForStatus(dealStatusLabel(deal.status))}
+          <span class="badge badge-gray">${escapeHTML(deal.stage)}</span>
+
+          <h2 style="margin-top:10px">${escapeHTML(deal.company)}</h2>
+
+          <p>
+            ${escapeHTML(deal.contact || "Sem contato")} · ${escapeHTML(deal.owner)} · ${currency(deal.value)}
+          </p>
+
+          <div class="stage-line">
+            ${stages.map((stage) => `
+              <span class="stage ${stage.name === deal.stage ? "current" : ""}">${escapeHTML(stage.name)}</span>
+            `).join("")}
+          </div>
+        </div>
+
+        <div class="inline-actions">
+          ${deal.status === "open" ? `<button class="button button-primary button-small" onclick="openActivityModal(${deal.id})">＋ Atividade</button>` : ""}
+          <button class="close-button" onclick="closeModal('detailModal')">×</button>
+        </div>
+      `;
+
+      document.getElementById("dealDetails").innerHTML = `
+        <div class="detail-title">Informações</div>
+
+        <div class="detail-value"><strong>Contato</strong><br>${escapeHTML(deal.contact || "Não informado")}</div>
+        <div class="detail-value"><strong>Telefone</strong><br>${escapeHTML(deal.phone || "Não informado")}</div>
+        <div class="detail-value"><strong>E-mail</strong><br>${escapeHTML(deal.email || "Não informado")}</div>
+        <div class="detail-value"><strong>Responsável</strong><br>${escapeHTML(deal.owner)}</div>
+        <div class="detail-value"><strong>Valor</strong><br>${currency(deal.value)}</div>
+        <div class="detail-value"><strong>Probabilidade</strong><br>${deal.probability}%</div>
+        <div class="detail-value"><strong>Fechamento previsto</strong><br>${deal.closeDate ? formatDate(deal.closeDate) : "Não informado"}</div>
+        <div class="detail-value"><strong>Próxima atividade</strong><br>${nextActivity ? escapeHTML(nextActivity.title) : "Nenhuma agendada"}</div>
+        <div class="detail-value"><strong>Origem</strong><br>${escapeHTML(deal.source || "Não informada")}</div>
+        <div class="detail-value"><strong>Tags</strong><br>${escapeHTML(deal.tags || "Sem tags")}</div>
+
+        ${deal.lossReason ? `
+          <div class="detail-value">
+            <strong>Motivo de ${deal.status === "churn" ? "churn" : "perda"}</strong><br>
+            ${escapeHTML(deal.lossReason)}
+          </div>
+        ` : ""}
+
+        ${deal.phone ? `
+          <div class="whatsapp-box">
+            <strong>WhatsApp preparado</strong>
+            <p>Atalho visual pronto para integração futura com a API oficial do WhatsApp Business.</p>
+            <button class="button button-success button-small" onclick="openWhatsApp('${escapeHTML(deal.phone)}', '${escapeHTML(deal.company)}')">◉ Abrir conversa</button>
+          </div>
+        ` : ""}
+
+        <div class="detail-title">Ações</div>
+
+        <div class="detail-actions">
+          ${deal.status === "open" ? `
+            <button class="button button-primary" onclick="openActivityModal(${deal.id})">Criar atividade</button>
+            <button class="button button-secondary" onclick="openDealModal(${deal.id})">Editar negócio</button>
+            <button class="button button-secondary" onclick="openTransferModal(${deal.id})">Transferir negócio</button>
+            <button class="button button-success" onclick="markDealWon(${deal.id})">Marcar como ganho</button>
+            <button class="button button-danger" onclick="openLossModal(${deal.id})">Marcar como perdido / churn</button>
+          ` : `
+            <button class="button button-secondary" onclick="reopenDeal(${deal.id})">Reabrir negócio</button>
+            <button class="button button-secondary" onclick="openDealModal(${deal.id})">Editar informações</button>
+          `}
+
+          <button class="button button-secondary" onclick="archiveDeal(${deal.id})">Arquivar / excluir</button>
+        </div>
+      `;
+
+      const timelineEvents = [
+        ...(deal.timeline || []),
+        ...getDealActivities(deal.id).map((activity) => ({
+          title: `Atividade: ${activity.title}`,
+          description: `${activity.type} · ${getActivityStatus(activity)}${activity.description ? ` · ${activity.description}` : ""}`,
+          date: activity.date
+        }))
+      ].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      document.getElementById("dealTimeline").innerHTML = `
+        <div class="panel-header">
+          <div>
+            <h2>Timeline comercial</h2>
+            <p class="panel-subtitle">Histórico completo da oportunidade.</p>
+          </div>
+          <span class="badge badge-gray">${timelineEvents.length} eventos</span>
+        </div>
+
+        ${timelineEvents.length ? timelineEvents.map((event) => `
+          <div class="timeline-event">
+            <strong>${escapeHTML(event.title)}</strong>
+            <small>${escapeHTML(event.description)}</small>
+            <small>${formatDateTime(event.date)}</small>
+          </div>
+        `).join("") : `<div class="empty">Ainda não há eventos neste negócio.</div>`}
+      `;
+
+      document.getElementById("detailModal").classList.add("open");
+    }
+
+    function openTransferModal(dealId) {
+      const deal = getDeal(dealId);
+      if (!deal) return;
+
+      fillOwnerOptions();
+
+      document.getElementById("transferDealId").value = deal.id;
+      document.getElementById("transferOwner").value = deal.owner;
+      document.getElementById("transferModal").classList.add("open");
+    }
+
+    function transferDeal() {
+      const deal = getDeal(document.getElementById("transferDealId").value);
+      const newOwner = document.getElementById("transferOwner").value;
+
+      if (!deal || deal.owner === newOwner) {
+        closeModal("transferModal");
+        return;
+      }
+
+      const previousOwner = deal.owner;
+      deal.owner = newOwner;
+
+      addTimelineEvent(deal, "Negócio transferido", `${previousOwner} → ${newOwner}.`);
+
+      saveData();
+      closeModal("transferModal");
+      refreshAll();
+      openDealDetail(deal.id);
+    }
+
+    function markDealWon(dealId) {
+      const deal = getDeal(dealId);
+      if (!deal) return;
+
+      if (!confirm(`Marcar "${deal.company}" como ganho?`)) return;
+
+      deal.status = "won";
+      deal.probability = 100;
+
+      addTimelineEvent(deal, "Negócio ganho", "Oportunidade marcada como ganha.");
+
+      saveData();
+      closeModal("detailModal");
+      refreshAll();
+      showView("forecast");
+    }
+
+    function openLossModal(dealId) {
+      document.getElementById("lossDealId").value = dealId;
+      document.getElementById("lossStatus").value = "lost";
+      document.getElementById("lossModal").classList.add("open");
+    }
+
+    function markDealLost() {
+      const deal = getDeal(document.getElementById("lossDealId").value);
+      if (!deal) return;
+
+      const status = document.getElementById("lossStatus").value;
+      const reason = document.getElementById("lossReason").value;
+
+      deal.status = status;
+      deal.lossReason = reason;
+
+      addTimelineEvent(
+        deal,
+        status === "churn" ? "Churn registrado" : "Negócio perdido",
+        `Motivo informado: ${reason}.`
+      );
+
+      saveData();
+      closeModal("lossModal");
+      closeModal("detailModal");
+      refreshAll();
+      showView("pipeline");
+    }
+
+    function reopenDeal(dealId) {
+      const deal = getDeal(dealId);
+      if (!deal) return;
+
+      deal.status = "open";
+      deal.lossReason = "";
+
+      addTimelineEvent(deal, "Negócio reaberto", "A oportunidade voltou para o pipeline ativo.");
+
+      saveData();
+      refreshAll();
+      openDealDetail(dealId);
+    }
+
+    function archiveDeal(dealId) {
+      const deal = getDeal(dealId);
+      if (!deal) return;
+
+      if (!confirm(`Arquivar "${deal.company}"? O negócio deixará de aparecer nas visões ativas.`)) {
+        return;
+      }
+
+      deal.status = "archived";
+
+      addTimelineEvent(deal, "Negócio arquivado", "Oportunidade removida das visões ativas.");
+
+      saveData();
+      closeModal("detailModal");
+      refreshAll();
+      showView("pipeline");
+    }
+
+    function openWhatsApp(phone, company) {
+      const cleanPhone = String(phone).replace(/\D/g, "");
+      const message = encodeURIComponent(
+        `Olá! Aqui é da SalesMates. Podemos conversar sobre a oportunidade da ${company}?`
+      );
+
+      window.open(`https://wa.me/55${cleanPhone}?text=${message}`, "_blank");
+    }
+
+    function saveGoal() {
+      const value = Number(document.getElementById("goalInput").value);
+
+      if (Number.isNaN(value) || value < 0) {
+        alert("Informe uma meta válida.");
+        return;
+      }
+
+      forecastGoal = value;
+      saveData();
+      refreshAll();
+      alert("Configurações salvas com sucesso.");
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove("open");
+    }
+
+    document.querySelectorAll(".modal-backdrop").forEach((backdrop) => {
+      backdrop.addEventListener("click", (event) => {
+        if (event.target === backdrop) {
+          backdrop.classList.remove("open");
+        }
+      });
+    });
+
+    migrateOldDeals();
+    saveData();
+    fillOwnerOptions();
+    renderCalendar();
+    refreshAll();
+  </script>
+</body>
+</html>
+
