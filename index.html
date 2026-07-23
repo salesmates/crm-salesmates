@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,41 +7,57 @@
 
   <style>
     :root {
-      --bg: #f7f7f8;
+      /* LIGHT THEME (Padrão) */
+      --bg: #f8f9fa;
       --surface: #ffffff;
-      --sidebar: #050505;
-      --text: #171717;
-      --muted: #737373;
-      --border: #e7e7e7;
-      --primary: #171717;
-      --primary-hover: #353535;
-      --success: #17a36b;
-      --warning: #e88d10;
-      --danger: #e84a4a;
-      --info: #3977e8;
-      --radius: 14px;
-      --shadow: 0 8px 26px rgba(0, 0, 0, 0.055);
-      --card-bg: #ffffff;
-      --kanban-col-bg: #eeeeef;
-      --tab-active-bg: #f3f4f6;
+      --sidebar: #0f0f11;
+      --sidebar-text: #a1a1aa;
+      --sidebar-active: #ffffff;
+      --sidebar-active-bg: rgba(255,255,255,0.08);
+      --text: #09090b;
+      --text-muted: #71717a;
+      --border: #e4e4e7;
+      --border-strong: #d4d4d8;
+      --primary: #18181b;
+      --primary-hover: #27272a;
+      --primary-text: #ffffff;
+      --success: #10b981;
+      --success-bg: #ecfdf5;
+      --warning: #f59e0b;
+      --warning-bg: #fffbeb;
+      --danger: #ef4444;
+      --danger-bg: #fef2f2;
+      --info: #3b82f6;
+      --info-bg: #eff6ff;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
     }
 
-    body.dark-theme {
-      --bg: #0d0d0e;
+    [data-theme="dark"] {
+      /* DARK THEME */
+      --bg: #09090b;
       --surface: #18181b;
       --sidebar: #09090b;
+      --sidebar-text: #a1a1aa;
+      --sidebar-active: #ffffff;
+      --sidebar-active-bg: #27272a;
       --text: #f4f4f5;
-      --muted: #a1a1aa;
+      --text-muted: #71717a;
       --border: #27272a;
+      --border-strong: #3f3f46;
       --primary: #f4f4f5;
       --primary-hover: #e4e4e7;
+      --primary-text: #09090b;
       --success: #10b981;
+      --success-bg: rgba(16, 185, 129, 0.1);
       --warning: #f59e0b;
+      --warning-bg: rgba(245, 158, 11, 0.1);
       --danger: #ef4444;
+      --danger-bg: rgba(239, 68, 68, 0.1);
       --info: #3b82f6;
-      --card-bg: #27272a;
-      --kanban-col-bg: #1f1f23;
-      --tab-active-bg: #27272a;
+      --info-bg: rgba(59, 130, 246, 0.1);
     }
 
     * { box-sizing: border-box; }
@@ -52,25 +68,24 @@
       background: var(--bg);
       color: var(--text);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      transition: background .3s, color .3s;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     button, input, select, textarea { font: inherit; }
     button { border: 0; cursor: pointer; }
-    
     input, select, textarea {
       width: 100%;
       outline: none;
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: var(--radius-sm);
       background: var(--surface);
       color: var(--text);
-      transition: border .2s, box-shadow .2s;
+      transition: border .2s, box-shadow .2s, background .2s, color .2s;
     }
 
     input:focus, select:focus, textarea:focus {
-      border-color: #8d8d8d;
-      box-shadow: 0 0 0 3px rgba(125,125,125,.15);
+      border-color: var(--border-strong);
+      box-shadow: 0 0 0 3px rgba(120,120,120,.12);
     }
 
     textarea { resize: vertical; }
@@ -89,7 +104,8 @@
       flex-direction: column;
       padding: 22px 13px 16px;
       background: var(--sidebar);
-      color: white;
+      color: var(--sidebar-text);
+      border-right: 1px solid var(--border);
     }
 
     .brand {
@@ -112,9 +128,22 @@
     .brand-logo strong { font-weight: 850; }
     .brand-logo span { color: #b8b8b8; font-weight: 350; }
 
+    .theme-toggle-btn {
+      background: transparent;
+      color: var(--sidebar-text);
+      font-size: 18px;
+      padding: 5px;
+      border-radius: 5px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .theme-toggle-btn:hover {
+      color: white;
+      background: rgba(255,255,255,0.08);
+    }
+
     .menu-label {
       padding: 10px 12px 7px;
-      color: #8c8c8c;
+      color: #6b7280;
       font-size: 10px;
       font-weight: 800;
       letter-spacing: .1em;
@@ -129,7 +158,7 @@
       padding: 11px 12px;
       margin: 2px 0;
       border-radius: 9px;
-      color: #a9a9a9;
+      color: var(--sidebar-text);
       background: transparent;
       text-align: left;
       font-size: 13px;
@@ -139,17 +168,12 @@
 
     .nav-button:hover {
       color: white;
-      background: rgba(255,255,255,.07);
+      background: var(--sidebar-active-bg);
     }
 
     .nav-button.active {
-      color: #111;
-      background: #fff;
-    }
-
-    body.dark-theme .nav-button.active {
-      color: #fff;
-      background: #27272a;
+      color: var(--primary-text);
+      background: var(--primary);
     }
 
     .nav-icon {
@@ -168,14 +192,14 @@
     .user-box {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
       padding: 10px;
       border-radius: 10px;
       color: #d6d6d6;
       font-size: 12px;
     }
 
-    .user-info {
+    .user-info-row {
       display: flex;
       align-items: center;
       gap: 10px;
@@ -199,19 +223,14 @@
     .user-box strong { color: white; font-size: 13px; }
     .user-box small { color: #939393; }
 
-    /* Theme Toggle */
-    .theme-toggle-btn {
-      background: rgba(255,255,255,0.08);
-      color: #fff;
-      border-radius: 8px;
-      padding: 6px 12px;
+    .user-selector {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: white;
       font-size: 11px;
-      font-weight: 650;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      width: fit-content;
+      padding: 6px;
+      margin-top: 4px;
+      border-radius: var(--radius-sm);
     }
 
     /* MAIN */
@@ -240,7 +259,7 @@
 
     .page-title p {
       margin: 7px 0 0;
-      color: var(--muted);
+      color: var(--text-muted);
       font-size: 14px;
     }
 
@@ -264,11 +283,10 @@
     }
 
     .button:hover { transform: translateY(-1px); }
-    .button-primary { color: white; background: var(--primary); }
-    body.dark-theme .button-primary { color: #111; background: var(--primary); }
+    .button-primary { color: var(--primary-text); background: var(--primary); }
     .button-primary:hover { background: var(--primary-hover); }
     .button-secondary { border: 1px solid var(--border); background: var(--surface); color: var(--text); }
-    .button-secondary:hover { background: var(--tab-active-bg); }
+    .button-secondary:hover { background: var(--bg); }
     .button-danger { color: white; background: var(--danger); }
     .button-success { color: white; background: var(--success); }
     .button-small { padding: 7px 10px; font-size: 12px; }
@@ -285,7 +303,7 @@
       font-size: 15px;
     }
 
-    .icon-button:hover { background: var(--tab-active-bg); }
+    .icon-button:hover { background: var(--bg); }
     .icon-button.danger { color: var(--danger); }
 
     .panel, .metric-card {
@@ -306,7 +324,7 @@
     }
 
     .panel-header h2 { margin: 0; font-size: 16px; letter-spacing: -.025em; }
-    .panel-subtitle { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
+    .panel-subtitle { margin: 4px 0 0; color: var(--text-muted); font-size: 12px; }
 
     .dashboard-grid {
       display: grid;
@@ -316,7 +334,7 @@
     }
 
     .metric-card { padding: 18px; }
-    .metric-label { color: var(--muted); font-size: 12px; font-weight: 650; }
+    .metric-label { color: var(--text-muted); font-size: 12px; font-weight: 650; }
     .metric-value {
       margin: 9px 0 5px;
       font-size: 25px;
@@ -324,7 +342,7 @@
       letter-spacing: -.04em;
     }
 
-    .metric-note { color: var(--muted); font-size: 11px; font-weight: 600; }
+    .metric-note { color: var(--text-muted); font-size: 11px; font-weight: 600; }
     .metric-note.danger { color: var(--danger); }
     .metric-note.success { color: var(--success); }
 
@@ -353,7 +371,7 @@
     .progress-bar {
       height: 100%;
       border-radius: inherit;
-      background: var(--primary);
+      background: var(--text);
     }
 
     .badge {
@@ -367,11 +385,11 @@
       white-space: nowrap;
     }
 
-    .badge-green { color: #087846; background: #dbf7e8; }
-    .badge-red { color: #b72e2e; background: #ffe4e4; }
-    .badge-blue { color: #245bc4; background: #e3edff; }
-    .badge-yellow { color: #a15c00; background: #fff1d4; }
-    .badge-gray { color: #656565; background: var(--border); }
+    .badge-green { color: #087846; background: var(--success-bg); }
+    .badge-red { color: #b72e2e; background: var(--danger-bg); }
+    .badge-blue { color: #245bc4; background: var(--info-bg); }
+    .badge-yellow { color: #a15c00; background: var(--warning-bg); }
+    .badge-gray { color: var(--text-muted); background: var(--border); }
 
     .activity-item {
       display: flex;
@@ -390,7 +408,7 @@
       flex: 0 0 auto;
       place-items: center;
       border-radius: 9px;
-      background: var(--border);
+      background: var(--bg);
       font-size: 15px;
     }
 
@@ -401,11 +419,12 @@
       font-size: 12px;
       text-overflow: ellipsis;
       white-space: nowrap;
+      color: var(--text);
     }
 
     .activity-info small {
       margin-top: 4px;
-      color: var(--muted);
+      color: var(--text-muted);
       font-size: 11px;
     }
 
@@ -422,6 +441,8 @@
       min-width: 245px;
       padding: 10px 12px;
       font-size: 13px;
+      background: var(--surface);
+      color: var(--text);
     }
 
     .filter, .view-toggle {
@@ -436,8 +457,8 @@
     }
 
     .filter.active, .view-toggle.active {
-      border-color: var(--primary);
-      color: var(--bg);
+      border-color: var(--text);
+      color: var(--primary-text);
       background: var(--primary);
     }
 
@@ -462,18 +483,18 @@
     .conversion-top strong { font-size: 12px; }
     .conversion-meta {
       margin-top: 7px;
-      color: var(--muted);
+      color: var(--text-muted);
       font-size: 10px;
     }
 
-    /* PIPELINE STAGES & HORIZONTAL SCROLL */
+    /* PIPELINE */
     .pipeline-manager {
       display: none;
       margin-bottom: 18px;
       padding: 16px;
-      border: 1px dashed #bcbcbc;
+      border: 1px dashed var(--border-strong);
       border-radius: var(--radius);
-      background: var(--surface);
+      background: var(--bg);
     }
 
     .pipeline-manager.open { display: block; }
@@ -516,7 +537,7 @@
       align-self: center;
       display: grid;
       place-items: center;
-      border: 1px dashed #a7a7a7;
+      border: 1px dashed var(--border-strong);
       border-radius: 50%;
       background: var(--surface);
       color: var(--text);
@@ -525,34 +546,26 @@
     }
 
     .stage-add-between:hover {
-      color: var(--bg);
+      color: var(--primary-text);
       background: var(--primary);
       border-color: var(--primary);
     }
 
-    /* REAL HORIZONTAL SCROLL KANBAN BOARD */
     .kanban-board {
-      display: flex;
-      gap: 14px;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(235px, 1fr));
+      gap: 12px;
       overflow-x: auto;
-      padding-bottom: 16px;
-      align-items: flex-start;
-      min-height: calc(100vh - 280px);
+      padding-bottom: 10px;
     }
 
     .kanban-column {
-      flex: 0 0 290px;
-      min-width: 290px;
-      max-width: 290px;
+      min-height: 515px;
       padding: 10px;
       border: 1px solid var(--border);
       border-radius: 13px;
-      background: var(--kanban-col-bg);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      max-height: 80vh;
-      overflow-y: auto;
+      background: var(--bg);
+      transition: background 0.2s;
     }
 
     .column-header {
@@ -562,10 +575,6 @@
       padding: 6px 4px 13px;
       font-size: 12px;
       font-weight: 800;
-      position: sticky;
-      top: 0;
-      background: var(--kanban-col-bg);
-      z-index: 2;
     }
 
     .column-title {
@@ -578,7 +587,7 @@
     .column-total {
       display: block;
       margin-top: 3px;
-      color: var(--muted);
+      color: var(--text-muted);
       font-size: 10px;
       font-weight: 600;
     }
@@ -586,40 +595,36 @@
     .column-count {
       padding: 3px 8px;
       border-radius: 99px;
-      color: #555;
+      color: var(--text);
       background: var(--surface);
       font-size: 10px;
+      border: 1px solid var(--border);
     }
 
-    /* DEAL CARDS INTEGRATION */
     .deal-card {
+      margin-bottom: 9px;
       padding: 13px;
       border: 1px solid var(--border);
       border-radius: 11px;
-      background: var(--card-bg);
+      background: var(--surface);
       box-shadow: 0 2px 6px rgba(0,0,0,.035);
       cursor: pointer;
-      position: relative;
       transition: .18s ease;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
     }
 
     .deal-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 18px rgba(0,0,0,.08);
+      box-shadow: var(--shadow-lg);
     }
 
     .deal-card-top, .deal-card-footer {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
       gap: 8px;
     }
 
     .deal-card h3 {
-      margin: 0;
+      margin: 0 0 5px;
       font-size: 13px;
       letter-spacing: -.015em;
     }
@@ -627,84 +632,30 @@
     .deal-card p {
       margin: 0;
       overflow: hidden;
-      color: var(--muted);
+      color: var(--text-muted);
       font-size: 11px;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
 
-    .deal-meta-info {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      font-size: 10px;
-      color: var(--muted);
-      border-top: 1px dashed var(--border);
-      padding-top: 6px;
-      margin-top: 4px;
-    }
-
-    .deal-meta-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
     .deal-value {
-      margin-top: 5px;
+      margin-top: 14px;
       font-size: 14px;
       font-weight: 800;
     }
 
     .deal-no-value {
-      color: #9a9a9a;
+      color: var(--text-muted);
       font-size: 12px;
       font-weight: 650;
     }
 
-    /* Colored Activity Indicators & Quick Complete button */
-    .activity-indicators {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .status-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      display: inline-block;
-    }
-
-    .status-dot.red { background: var(--danger); }
-    .status-dot.yellow { background: var(--warning); }
-    .status-dot.blue { background: var(--info); }
-    .status-dot.green { background: var(--success); }
-
-    .quick-check-btn {
-      background: var(--border);
-      color: var(--text);
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      font-size: 10px;
-      font-weight: bold;
-      transition: background .15s, color .15s;
-    }
-
-    .quick-check-btn:hover {
-      background: var(--success);
-      color: white;
-    }
-
     .next-activity {
-      margin-top: 4px;
-      padding-top: 6px;
+      margin-top: 11px;
+      padding-top: 10px;
       overflow: hidden;
       border-top: 1px solid var(--border);
-      color: var(--muted);
+      color: var(--text-muted);
       font-size: 10px;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -720,38 +671,6 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       background: var(--surface);
-    }
-
-    /* MODAL TABS */
-    .modal-tabs {
-      display: flex;
-      border-bottom: 1px solid var(--border);
-      background: var(--surface);
-      padding: 0 24px;
-      gap: 18px;
-    }
-
-    .tab-button {
-      padding: 14px 4px;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--muted);
-      background: transparent;
-      border-bottom: 2px solid transparent;
-      transition: color .2s, border-color .2s;
-    }
-
-    .tab-button.active {
-      color: var(--text);
-      border-bottom-color: var(--text);
-    }
-
-    .tab-content {
-      display: none;
-    }
-
-    .tab-content.active {
-      display: block;
     }
 
     /* TABLE */
@@ -772,7 +691,7 @@
     }
 
     th {
-      color: var(--muted);
+      color: var(--text-muted);
       background: var(--bg);
       font-size: 10px;
       letter-spacing: .06em;
@@ -780,7 +699,7 @@
     }
 
     tr:last-child td { border-bottom: 0; }
-    tbody tr:hover { background: var(--tab-active-bg); }
+    tbody tr:hover { background: var(--bg); }
 
     .link-button {
       padding: 0;
@@ -792,7 +711,7 @@
 
     .empty {
       padding: 35px;
-      color: var(--muted);
+      color: var(--text-muted);
       text-align: center;
       font-size: 13px;
     }
@@ -827,7 +746,7 @@
 
     .weekdays span {
       padding-bottom: 6px;
-      color: var(--muted);
+      color: var(--text-muted);
       text-align: center;
       font-size: 10px;
       font-weight: 800;
@@ -847,7 +766,7 @@
     .calendar-day:hover { background: var(--border); }
     .calendar-day.empty-day { pointer-events: none; }
     .calendar-day.today { border: 1px solid var(--text); font-weight: 800; }
-    .calendar-day.selected { color: var(--bg); background: var(--text); }
+    .calendar-day.selected { color: var(--primary-text); background: var(--primary); }
 
     .calendar-day.has-activity::after {
       content: "";
@@ -859,7 +778,7 @@
       background: var(--info);
     }
 
-    .calendar-day.selected.has-activity::after { background: var(--bg); }
+    .calendar-day.selected.has-activity::after { background: var(--primary-text); }
 
     .agenda-summary {
       display: grid;
@@ -912,7 +831,7 @@
     }
 
     .chart-card span {
-      color: var(--muted);
+      color: var(--text-muted);
       font-size: 10px;
       font-weight: 700;
     }
@@ -977,8 +896,8 @@
       overflow: hidden;
       border-radius: 17px;
       background: var(--surface);
+      border: 1px solid var(--border);
       box-shadow: 0 28px 90px rgba(0,0,0,.27);
-      color: var(--text);
     }
 
     .modal.small-modal { width: min(530px, 100%); }
@@ -1000,7 +919,7 @@
 
     .modal-header p {
       margin: 6px 0 0;
-      color: var(--muted);
+      color: var(--text-muted);
       font-size: 12px;
     }
 
@@ -1013,7 +932,7 @@
       flex: 0 0 auto;
       place-items: center;
       border-radius: 9px;
-      background: var(--border);
+      background: var(--bg);
       color: var(--text);
       font-size: 21px;
     }
@@ -1062,7 +981,7 @@
 
     .detail-title {
       margin: 19px 0 8px;
-      color: var(--muted);
+      color: var(--text-muted);
       font-size: 10px;
       font-weight: 800;
       letter-spacing: .08em;
@@ -1088,15 +1007,15 @@
     .stage {
       padding: 6px 8px;
       border-radius: 7px;
-      color: #777;
+      color: var(--text-muted);
       background: var(--border);
       font-size: 10px;
       font-weight: 800;
     }
 
     .stage.current {
-      color: white;
-      background: #171717;
+      color: var(--primary-text);
+      background: var(--primary);
     }
 
     .timeline { padding: 22px; }
@@ -1104,7 +1023,7 @@
     .timeline-event {
       position: relative;
       padding: 0 0 20px 23px;
-      border-left: 1px solid #dedede;
+      border-left: 1px solid var(--border);
     }
 
     .timeline-event::before {
@@ -1124,7 +1043,7 @@
 
     .timeline-event small {
       margin-top: 4px;
-      color: var(--muted);
+      color: var(--text-muted);
       font-size: 11px;
       line-height: 1.45;
     }
@@ -1132,14 +1051,9 @@
     .whatsapp-box {
       padding: 12px;
       margin-top: 14px;
-      border: 1px solid #ccebdc;
+      border: 1px solid rgba(16, 185, 129, 0.3);
       border-radius: 10px;
-      background: #f1fcf5;
-    }
-
-    body.dark-theme .whatsapp-box {
-      border-color: #123e27;
-      background: #0d1e15;
+      background: rgba(16, 185, 129, 0.05);
     }
 
     .whatsapp-box strong {
@@ -1156,27 +1070,30 @@
       line-height: 1.4;
     }
 
-    /* Warning Block */
-    .warning-alert-box {
-      background: rgba(232, 141, 16, 0.1);
-      border: 1px solid var(--warning);
-      color: var(--warning);
-      padding: 10px;
-      border-radius: 8px;
-      font-size: 11px;
-      margin-top: 10px;
+    .restriction-banner {
+      background: var(--danger-bg);
+      border: 1px solid var(--danger);
+      color: var(--danger);
+      padding: 15px;
+      border-radius: var(--radius);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
       font-weight: 600;
     }
 
     @media (max-width: 1100px) {
       .sidebar { width: 72px; padding: 19px 8px; }
       .brand { justify-content: center; padding: 4px 0 20px; }
-      .brand-logo, .theme-toggle-btn span { font-size: 0; }
+      .brand-logo { font-size: 0; }
       .brand-logo strong, .brand-logo span, .menu-label,
-      .nav-button span:not(.nav-icon), .user-box > div:last-child { display: none; }
+      .nav-button span:not(.nav-icon), .user-box > div:not(.avatar):not(.user-selector-container) { display: none; }
       .nav-button { justify-content: center; padding: 12px; }
       .sidebar-footer { display: flex; justify-content: center; }
-      .user-box { padding: 5px; }
+      .user-box { padding: 5px; align-items: center; }
+      .user-selector-container { display: none; }
       .main { margin-left: 72px; }
       .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
       .content-grid, .team-grid { grid-template-columns: 1fr; }
@@ -1241,6 +1158,7 @@
         <div class="brand-logo">
           <strong>Sales</strong><span>Mates</span>
         </div>
+        <button class="theme-toggle-btn" onclick="toggleTheme()" title="Alternar tema">🌗</button>
       </div>
 
       <div class="menu-label">Operação</div>
@@ -1277,17 +1195,21 @@
 
       <div class="sidebar-footer">
         <div class="user-box">
-          <div class="user-info">
-            <div class="avatar" id="avatarChar">V</div>
+          <div class="user-info-row">
+            <div class="avatar" id="sidebarAvatar">V</div>
             <div>
-              <strong id="loggedUserName">Victor</strong><br />
-              <small id="loggedUserRole">Administrador Master</small>
+              <strong id="sidebarUserName">Victor</strong><br />
+              <small id="sidebarUserRole">Administrador</small>
             </div>
           </div>
-          
-          <button class="theme-toggle-btn" onclick="toggleTheme()">
-            <span id="themeToggleIcon">🌙</span> <span id="themeToggleText">Modo Escuro</span>
-          </button>
+          <div class="user-selector-container" style="width:100%;">
+            <label style="font-size:10px; color:var(--sidebar-text); display:block; margin-top:5px;">Simular Usuário:</label>
+            <select class="user-selector" id="currentUserSim" onchange="switchUser(this.value)" style="width:100%;">
+              <option value="Victor">Victor (Admin)</option>
+              <option value="Gustavo">Gustavo (Vendedor)</option>
+              <option value="Ana">Ana (Vendedor)</option>
+            </select>
+          </div>
         </div>
       </div>
     </aside>
@@ -1297,22 +1219,12 @@
       <section class="view active" id="dashboard">
         <div class="topbar">
           <div class="page-title">
-            <h1>Olá, <span class="user-name-placeholder">Victor</span>.</h1>
+            <h1 id="dashboardGreeting">Olá, Victor.</h1>
             <p>Uma visão rápida da sua operação comercial.</p>
           </div>
 
           <div class="actions">
-            <!-- Simulated Tenant Switcher (Acesso Master / Impersonate) -->
-            <div class="field" style="flex-direction:row; align-items:center; gap:8px;">
-              <label style="font-size:11px; font-weight:800; white-space:nowrap;">Tenant:</label>
-              <select class="filter" id="tenantSelector" onchange="changeTenant(this.value)" style="padding: 7px; width: 180px;">
-                <option value="all">Todos (Visão Master)</option>
-                <option value="tenant_a">Cliente A (Tech Startup)</option>
-                <option value="tenant_b">Cliente B (Health Group)</option>
-                <option value="tenant_c">Cliente C (E-commerce Express)</option>
-              </select>
-            </div>
-
+            <button class="button button-secondary" onclick="exportToCSV('dashboard')">⬇ Exportar CSV</button>
             <button class="button button-secondary" onclick="showView('activities')">Agenda</button>
             <button class="button button-primary" onclick="openActivityModal()">＋ Nova atividade</button>
           </div>
@@ -1380,7 +1292,8 @@
           </div>
 
           <div class="actions">
-            <button class="button button-secondary admin-only" onclick="togglePipelineManager()">⚙ Editar funil</button>
+            <button class="button button-secondary" onclick="exportToCSV('pipeline')">⬇ Exportar CSV</button>
+            <button class="button button-secondary" id="editPipelineBtn" onclick="togglePipelineManager()">⚙ Editar funil</button>
             <button class="button button-primary" onclick="openDealModal()">＋ Novo negócio</button>
           </div>
         </div>
@@ -1396,7 +1309,7 @@
 
           <div class="stage-editor" id="stageEditor"></div>
 
-          <div style="margin-top:14px;color:var(--muted);font-size:11px;line-height:1.5">
+          <div style="margin-top:14px;color:var(--text-muted);font-size:11px;line-height:1.5">
             Ao excluir uma etapa, os negócios dela serão movidos para a etapa anterior. É necessário manter ao menos duas etapas no funil.
           </div>
         </section>
@@ -1458,6 +1371,7 @@
           </div>
 
           <div class="actions">
+            <button class="button button-secondary" onclick="exportToCSV('activities')">⬇ Exportar CSV</button>
             <button class="button button-secondary" onclick="goToday()">Hoje</button>
             <button class="button button-primary" onclick="openActivityModal()">＋ Nova atividade</button>
           </div>
@@ -1574,6 +1488,7 @@
           </div>
 
           <div class="actions">
+            <button class="button button-secondary" onclick="exportToCSV('forecast')">⬇ Exportar CSV</button>
             <select class="filter" id="forecastOwnerFilter" onchange="renderForecast()">
               <option value="">Toda a equipe</option>
             </select>
@@ -1659,71 +1574,74 @@
 
       <!-- TEAM -->
       <section class="view" id="team">
-        <div class="topbar">
-          <div class="page-title">
-            <h1>Visão de equipe</h1>
-            <p>Pipeline, produtividade, metas e atividades por responsável.</p>
+        <div id="teamViewContainer">
+          <div class="topbar">
+            <div class="page-title">
+              <h1>Visão de equipe</h1>
+              <p>Pipeline, produtividade, metas e atividades por responsável.</p>
+            </div>
+
+            <div class="actions">
+              <button class="button button-secondary" onclick="exportToCSV('team')">⬇ Exportar CSV</button>
+              <select class="filter" id="teamPeriod" onchange="renderTeam()">
+                <option value="month">Mês atual</option>
+                <option value="week">Semana atual</option>
+                <option value="all">Histórico completo</option>
+              </select>
+            </div>
           </div>
 
-          <div class="actions">
-            <select class="filter" id="teamPeriod" onchange="renderTeam()">
-              <option value="month">Mês atual</option>
-              <option value="week">Semana atual</option>
-              <option value="all">Histórico completo</option>
-            </select>
+          <div class="dashboard-grid">
+            <article class="metric-card">
+              <div class="metric-label">Pipeline da equipe</div>
+              <div class="metric-value" id="teamPipeline">R$ 0</div>
+              <div class="metric-note">Oportunidades em aberto</div>
+            </article>
+
+            <article class="metric-card">
+              <div class="metric-label">Atividades pendentes</div>
+              <div class="metric-value" id="teamPending">0</div>
+              <div class="metric-note">Ações planejadas</div>
+            </article>
+
+            <article class="metric-card">
+              <div class="metric-label">Atividades vencidas</div>
+              <div class="metric-value" id="teamOverdue">0</div>
+              <div class="metric-note danger">Acompanhar com prioridade</div>
+            </article>
+
+            <article class="metric-card">
+              <div class="metric-label">Receita ganha</div>
+              <div class="metric-value" id="teamWon">R$ 0</div>
+              <div class="metric-note success">Negócios fechados como ganho</div>
+            </article>
           </div>
-        </div>
 
-        <div class="dashboard-grid">
-          <article class="metric-card">
-            <div class="metric-label">Pipeline da equipe</div>
-            <div class="metric-value" id="teamPipeline">R$ 0</div>
-            <div class="metric-note">Oportunidades em aberto</div>
-          </article>
-
-          <article class="metric-card">
-            <div class="metric-label">Atividades pendentes</div>
-            <div class="metric-value" id="teamPending">0</div>
-            <div class="metric-note">Ações planejadas</div>
-          </article>
-
-          <article class="metric-card">
-            <div class="metric-label">Atividades vencidas</div>
-            <div class="metric-value" id="teamOverdue">0</div>
-            <div class="metric-note danger">Acompanhar com prioridade</div>
-          </article>
-
-          <article class="metric-card">
-            <div class="metric-label">Receita ganha</div>
-            <div class="metric-value" id="teamWon">R$ 0</div>
-            <div class="metric-note success">Negócios fechados como ganho</div>
-          </article>
-        </div>
-
-        <div class="team-grid">
-          <section class="panel">
-            <div class="panel-header">
-              <div>
-                <h2>Ranking comercial</h2>
-                <p class="panel-subtitle">Pipeline, atividades, atrasos e forecast individual.</p>
+          <div class="team-grid">
+            <section class="panel">
+              <div class="panel-header">
+                <div>
+                  <h2>Ranking comercial</h2>
+                  <p class="panel-subtitle">Pipeline, atividades, atrasos e forecast individual.</p>
+                </div>
               </div>
-            </div>
 
-            <div style="overflow:auto">
-              <div id="teamRanking"></div>
-            </div>
-          </section>
-
-          <section class="panel">
-            <div class="panel-header">
-              <div>
-                <h2>Alertas do time</h2>
-                <p class="panel-subtitle">Atividades que precisam de acompanhamento.</p>
+              <div style="overflow:auto">
+                <div id="teamRanking"></div>
               </div>
-            </div>
+            </section>
 
-            <div id="teamAlerts"></div>
-          </section>
+            <section class="panel">
+              <div class="panel-header">
+                <div>
+                  <h2>Alertas do time</h2>
+                  <p class="panel-subtitle">Atividades que precisam de acompanhamento.</p>
+                </div>
+              </div>
+
+              <div id="teamAlerts"></div>
+            </section>
+          </div>
         </div>
       </section>
 
@@ -1770,11 +1688,13 @@
           </div>
         </div>
 
-        <section class="panel">
+        <div id="settingsRestrictionsContainer"></div>
+
+        <section class="panel" style="margin-bottom:18px;">
           <div class="panel-header">
             <div>
-              <h2>Integrações e campos padrão</h2>
-              <p class="panel-subtitle">Base pronta para conexão futura com Supabase e exportação de backups.</p>
+              <h2>Integrações e metas comerciais</h2>
+              <p class="panel-subtitle">Base pronta para conexão futura com Supabase e WhatsApp Business API.</p>
             </div>
           </div>
 
@@ -1785,14 +1705,6 @@
             </div>
 
             <div class="field">
-              <label>Simular Cargo do Usuário Atual</label>
-              <select id="roleSelector" onchange="changeUserRole(this.value)">
-                <option value="admin">Victor (Master Admin) - Todas permissões</option>
-                <option value="vendedor">Gustavo (Vendedor) - Bloquear painéis administrativos</option>
-              </select>
-            </div>
-
-            <div class="field">
               <label>Canal de WhatsApp</label>
               <select>
                 <option>Preparado para integração futura</option>
@@ -1800,19 +1712,30 @@
                 <option>Cloud API da Meta</option>
               </select>
             </div>
-
-            <div class="field">
-              <label>Backup e Portabilidade (JSON Front-end)</label>
-              <div style="display: flex; gap: 8px;">
-                <button class="button button-secondary" onclick="exportDataToJSON()">💾 Exportar Backup</button>
-                <button class="button button-secondary" onclick="document.getElementById('importFile').click()">📂 Importar Backup</button>
-                <input type="file" id="importFile" style="display:none;" accept=".json" onchange="importDataFromJSON(event)" />
-              </div>
-            </div>
           </div>
 
           <div class="modal-actions">
-            <button class="button button-primary" onclick="saveGoal()">Salvar configurações</button>
+            <button class="button button-primary" id="saveGoalBtn" onclick="saveGoal()">Salvar configurações</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>Backup & Administração de Dados</h2>
+              <p class="panel-subtitle">Exporte todos os seus dados para segurança ou faça importações completas em formato JSON.</p>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 12px; margin-top: 10px; flex-wrap: wrap;">
+            <button class="button button-secondary" onclick="exportBackupData()">⬆ Exportar Backup Completo (JSON)</button>
+            
+            <label class="button button-secondary" style="margin:0; cursor:pointer;">
+              ⬇ Importar Backup (JSON)
+              <input type="file" id="importBackupFile" accept=".json" onchange="importBackupData(event)" style="display:none;" />
+            </label>
+
+            <button class="button button-danger" id="clearDataBtn" onclick="resetDatabaseToDefault()">⚠ Restaurar Dados de Fábrica</button>
           </div>
         </section>
       </section>
@@ -1855,43 +1778,9 @@
               <input id="dealEmail" type="email" placeholder="contato@empresa.com" />
             </div>
 
-            <!-- NOVOS CAMPOS DO CLIENTE -->
             <div class="field">
-              <label>Nicho / Segmento</label>
-              <select id="dealNiche">
-                <option value="">Não informado</option>
-                <option value="Tecnologia">Tecnologia / SaaS</option>
-                <option value="Saúde">Saúde / Clínicas</option>
-                <option value="Indústria">Indústria / Manufatura</option>
-                <option value="Serviços">Prestador de Serviços</option>
-                <option value="E-commerce">Varejo / E-commerce</option>
-                <option value="Outro">Outro</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label>Produto / Serviço Contratado</label>
-              <input id="dealProduct" placeholder="Ex: Licença Enterprise, Mentoria Gold" />
-            </div>
-
-            <div class="field">
-              <label>Valor Mensal Estimado / Recorrente (MRR)</label>
+              <label>Valor estimado</label>
               <input id="dealValue" type="number" min="0" step="0.01" placeholder="Deixe em branco se ainda não souber" />
-            </div>
-
-            <div class="field">
-              <label>Vencimento do Contrato</label>
-              <input id="dealContractExpiry" type="date" min="1960-01-01" max="2090-12-31" />
-            </div>
-
-            <div class="field">
-              <label>Status do Relacionamento</label>
-              <select id="dealRelationshipStatus">
-                <option value="Excelente">Excelente (Atendimento fluido)</option>
-                <option value="Ativo" selected>Ativo (Regular)</option>
-                <option value="Em risco">⚠️ Em risco (Problemas de entrega)</option>
-                <option value="Frio">Frio (Inativo)</option>
-              </select>
             </div>
 
             <div class="field">
@@ -2025,48 +1914,14 @@
     </div>
   </div>
 
-  <!-- MODAL: DEAL DETAIL WITH TABS -->
+  <!-- MODAL: DEAL DETAIL -->
   <div class="modal-backdrop" id="detailModal">
-    <div class="modal" style="width: min(1150px, 100%);">
+    <div class="modal">
       <div class="modal-header" id="detailHeader"></div>
 
-      <!-- Navigation Tabs inside details -->
-      <div class="modal-tabs">
-        <button class="tab-button active" onclick="switchDetailTab('tabGeral')">Histórico e Detalhes</button>
-        <button class="tab-button" onclick="switchDetailTab('tabContrato')">Contrato & Finanças</button>
-        <button class="tab-button" onclick="switchDetailTab('tabRelacionamento')">Relacionamento & NPS</button>
-      </div>
-
-      <div class="modal-content" style="grid-template-columns: 1fr;">
-        <!-- TAB 1: GERAL -->
-        <div id="tabGeral" class="tab-content active">
-          <div style="display: grid; grid-template-columns: 310px 1fr;">
-            <aside class="deal-details" id="dealDetails" style="border-right: 1px solid var(--border);"></aside>
-            <section class="timeline" id="dealTimeline" style="background: var(--surface);"></section>
-          </div>
-        </div>
-
-        <!-- TAB 2: CONTRATO -->
-        <div id="tabContrato" class="tab-content" style="padding: 24px;">
-          <div class="panel-header">
-            <div>
-              <h2>Informações do Contrato</h2>
-              <p class="panel-subtitle">Gestão de prazos, recorrência de receita, renovações e auditorias.</p>
-            </div>
-          </div>
-          <div id="contractTabContent"></div>
-        </div>
-
-        <!-- TAB 3: RELACIONAMENTO -->
-        <div id="tabRelacionamento" class="tab-content" style="padding: 24px;">
-          <div class="panel-header">
-            <div>
-              <h2>Índice de Saúde e Sucesso do Cliente</h2>
-              <p class="panel-subtitle">Monitore a frequência de contatos e alertas de churn em risco.</p>
-            </div>
-          </div>
-          <div id="relationshipTabContent"></div>
-        </div>
+      <div class="modal-content">
+        <aside class="deal-details" id="dealDetails"></aside>
+        <section class="timeline" id="dealTimeline"></section>
       </div>
     </div>
   </div>
@@ -2215,12 +2070,6 @@
         tags: "inbound, prioridade",
         status: "open",
         createdAt: "2026-07-23T08:30:00",
-        niche: "Indústria",
-        product: "SaaS CRM Enterprise",
-        contractExpiry: "2027-01-15",
-        relationshipStatus: "Excelente",
-        relationshipNotes: "Victor mantém alinhamento semanal estruturado.",
-        tenantId: "tenant_a",
         timeline: [
           { title: "Negócio criado", description: "Oportunidade incluída por Victor.", date: "2026-07-23T08:30:00" }
         ]
@@ -2240,12 +2089,6 @@
         tags: "prospecção",
         status: "open",
         createdAt: "2026-07-20T10:20:00",
-        niche: "Serviços",
-        product: "Módulo Financeiro",
-        contractExpiry: "",
-        relationshipStatus: "Ativo",
-        relationshipNotes: "Aguardando confirmação sobre os fluxos internos.",
-        tenantId: "tenant_b",
         timeline: [
           { title: "WhatsApp enviado", description: "Apresentação comercial enviada ao contato.", date: "2026-07-20T10:20:00" }
         ]
@@ -2265,12 +2108,6 @@
         tags: "saúde, decisor",
         status: "open",
         createdAt: "2026-07-17T09:00:00",
-        niche: "Saúde",
-        product: "SalesMates Consultoria",
-        contractExpiry: "2026-08-05", // Near Expiry!
-        relationshipStatus: "Em risco",
-        relationshipNotes: "Atrasos na última entrega geraram instabilidade.",
-        tenantId: "tenant_b",
         timeline: [
           { title: "Reunião realizada", description: "Necessidade identificada: CRM para equipe de 12 vendedores.", date: "2026-07-22T16:00:00" }
         ]
@@ -2290,12 +2127,6 @@
         tags: "construção",
         status: "open",
         createdAt: "2026-07-15T15:20:00",
-        niche: "Indústria",
-        product: "CRM API Integration",
-        contractExpiry: "2026-11-20",
-        relationshipStatus: "Ativo",
-        relationshipNotes: "Rafael aprovou a estimativa técnica do projeto.",
-        tenantId: "tenant_c",
         timeline: [
           { title: "Proposta enviada", description: "Proposta comercial enviada por e-mail e WhatsApp.", date: "2026-07-22T10:00:00" }
         ]
@@ -2315,12 +2146,6 @@
         tags: "alta prioridade",
         status: "open",
         createdAt: "2026-07-10T11:10:00",
-        niche: "Serviços",
-        product: "Enterprise Training",
-        contractExpiry: "2026-07-20", // Overdue Contract!
-        relationshipStatus: "Frio",
-        relationshipNotes: "Pouco engajamento após as apresentações principais.",
-        tenantId: "tenant_a",
         timeline: [
           { title: "Negociação em fechamento", description: "Cliente solicitou ajuste de condições comerciais.", date: "2026-07-22T14:00:00" }
         ]
@@ -2378,10 +2203,10 @@
     let deals = JSON.parse(localStorage.getItem("salesmates_deals_v3")) || defaultDeals;
     let activities = JSON.parse(localStorage.getItem("salesmates_activities_v3")) || defaultActivities;
     let forecastGoal = Number(localStorage.getItem("salesmates_goal_v3")) || 80000;
-    
-    // User Roles & simulated Tenants
-    let userRole = localStorage.getItem("salesmates_role_v3") || "admin"; 
-    let currentTenant = localStorage.getItem("salesmates_tenant_v3") || "all";
+
+    // SISTEMA DE PERMISSÕES & USUÁRIOS
+    let activeUser = localStorage.getItem("salesmates_active_user") || "Victor";
+    let userRole = activeUser === "Victor" ? "Administrador" : "Vendedor";
 
     let selectedDate = new Date("2026-07-23T12:00:00");
     let calendarCursor = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
@@ -2408,11 +2233,6 @@
       };
 
       deals.forEach((deal) => {
-        if (!deal.tenantId) deal.tenantId = "tenant_a";
-        if (!deal.niche) deal.niche = "Tecnologia";
-        if (!deal.product) deal.product = "SaaS Platform";
-        if (!deal.relationshipStatus) deal.relationshipStatus = "Ativo";
-
         if (oldMap[deal.stage]) {
           deal.stage = oldMap[deal.stage];
           deal.probability = getStageData(deal.stage).probability;
@@ -2425,13 +2245,28 @@
       });
     }
 
+    // RETORNA DEALS RESPEITANDO O PERFIL (Vendedores só enxergam suas próprias oportunidades)
+    function getAuthorizedDeals() {
+      if (userRole === "Administrador") {
+        return deals;
+      }
+      return deals.filter(deal => deal.owner === activeUser);
+    }
+
+    // RETORNA ATIVIDADES RESPEITANDO O PERFIL
+    function getAuthorizedActivities() {
+      if (userRole === "Administrador") {
+        return activities;
+      }
+      return activities.filter(act => act.owner === activeUser);
+    }
+
     function saveData() {
       localStorage.setItem("salesmates_stages_v3", JSON.stringify(stages));
       localStorage.setItem("salesmates_deals_v3", JSON.stringify(deals));
       localStorage.setItem("salesmates_activities_v3", JSON.stringify(activities));
       localStorage.setItem("salesmates_goal_v3", String(forecastGoal));
-      localStorage.setItem("salesmates_role_v3", userRole);
-      localStorage.setItem("salesmates_tenant_v3", currentTenant);
+      localStorage.setItem("salesmates_active_user", activeUser);
     }
 
     function escapeHTML(value) {
@@ -2586,68 +2421,28 @@
 
       ["dealOwner", "activityOwner", "transferOwner"].forEach((id) => {
         const select = document.getElementById(id);
-        if (select) select.innerHTML = options;
+        if (select) {
+          select.innerHTML = options;
+          // Se for vendedor, forçar o próprio como único selecionável para criação
+          if (userRole === "Vendedor") {
+            select.value = activeUser;
+            select.setAttribute("disabled", "true");
+          } else {
+            select.removeAttribute("disabled");
+          }
+        }
       });
-    }
-
-    // SIMULATED MULTI-TENANT FILTERING
-    function getTenantDeals() {
-      if (currentTenant === "all") return deals;
-      return deals.filter(deal => deal.tenantId === currentTenant);
-    }
-
-    function getTenantActivities() {
-      const filteredDeals = getTenantDeals();
-      const dealIds = filteredDeals.map(d => d.id);
-      return activities.filter(activity => dealIds.includes(activity.dealId));
-    }
-
-    function changeTenant(value) {
-      currentTenant = value;
-      saveData();
-      refreshAll();
-    }
-
-    function changeUserRole(value) {
-      userRole = value;
-      saveData();
-      
-      const isVendedor = value === "vendedor";
-      document.getElementById("loggedUserRole").textContent = isVendedor ? "Vendedor (Gustavo)" : "Administrador Master";
-      document.getElementById("avatarChar").textContent = isVendedor ? "G" : "V";
-      document.getElementById("loggedUserName").textContent = isVendedor ? "Gustavo" : "Victor";
-      document.querySelectorAll(".user-name-placeholder").forEach(el => el.textContent = isVendedor ? "Gustavo" : "Victor");
-
-      // Hide or show admin features
-      document.querySelectorAll(".admin-only").forEach(el => {
-        el.style.display = isVendedor ? "none" : "inline-flex";
-      });
-
-      refreshAll();
-    }
-
-    // LIGHT / DARK MODE TOGGLE
-    function toggleTheme() {
-      const isDark = document.body.classList.toggle("dark-theme");
-      localStorage.setItem("salesmates_theme_v3", isDark ? "dark" : "light");
-      document.getElementById("themeToggleIcon").textContent = isDark ? "☀️" : "🌙";
-      document.getElementById("themeToggleText").textContent = isDark ? "Modo Claro" : "Modo Escuro";
-    }
-
-    function initTheme() {
-      const savedTheme = localStorage.getItem("salesmates_theme_v3") || "light";
-      if (savedTheme === "dark") {
-        document.body.classList.add("dark-theme");
-        document.getElementById("themeToggleIcon").textContent = "☀️";
-        document.getElementById("themeToggleText").textContent = "Modo Claro";
-      } else {
-        document.body.classList.remove("dark-theme");
-        document.getElementById("themeToggleIcon").textContent = "🌙";
-        document.getElementById("themeToggleText").textContent = "Modo Escuro";
-      }
     }
 
     function refreshAll() {
+      // Sincronizar UI de usuário no sidebar
+      document.getElementById("sidebarAvatar").textContent = activeUser.charAt(0);
+      document.getElementById("sidebarUserName").textContent = activeUser;
+      document.getElementById("sidebarUserRole").textContent = userRole;
+      document.getElementById("currentUserSim").value = activeUser;
+      document.getElementById("dashboardGreeting").textContent = `Olá, ${activeUser}.`;
+
+      applyPermissions();
       fillOwnerOptions();
       renderDashboard();
       renderKanban();
@@ -2656,6 +2451,118 @@
       renderTeam();
       renderReports();
       renderStageEditor();
+    }
+
+    // APLICA RESTRIÇÕES DE VISUALIZAÇÃO E FUNÇÃO BASEADAS NO ROLE DO USUÁRIO
+    function applyPermissions() {
+      const editPipelineBtn = document.getElementById("editPipelineBtn");
+      const saveGoalBtn = document.getElementById("saveGoalBtn");
+      const clearDataBtn = document.getElementById("clearDataBtn");
+      const teamViewContainer = document.getElementById("teamViewContainer");
+      const settingsRestrictionsContainer = document.getElementById("settingsRestrictionsContainer");
+
+      if (userRole === "Vendedor") {
+        // Bloquear edição de funil e configs de administração
+        if (editPipelineBtn) editPipelineBtn.style.display = "none";
+        if (saveGoalBtn) saveGoalBtn.setAttribute("disabled", "true");
+        if (clearDataBtn) clearDataBtn.setAttribute("disabled", "true");
+        
+        // Bloquear visualização de equipe de forma elegante
+        if (teamViewContainer) {
+          teamViewContainer.innerHTML = `
+            <div class="restriction-banner">
+              <span>🔒 Acesso Restrito: A visão de equipe é restrita a administradores. Para simular acessos amplos, alterne seu usuário para Victor (Admin) no rodapé da barra lateral.</span>
+            </div>
+          `;
+        }
+        if (settingsRestrictionsContainer) {
+          settingsRestrictionsContainer.innerHTML = `
+            <div class="restriction-banner" style="margin-top:20px;">
+              <span>🔒 Suas permissões de Vendedor impedem que você altere as configurações globais da empresa.</span>
+            </div>
+          `;
+        }
+      } else {
+        // Restaurar estado de Administrador
+        if (editPipelineBtn) editPipelineBtn.style.display = "inline-flex";
+        if (saveGoalBtn) saveGoalBtn.removeAttribute("disabled");
+        if (clearDataBtn) clearDataBtn.removeAttribute("disabled");
+        
+        if (teamViewContainer) {
+          // Re-renderiza a estrutura normal se voltar para Admin
+          teamViewContainer.innerHTML = `
+            <div class="topbar">
+              <div class="page-title">
+                <h1>Visão de equipe</h1>
+                <p>Pipeline, produtividade, metas e atividades por responsável.</p>
+              </div>
+              <div class="actions">
+                <button class="button button-secondary" onclick="exportToCSV('team')">⬇ Exportar CSV</button>
+                <select class="filter" id="teamPeriod" onchange="renderTeam()">
+                  <option value="month">Mês atual</option>
+                  <option value="week">Semana atual</option>
+                  <option value="all">Histórico completo</option>
+                </select>
+              </div>
+            </div>
+            <div class="dashboard-grid">
+              <article class="metric-card">
+                <div class="metric-label">Pipeline da equipe</div>
+                <div class="metric-value" id="teamPipeline">R$ 0</div>
+                <div class="metric-note">Oportunidades em aberto</div>
+              </article>
+              <article class="metric-card">
+                <div class="metric-label">Atividades pendentes</div>
+                <div class="metric-value" id="teamPending">0</div>
+                <div class="metric-note">Ações planejadas</div>
+              </article>
+              <article class="metric-card">
+                <div class="metric-label">Atividades vencidas</div>
+                <div class="metric-value" id="teamOverdue">0</div>
+                <div class="metric-note danger">Acompanhar com prioridade</div>
+              </article>
+              <article class="metric-card">
+                <div class="metric-label">Receita ganha</div>
+                <div class="metric-value" id="teamWon">R$ 0</div>
+                <div class="metric-note success">Negócios fechados como ganho</div>
+              </article>
+            </div>
+            <div class="team-grid">
+              <section class="panel">
+                <div class="panel-header">
+                  <div>
+                    <h2>Ranking comercial</h2>
+                    <p class="panel-subtitle">Pipeline, atividades, atrasos e forecast individual.</p>
+                  </div>
+                </div>
+                <div style="overflow:auto">
+                  <div id="teamRanking"></div>
+                </div>
+              </section>
+              <section class="panel">
+                <div class="panel-header">
+                  <div>
+                    <h2>Alertas do time</h2>
+                    <p class="panel-subtitle">Atividades que precisam de acompanhamento.</p>
+                  </div>
+                </div>
+                <div id="teamAlerts"></div>
+              </section>
+            </div>
+          `;
+        }
+        if (settingsRestrictionsContainer) {
+          settingsRestrictionsContainer.innerHTML = "";
+        }
+      }
+    }
+
+    // ALTERNAR USUÁRIO DE FORMA DINÂMICA
+    function switchUser(userName) {
+      activeUser = userName;
+      userRole = activeUser === "Victor" ? "Administrador" : "Vendedor";
+      saveData();
+      refreshAll();
     }
 
     function showView(viewId) {
@@ -2673,10 +2580,7 @@
       if (viewId === "forecast") renderForecast();
       if (viewId === "team") renderTeam();
       if (viewId === "reports") renderReports();
-      if (viewId === "settings") {
-        document.getElementById("goalInput").value = forecastGoal;
-        document.getElementById("roleSelector").value = userRole;
-      }
+      if (viewId === "settings") document.getElementById("goalInput").value = forecastGoal;
     }
 
     document.querySelectorAll(".nav-button").forEach((button) => {
@@ -2687,8 +2591,8 @@
       const container = document.getElementById(containerId);
       if (!container) return;
 
-      const tenantDeals = getTenantDeals();
-      const openDeals = tenantDeals.filter((deal) => deal.status === "open");
+      const authDeals = getAuthorizedDeals();
+      const openDeals = authDeals.filter((deal) => deal.status === "open");
 
       container.innerHTML = stages.map((stage, index) => {
         const currentCount = openDeals.filter((deal) => deal.stage === stage.name).length;
@@ -2720,7 +2624,7 @@
             </div>
 
             <div class="progress-track">
-              <div class="progress-bar" style="width:${conversion}%;background:${index % 2 ? "#3977e8" : "#171717"}"></div>
+              <div class="progress-bar" style="width:${conversion}%;background:${index % 2 ? "#3977e8" : "var(--text)"}"></div>
             </div>
 
             <div class="conversion-meta">
@@ -2734,17 +2638,17 @@
 
     function renderDashboard() {
       const currentDay = dateKey(CURRENT_DATE);
-      const tenantActivities = getTenantActivities();
-      const tenantDeals = getTenantDeals();
+      const authActs = getAuthorizedActivities();
+      const authDeals = getAuthorizedDeals();
 
-      const completedToday = tenantActivities.filter((activity) =>
+      const completedToday = authActs.filter((activity) =>
         getActivityStatus(activity) === "Concluída" && dateKey(activity.date) === currentDay
       ).length;
 
-      const pending = tenantActivities.filter((activity) => getActivityStatus(activity) === "Agendada").length;
-      const overdue = tenantActivities.filter((activity) => getActivityStatus(activity) === "Atrasada").length;
+      const pending = authActs.filter((activity) => getActivityStatus(activity) === "Agendada").length;
+      const overdue = authActs.filter((activity) => getActivityStatus(activity) === "Atrasada").length;
 
-      const weightedForecast = tenantDeals
+      const weightedForecast = authDeals
         .filter((deal) => deal.status === "open")
         .reduce((total, deal) => {
           return total + Number(deal.value || 0) * (Number(deal.probability || 0) / 100);
@@ -2757,7 +2661,7 @@
 
       renderConversionRows("conversionDashboard");
 
-      const nextActivities = [...tenantActivities]
+      const nextActivities = [...authActs]
         .filter((activity) => !["Concluída", "Cancelada"].includes(getActivityStatus(activity)))
         .sort((a, b) => new Date(a.date) - new Date(b.date))
         .slice(0, 4);
@@ -2788,9 +2692,9 @@
       const status = document.getElementById("pipelineStatus")?.value || "open";
       const lossReason = document.getElementById("pipelineLossReason")?.value || "";
 
-      const tenantDeals = getTenantDeals();
+      const authDeals = getAuthorizedDeals();
 
-      return tenantDeals.filter((deal) => {
+      return authDeals.filter((deal) => {
         const matchesStatus = status === "all" || deal.status === status;
 
         const fields = [
@@ -2799,8 +2703,6 @@
           deal.phone,
           deal.email,
           deal.tags,
-          deal.niche,
-          deal.product,
           deal.lossReason
         ].join(" ").toLowerCase();
 
@@ -2820,7 +2722,6 @@
       });
     }
 
-    // ADVANCED INTEGRATED CARD LAYOUT & RENDER KANBAN
     function renderKanban() {
       const board = document.getElementById("kanbanBoard");
       const list = document.getElementById("pipelineList");
@@ -2829,7 +2730,7 @@
 
       const filteredDeals = getFilteredPipelineDeals();
 
-      board.style.display = pipelineView === "kanban" ? "flex" : "none";
+      board.style.display = pipelineView === "kanban" ? "grid" : "none";
       list.style.display = pipelineView === "list" ? "block" : "none";
 
       if (pipelineView === "list") {
@@ -2840,7 +2741,6 @@
                 <th>Negócio</th>
                 <th>Status</th>
                 <th>Etapa</th>
-                <th>Nicho/Produto</th>
                 <th>Responsável</th>
                 <th>Valor</th>
                 <th>Próxima ação</th>
@@ -2855,11 +2755,10 @@
                   <tr onclick="openDealDetail(${deal.id})" style="cursor:pointer">
                     <td>
                       <strong>${escapeHTML(deal.company)}</strong><br>
-                      <small style="color:#737373">${escapeHTML(deal.contact || "Sem contato")}</small>
+                      <small style="color:var(--text-muted)">${escapeHTML(deal.contact || "Sem contato")}</small>
                     </td>
                     <td>${badgeForStatus(dealStatusLabel(deal.status))}</td>
                     <td>${escapeHTML(deal.stage)}</td>
-                    <td>${escapeHTML(deal.niche || "N/I")} / ${escapeHTML(deal.product || "N/I")}</td>
                     <td>${escapeHTML(deal.owner)}</td>
                     <td>${currency(deal.value)}</td>
                     <td class="${nextStatus === "Atrasada" ? "next-activity overdue" : ""}">
@@ -2867,7 +2766,7 @@
                     </td>
                   </tr>
                 `;
-              }).join("") : `<tr><td colspan="7"><div class="empty">Nenhum negócio encontrado.</div></td></tr>`}
+              }).join("") : `<tr><td colspan="6"><div class="empty">Nenhum negócio encontrado.</div></td></tr>`}
             </tbody>
           </table>
         `;
@@ -2898,27 +2797,6 @@
               const next = getNextActivity(deal.id);
               const nextStatus = next ? getActivityStatus(next) : null;
 
-              // Color dot definition
-              let dotColor = "green"; // All cleared/Finished
-              if (next) {
-                if (nextStatus === "Atrasada") dotColor = "red";
-                else if (dateKey(next.date) === dateKey(CURRENT_DATE)) dotColor = "yellow";
-                else dotColor = "blue";
-              }
-
-              // Contract Status Alerts
-              let contractAlert = "";
-              if (deal.contractExpiry) {
-                const expiryDate = new Date(deal.contractExpiry);
-                const diffTime = expiryDate - CURRENT_DATE;
-                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                if (diffDays < 0) {
-                  contractAlert = `<span class="badge badge-red" style="font-size:9px; padding:2px 6px;">Contrato Vencido</span>`;
-                } else if (diffDays <= 30) {
-                  contractAlert = `<span class="badge badge-yellow" style="font-size:9px; padding:2px 6px;">Expira em ${diffDays}d</span>`;
-                }
-              }
-
               return `
                 <article
                   class="deal-card"
@@ -2927,42 +2805,21 @@
                   onclick="openDealDetail(${deal.id})"
                 >
                   <div class="deal-card-top">
-                    <div style="min-width:0; flex: 1;">
-                      <div class="activity-indicators" style="margin-bottom: 4px;">
-                        <span class="status-dot ${dotColor}" title="${next ? 'Ação pendente' : 'Tudo resolvido'}"></span>
-                        <span class="badge badge-gray" style="font-size: 8px; padding: 2px 5px;">${escapeHTML(deal.niche || "Geral")}</span>
-                      </div>
+                    <div style="min-width:0">
                       <h3>${escapeHTML(deal.company)}</h3>
                       <p>${escapeHTML(deal.contact || "Sem contato informado")}</p>
                     </div>
 
-                    <!-- Quick Action Complete Task -->
-                    ${next ? `
-                      <button class="quick-check-btn" title="Concluir '${escapeHTML(next.title)}' sem abrir modal" onclick="quickComplete(event, ${next.id}, ${deal.id})">
-                        ✓
-                      </button>
-                    ` : ""}
-                  </div>
-
-                  <!-- Product and Contract Meta details on front of the Card -->
-                  <div class="deal-meta-info">
-                    <div class="deal-meta-row">
-                      <span>Prod: <strong>${escapeHTML(deal.product || "Licença padrão")}</strong></span>
-                      <span>Resp: <strong>${escapeHTML(deal.owner)}</strong></span>
-                    </div>
-                    ${deal.relationshipStatus === "Em risco" ? `
-                      <div class="deal-meta-row" style="color:var(--danger); font-weight:700;">
-                        <span>⚠️ Relacionamento Em Risco</span>
-                      </div>
-                    ` : ""}
-                    ${contractAlert ? `<div class="deal-meta-row">${contractAlert}</div>` : ""}
+                    <span title="${nextStatus === "Atrasada" ? "Atividade vencida" : next ? "Atividade agendada" : "Sem atividade"}">
+                      ${nextStatus === "Atrasada" ? "●" : next ? "◌" : "○"}
+                    </span>
                   </div>
 
                   ${dealValueHTML(deal)}
 
-                  <div class="deal-card-footer" style="margin-top:2px;align-items:center">
+                  <div class="deal-card-footer" style="margin-top:10px;align-items:center">
                     <span class="badge badge-gray">${deal.probability}%</span>
-                    <small style="color:#737373;font-size:10px">${escapeHTML(deal.owner)}</small>
+                    <small style="color:var(--text-muted);font-size:10px">${escapeHTML(deal.owner)}</small>
                   </div>
 
                   <div class="next-activity ${nextStatus === "Atrasada" ? "overdue" : ""}">
@@ -2972,16 +2829,10 @@
               `;
             }).join("")}
 
-            ${!stageDeals.length ? `<div style="padding:16px 5px;color:#8b8b8b;font-size:11px;text-align:center">Sem negócios</div>` : ""}
+            ${!stageDeals.length ? `<div style="padding:16px 5px;color:var(--text-muted);font-size:11px;text-align:center">Sem negócios</div>` : ""}
           </div>
         `;
       }).join("");
-    }
-
-    // QUICK COMPLETE AT WORK
-    function quickComplete(event, activityId, dealId) {
-      event.stopPropagation(); // Avoid opening modal
-      completeActivity(activityId);
     }
 
     function setPipelineView(view) {
@@ -3016,8 +2867,9 @@
     }
 
     function togglePipelineManager() {
-      if (userRole === "vendedor") {
-        alert("Acesso restrito ao administrador comercial.");
+      // Bloquear se vendedor
+      if (userRole === "Vendedor") {
+        alert("Apenas administradores podem editar etapas de funil.");
         return;
       }
       document.getElementById("pipelineManager").classList.toggle("open");
@@ -3031,7 +2883,7 @@
       container.innerHTML = stages.map((stage, index) => `
         <div class="stage-editor-card">
           <strong title="${escapeHTML(stage.name)}">${escapeHTML(stage.name)}</strong>
-          <small style="display:block;margin-bottom:9px;color:#737373;font-size:10px">
+          <small style="display:block;margin-bottom:9px;color:var(--text-muted);font-size:10px">
             Probabilidade sugerida: ${stage.probability}%
           </small>
 
@@ -3053,6 +2905,8 @@
     }
 
     function openStageModal(index = null, insertAt = null) {
+      if (userRole === "Vendedor") return;
+
       document.getElementById("stageEditIndex").value = index === null ? `new:${insertAt}` : index;
       document.getElementById("stageModalTitle").textContent = index === null ? "Criar etapa" : "Editar etapa";
 
@@ -3068,6 +2922,8 @@
     }
 
     function saveStage() {
+      if (userRole === "Vendedor") return;
+
       const reference = document.getElementById("stageEditIndex").value;
       const name = document.getElementById("stageName").value.trim();
       const probability = Number(document.getElementById("stageProbability").value);
@@ -3106,6 +2962,7 @@
     }
 
     function moveStage(index, direction) {
+      if (userRole === "Vendedor") return;
       const newIndex = index + direction;
 
       if (newIndex < 0 || newIndex >= stages.length) return;
@@ -3116,6 +2973,7 @@
     }
 
     function deleteStage(index) {
+      if (userRole === "Vendedor") return;
       if (stages.length <= 2) {
         alert("O funil precisa ter pelo menos duas etapas.");
         return;
@@ -3158,17 +3016,16 @@
       const lastDate = new Date(year, month + 1, 0).getDate();
 
       let html = "";
+      const authActs = getAuthorizedActivities();
 
       for (let i = 0; i < firstDay; i++) {
         html += `<span class="calendar-day empty-day"></span>`;
       }
 
-      const tenantActivities = getTenantActivities();
-
       for (let day = 1; day <= lastDate; day++) {
         const thisDate = new Date(year, month, day, 12, 0, 0);
         const key = dateKey(thisDate);
-        const hasActivity = tenantActivities.some((activity) => dateKey(activity.date) === key);
+        const hasActivity = authActs.some((activity) => dateKey(activity.date) === key);
         const selected = dateKey(selectedDate) === key;
         const today = dateKey(CURRENT_DATE) === key;
 
@@ -3282,9 +3139,9 @@
       const statusFilter = document.getElementById("activityStatusFilter")?.value || "";
       const search = document.getElementById("activitySearch")?.value.trim().toLowerCase() || "";
 
-      const tenantActivities = getTenantActivities();
+      const authActs = getAuthorizedActivities();
 
-      const filtered = tenantActivities
+      const filtered = authActs
         .map((activity) => ({ ...activity, calculatedStatus: getActivityStatus(activity) }))
         .filter((activity) => {
           const deal = getDeal(activity.dealId);
@@ -3305,10 +3162,10 @@
 
       document.getElementById("agendaDateLabel").textContent = getAgendaLabel();
 
-      const periodActivities = tenantActivities.filter((activity) => isInAgendaPeriod(activity.date));
-      const scheduled = tenantActivities.filter((activity) => getActivityStatus(activity) === "Agendada").length;
-      const overdue = tenantActivities.filter((activity) => getActivityStatus(activity) === "Atrasada").length;
-      const completed = tenantActivities.filter((activity) => getActivityStatus(activity) === "Concluída").length;
+      const periodActivities = authActs.filter((activity) => isInAgendaPeriod(activity.date));
+      const scheduled = authActs.filter((activity) => getActivityStatus(activity) === "Agendada").length;
+      const overdue = authActs.filter((activity) => getActivityStatus(activity) === "Atrasada").length;
+      const completed = authActs.filter((activity) => getActivityStatus(activity) === "Concluída").length;
 
       document.getElementById("agendaScheduled").textContent = scheduled;
       document.getElementById("agendaOverdue").textContent = overdue;
@@ -3334,7 +3191,7 @@
               <tr>
                 <td>
                   <strong>${escapeHTML(activity.title)}</strong><br>
-                  <small style="color:#737373">${escapeHTML(activity.priority)} prioridade</small>
+                  <small style="color:var(--text-muted)">${escapeHTML(activity.priority)} prioridade</small>
                 </td>
                 <td>${escapeHTML(activity.type)}</td>
                 <td>
@@ -3382,9 +3239,9 @@
 
     function renderForecast() {
       const owner = document.getElementById("forecastOwnerFilter")?.value || "";
-      const tenantDeals = getTenantDeals();
+      const authDeals = getAuthorizedDeals();
 
-      const openDeals = tenantDeals.filter((deal) => {
+      const openDeals = authDeals.filter((deal) => {
         return deal.status === "open" && (!owner || deal.owner === owner);
       });
 
@@ -3417,7 +3274,7 @@
             <strong>${Math.round(goalProgress)}%</strong>
           </div>
           <div class="progress-track">
-            <div class="progress-bar" style="width:${goalProgress}%;background:${weighted >= forecastGoal ? "#17a36b" : "#171717"}"></div>
+            <div class="progress-bar" style="width:${goalProgress}%;background:${weighted >= forecastGoal ? "#17a36b" : "var(--text)"}"></div>
           </div>
         </div>
 
@@ -3473,7 +3330,7 @@
               <tr>
                 <td>
                   <button class="link-button" onclick="openDealDetail(${deal.id})">${escapeHTML(deal.company)}</button><br>
-                  <small style="color:#737373">${escapeHTML(deal.contact || "Sem contato")}</small>
+                  <small style="color:var(--text-muted)">${escapeHTML(deal.contact || "Sem contato")}</small>
                 </td>
                 <td>${escapeHTML(deal.owner)}</td>
                 <td>${escapeHTML(deal.stage)}</td>
@@ -3509,15 +3366,17 @@
     }
 
     function renderTeam() {
-      const openDeals = getTenantDeals().filter((deal) => deal.status === "open");
+      // Se for vendedor, a UI de bloqueio de permissão já foi injetada em applyPermissions()
+      if (userRole === "Vendedor") return;
+
+      const openDeals = deals.filter((deal) => deal.status === "open");
       const pipeline = openDeals.reduce((total, deal) => total + Number(deal.value || 0), 0);
 
-      const tenantActivities = getTenantActivities();
-      const periodActivities = tenantActivities.filter(activityMatchesTeamPeriod);
+      const periodActivities = activities.filter(activityMatchesTeamPeriod);
       const pending = periodActivities.filter((activity) => getActivityStatus(activity) === "Agendada").length;
       const overdue = periodActivities.filter((activity) => getActivityStatus(activity) === "Atrasada").length;
 
-      const won = getTenantDeals()
+      const won = deals
         .filter((deal) => deal.status === "won")
         .reduce((sum, deal) => sum + Number(deal.value || 0), 0);
 
@@ -3527,7 +3386,7 @@
       document.getElementById("teamWon").textContent = currencyNumber(won);
 
       document.getElementById("teamRanking").innerHTML = `
-        <div class="team-row" style="color:#737373;font-size:10px;font-weight:800;text-transform:uppercase">
+        <div class="team-row" style="color:var(--text-muted);font-size:10px;font-weight:800;text-transform:uppercase">
           <div>Comercial</div>
           <div>Pipeline</div>
           <div>Atividades</div>
@@ -3586,7 +3445,8 @@
     function renderReports() {
       renderConversionRows("reportsConversion");
 
-      const losses = getTenantDeals().filter((deal) => deal.status === "lost" || deal.status === "churn");
+      const authDeals = getAuthorizedDeals();
+      const losses = authDeals.filter((deal) => deal.status === "lost" || deal.status === "churn");
       const reasons = {};
 
       losses.forEach((deal) => {
@@ -3645,17 +3505,14 @@
         document.getElementById("dealEmail").value = deal.email || "";
         document.getElementById("dealValue").value = deal.value || "";
         document.getElementById("dealProbability").value = deal.probability || 25;
-        document.getElementById("dealOwner").value = deal.owner || "Victor";
+        document.getElementById("dealOwner").value = deal.owner || activeUser;
         document.getElementById("dealCloseDate").value = deal.closeDate || "";
         document.getElementById("dealSource").value = deal.source || "";
         document.getElementById("dealTags").value = deal.tags || "";
-        document.getElementById("dealNiche").value = deal.niche || "";
-        document.getElementById("dealProduct").value = deal.product || "";
-        document.getElementById("dealContractExpiry").value = deal.contractExpiry || "";
-        document.getElementById("dealRelationshipStatus").value = deal.relationshipStatus || "Ativo";
+        document.getElementById("dealNote").value = "";
       } else {
         document.getElementById("dealProbability").value = stages[0].probability;
-        document.getElementById("dealOwner").value = "Victor";
+        document.getElementById("dealOwner").value = activeUser;
       }
 
       document.getElementById("dealStage").onchange = (event) => {
@@ -3677,21 +3534,21 @@
       const value = rawValue === "" ? null : Number(rawValue);
       const probability = Number(document.getElementById("dealProbability").value);
       const stage = document.getElementById("dealStage").value;
-      const owner = document.getElementById("dealOwner").value;
+      const owner = userRole === "Vendedor" ? activeUser : document.getElementById("dealOwner").value;
       const closeDate = document.getElementById("dealCloseDate").value;
       const source = document.getElementById("dealSource").value;
       const tags = document.getElementById("dealTags").value.trim();
       const note = document.getElementById("dealNote").value.trim();
 
-      // NOVOS CAMPOS
-      const niche = document.getElementById("dealNiche").value;
-      const product = document.getElementById("dealProduct").value.trim();
-      const contractExpiry = document.getElementById("dealContractExpiry").value;
-      const relationshipStatus = document.getElementById("dealRelationshipStatus").value;
-
       if (editingId) {
         const deal = getDeal(editingId);
         if (!deal) return;
+
+        // Se for vendedor, impedir edição de deals alheios
+        if (userRole === "Vendedor" && deal.owner !== activeUser) {
+          alert("Você só pode editar negócios atribuídos a você.");
+          return;
+        }
 
         const oldStage = deal.stage;
         const oldOwner = deal.owner;
@@ -3709,11 +3566,7 @@
           owner,
           closeDate,
           source,
-          tags,
-          niche,
-          product,
-          contractExpiry,
-          relationshipStatus
+          tags
         });
 
         addTimelineEvent(deal, "Negócio atualizado", "Informações da oportunidade foram atualizadas.");
@@ -3751,11 +3604,6 @@
           closeDate,
           source,
           tags,
-          niche,
-          product,
-          contractExpiry,
-          relationshipStatus,
-          tenantId: currentTenant === "all" ? "tenant_a" : currentTenant, // set default tenant logically
           status: "open",
           createdAt: new Date().toISOString(),
           timeline: [
@@ -3793,7 +3641,8 @@
       form.reset();
       fillOwnerOptions();
 
-      const activeDeals = getTenantDeals().filter((deal) => deal.status === "open");
+      const authDeals = getAuthorizedDeals();
+      const activeDeals = authDeals.filter((deal) => deal.status === "open");
 
       select.innerHTML = activeDeals.length
         ? activeDeals.map((deal) => `
@@ -3804,7 +3653,13 @@
         : `<option value="">Nenhum negócio aberto</option>`;
 
       const selectedDeal = getDeal(dealId);
-      document.getElementById("activityOwner").value = selectedDeal?.owner || "Victor";
+      document.getElementById("activityOwner").value = selectedDeal?.owner || activeUser;
+
+      if (userRole === "Vendedor") {
+        document.getElementById("activityOwner").setAttribute("disabled", "true");
+      } else {
+        document.getElementById("activityOwner").removeAttribute("disabled");
+      }
 
       const defaultDate = new Date(CURRENT_DATE);
       defaultDate.setHours(defaultDate.getHours() + 1);
@@ -3821,6 +3676,8 @@
       const dealId = Number(document.getElementById("activityDeal").value);
       if (!dealId) return;
 
+      const owner = userRole === "Vendedor" ? activeUser : document.getElementById("activityOwner").value;
+
       const newActivity = {
         id: Date.now(),
         title: document.getElementById("activityTitle").value.trim(),
@@ -3828,7 +3685,7 @@
         dealId,
         date: document.getElementById("activityDate").value,
         priority: document.getElementById("activityPriority").value,
-        owner: document.getElementById("activityOwner").value,
+        owner: owner,
         description: document.getElementById("activityDescription").value.trim(),
         status: "Agendada"
       };
@@ -3854,27 +3711,19 @@
       }
     }
 
-    // MULTI-TAB CONTROLS INSIDE DETAILS
-    function switchDetailTab(tabId) {
-      document.querySelectorAll(".tab-button").forEach(btn => btn.classList.remove("active"));
-      document.querySelectorAll(".tab-content").forEach(content => content.classList.remove("active"));
-      
-      const currentBtn = Array.from(document.querySelectorAll(".tab-button")).find(btn => btn.getAttribute("onclick").includes(tabId));
-      if (currentBtn) currentBtn.classList.add("active");
-      document.getElementById(tabId).classList.add("active");
-    }
-
-    // DETAILED MODAL VIEWS WITH AUTOMATION & RENEWALS
     function openDealDetail(dealId) {
       const deal = getDeal(dealId);
       if (!deal) return;
 
+      // Se for vendedor, impedir de ver detalhes de deals de outros
+      if (userRole === "Vendedor" && deal.owner !== activeUser) {
+        alert("Acesso restrito. Você só pode visualizar detalhes das suas próprias oportunidades.");
+        return;
+      }
+
       currentDetailDealId = deal.id;
 
       const nextActivity = getNextActivity(deal.id);
-
-      // Active main tab initially
-      switchDetailTab('tabGeral');
 
       document.getElementById("detailHeader").innerHTML = `
         <div>
@@ -3900,7 +3749,6 @@
         </div>
       `;
 
-      // TAB 1: GERAL CONTROLS
       document.getElementById("dealDetails").innerHTML = `
         <div class="detail-title">Informações</div>
 
@@ -3908,7 +3756,7 @@
         <div class="detail-value"><strong>Telefone</strong><br>${escapeHTML(deal.phone || "Não informado")}</div>
         <div class="detail-value"><strong>E-mail</strong><br>${escapeHTML(deal.email || "Não informado")}</div>
         <div class="detail-value"><strong>Responsável</strong><br>${escapeHTML(deal.owner)}</div>
-        <div class="detail-value"><strong>Valor Mensal (MRR)</strong><br>${currency(deal.value)}</div>
+        <div class="detail-value"><strong>Valor</strong><br>${currency(deal.value)}</div>
         <div class="detail-value"><strong>Probabilidade</strong><br>${deal.probability}%</div>
         <div class="detail-value"><strong>Fechamento previsto</strong><br>${deal.closeDate ? formatDate(deal.closeDate) : "Não informado"}</div>
         <div class="detail-value"><strong>Próxima atividade</strong><br>${nextActivity ? escapeHTML(nextActivity.title) : "Nenhuma agendada"}</div>
@@ -3936,7 +3784,7 @@
           ${deal.status === "open" ? `
             <button class="button button-primary" onclick="openActivityModal(${deal.id})">Criar atividade</button>
             <button class="button button-secondary" onclick="openDealModal(${deal.id})">Editar negócio</button>
-            <button class="button button-secondary" onclick="openTransferModal(${deal.id})">Transferir negócio</button>
+            <button class="button button-secondary" ${userRole === "Vendedor" ? "disabled" : ""} onclick="openTransferModal(${deal.id})">Transferir negócio</button>
             <button class="button button-success" onclick="markDealWon(${deal.id})">Marcar como ganho</button>
             <button class="button button-danger" onclick="openLossModal(${deal.id})">Marcar como perdido / churn</button>
           ` : `
@@ -3944,11 +3792,10 @@
             <button class="button button-secondary" onclick="openDealModal(${deal.id})">Editar informações</button>
           `}
 
-          <button class="button button-secondary" onclick="archiveDeal(${deal.id})">Arquivar / excluir</button>
+          <button class="button button-secondary" ${userRole === "Vendedor" ? "disabled" : ""} onclick="archiveDeal(${deal.id})">Arquivar / excluir</button>
         </div>
       `;
 
-      // TIMELINE EVENTS
       const timelineEvents = [
         ...(deal.timeline || []),
         ...getDealActivities(deal.id).map((activity) => ({
@@ -3959,7 +3806,7 @@
       ].sort((a, b) => new Date(b.date) - new Date(a.date));
 
       document.getElementById("dealTimeline").innerHTML = `
-        <div class="panel-header" style="margin-bottom: 12px;">
+        <div class="panel-header">
           <div>
             <h2>Timeline comercial</h2>
             <p class="panel-subtitle">Histórico completo da oportunidade.</p>
@@ -3976,100 +3823,11 @@
         `).join("") : `<div class="empty">Ainda não há eventos neste negócio.</div>`}
       `;
 
-      // TAB 2: CONTRACT CONTENT (WITH ALERT CALCULATIONS)
-      let contractStatusHTML = "";
-      if (deal.contractExpiry) {
-        const expiryDate = new Date(deal.contractExpiry);
-        const diffTime = expiryDate - CURRENT_DATE;
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-        if (diffDays < 0) {
-          contractStatusHTML = `
-            <div class="warning-alert-box" style="border-color:var(--danger); color:var(--danger); background:rgba(232,74,74,0.1);">
-              🚨 CONTRATO EXPIRADO HÁ ${Math.abs(diffDays)} DIA(S)! Necessita renovação urgente de serviços e reajuste comercial.
-            </div>`;
-        } else if (diffDays <= 30) {
-          contractStatusHTML = `
-            <div class="warning-alert-box">
-              ⚠️ ATENÇÃO: Contrato vence em ${diffDays} dias (${formatDate(deal.contractExpiry)}). Recomenda-se iniciar o fluxo de renovação ativo.
-            </div>`;
-        } else {
-          contractStatusHTML = `
-            <div class="warning-alert-box" style="border-color:var(--success); color:var(--success); background:rgba(23,163,107,0.1);">
-              ✅ Contrato saudável e ativo. Vence em ${diffDays} dias (${formatDate(deal.contractExpiry)}).
-            </div>`;
-        }
-      } else {
-        contractStatusHTML = `<div class="warning-alert-box" style="color:var(--muted); border-color:var(--border); background:transparent;">Sem vencimento de contrato cadastrado.</div>`;
-      }
-
-      document.getElementById("contractTabContent").innerHTML = `
-        <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:18px;">
-          <div class="metric-card">
-            <div class="metric-label">Produto / Serviço Contratado</div>
-            <div class="metric-value" style="font-size:20px; font-weight:750; margin-top:5px;">${escapeHTML(deal.product || "Não informado")}</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-label">Valor Mensal (Recorrente)</div>
-            <div class="metric-value" style="font-size:20px; font-weight:750; margin-top:5px;">${currency(deal.value)}</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-label">Nicho / Segmento do Cliente</div>
-            <div style="font-size:14px; font-weight:700; margin-top:5px;">${escapeHTML(deal.niche || "Não informado")}</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-label">Data de Expiração</div>
-            <div style="font-size:14px; font-weight:700; margin-top:5px;">${deal.contractExpiry ? formatDate(deal.contractExpiry) : "Não cadastrada"}</div>
-          </div>
-        </div>
-        ${contractStatusHTML}
-        
-        <div style="margin-top:20px;">
-          <h3>Automação de Vencimento</h3>
-          <p style="font-size:12px; color:var(--muted); line-height:1.4;">
-            As regras de aviso visual disparam notificações automáticas no funil comercial a cada 30 dias de antecedência ao vencimento. 
-            Você pode atualizar as informações contratuais a qualquer momento na edição do negócio.
-          </p>
-        </div>
-      `;
-
-      // TAB 3: RELATIONSHIP CONTENT
-      let relBadgeClass = "badge-green";
-      if (deal.relationshipStatus === "Em risco") relBadgeClass = "badge-red";
-      else if (deal.relationshipStatus === "Frio") relBadgeClass = "badge-yellow";
-
-      document.getElementById("relationshipTabContent").innerHTML = `
-        <div style="display:grid; grid-template-columns: 200px 1fr; gap:18px; align-items:center;">
-          <div class="metric-card" style="text-align:center;">
-            <div class="metric-label">Saúde do Cliente</div>
-            <div style="margin-top:10px;">
-              <span class="badge ${relBadgeClass}" style="font-size:12px; padding:6px 12px;">${escapeHTML(deal.relationshipStatus || "Ativo")}</span>
-            </div>
-          </div>
-          <div class="panel" style="padding:15px; margin:0;">
-            <strong style="font-size:13px; display:block; margin-bottom:5px;">Comentários e Histórico de Sucesso:</strong>
-            <p style="font-size:12px; margin:0; line-height:1.5;">${escapeHTML(deal.relationshipNotes || "Nenhuma nota de relacionamento salva até o momento.")}</p>
-          </div>
-        </div>
-
-        ${deal.relationshipStatus === "Em risco" ? `
-          <div class="warning-alert-box" style="border-color:var(--danger); color:var(--danger); background:rgba(232,74,74,0.1); margin-top:15px;">
-            ⚠️ ALERTA DE CHURN: Este cliente está com relacionamento marcado como "Em Risco". Recomenda-se uma ligação imediata de alinhamento com os decisores.
-          </div>
-        ` : ""}
-
-        <div style="margin-top:24px;">
-          <h3>Registro de Reuniões e Feedbacks (NPS)</h3>
-          <p style="font-size:12px; color:var(--muted); line-height:1.4;">
-            Acompanhe o grau de satisfação de entrega e mantenha o time integrado. Atualmente, os relatórios unificam as métricas de conversão com o índice de saúde para que você tome decisões preventivas contra cancelamentos indesejados.
-          </p>
-        </div>
-      `;
-
       document.getElementById("detailModal").classList.add("open");
     }
 
     function openTransferModal(dealId) {
+      if (userRole === "Vendedor") return;
       const deal = getDeal(dealId);
       if (!deal) return;
 
@@ -4081,6 +3839,7 @@
     }
 
     function transferDeal() {
+      if (userRole === "Vendedor") return;
       const deal = getDeal(document.getElementById("transferDealId").value);
       const newOwner = document.getElementById("transferOwner").value;
 
@@ -4097,7 +3856,13 @@
       saveData();
       closeModal("transferModal");
       refreshAll();
-      openDealDetail(deal.id);
+      
+      // Se mudei e sou vendedor simulado, posso perder acesso ao deal. Sair do modal se necessário.
+      if (userRole === "Vendedor") {
+        closeModal("detailModal");
+      } else {
+        openDealDetail(deal.id);
+      }
     }
 
     function markDealWon(dealId) {
@@ -4161,6 +3926,7 @@
     }
 
     function archiveDeal(dealId) {
+      if (userRole === "Vendedor") return;
       const deal = getDeal(dealId);
       if (!deal) return;
 
@@ -4187,4 +3953,77 @@
       window.open(`https://wa.me/55${cleanPhone}?text=${message}`, "_blank");
     }
 
-    
+    function saveGoal() {
+      if (userRole === "Vendedor") return;
+      const value = Number(document.getElementById("goalInput").value);
+
+      if (Number.isNaN(value) || value < 0) {
+        alert("Informe uma meta válida.");
+        return;
+      }
+
+      forecastGoal = value;
+      saveData();
+      refreshAll();
+      alert("Configurações salvas com sucesso.");
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove("open");
+    }
+
+    document.querySelectorAll(".modal-backdrop").forEach((backdrop) => {
+      backdrop.addEventListener("click", (event) => {
+        if (event.target === backdrop) {
+          backdrop.classList.remove("open");
+        }
+      });
+    });
+
+    // CONTROLE DE TEMA (CLARO/ESCURO)
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const targetTheme = currentTheme === "dark" ? "light" : "dark";
+      
+      document.documentElement.setAttribute("data-theme", targetTheme);
+      localStorage.setItem("salesmates_theme", targetTheme);
+    }
+
+    function initializeTheme() {
+      const savedTheme = localStorage.getItem("salesmates_theme") || "light";
+      document.documentElement.setAttribute("data-theme", savedTheme);
+    }
+
+    // EXPORTADOR CSV AUTOMÁTICO DE ACORDO COM A VIEW
+    function exportToCSV(type) {
+      let csvContent = "data:text/csv;charset=utf-8,\uFEFF";
+      let filename = `salesmates_${type}_export.csv`;
+
+      if (type === 'pipeline' || type === 'dashboard') {
+        const headers = ["Empresa", "Contato", "Email", "Telefone", "Valor", "Probabilidade", "Etapa", "Responsável", "Status", "Origem", "Tags"];
+        csvContent += headers.join(";") + "\n";
+
+        const filteredDeals = getFilteredPipelineDeals();
+        filteredDeals.forEach(deal => {
+          const row = [
+            deal.company,
+            deal.contact || "",
+            deal.email || "",
+            deal.phone || "",
+            deal.value || 0,
+            deal.probability || 0,
+            deal.stage,
+            deal.owner,
+            deal.status,
+            deal.source || "",
+            deal.tags || ""
+          ];
+          csvContent += row.map(val => `"${String(val).replace(/"/g, '""')}"`).join(";") + "\n";
+        });
+      } else if (type === 'activities') {
+        const headers = ["Título", "Tipo", "Negócio Relacionado", "Responsável", "Data", "Prioridade", "Status"];
+        csvContent += headers.join(";") + "\n";
+
+        const authActs = getAuthorizedActivities();
+        authActs.forEach(act => {
+          
