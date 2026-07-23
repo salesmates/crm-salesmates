@@ -7,20 +7,20 @@
 
   <style>
     :root {
-      --bg: #f7f7f8;
+      --bg: #f3f4f6;
       --surface: #ffffff;
-      --sidebar: #050505;
-      --text: #171717;
-      --muted: #737373;
-      --border: #e7e7e7;
-      --primary: #171717;
-      --primary-hover: #353535;
-      --success: #17a36b;
-      --warning: #e88d10;
-      --danger: #e84a4a;
-      --info: #3977e8;
-      --radius: 14px;
-      --shadow: 0 8px 26px rgba(0, 0, 0, 0.055);
+      --sidebar: #0b0f19;
+      --text: #111827;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --info: #3b82f6;
+      --radius: 12px;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
 
     * { box-sizing: border-box; }
@@ -39,15 +39,15 @@
       width: 100%;
       outline: none;
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 8px;
       background: #fff;
       color: var(--text);
       transition: border .2s, box-shadow .2s;
     }
 
     input:focus, select:focus, textarea:focus {
-      border-color: #8d8d8d;
-      box-shadow: 0 0 0 3px rgba(0,0,0,.07);
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
     }
 
     textarea { resize: vertical; }
@@ -61,10 +61,10 @@
       top: 0;
       bottom: 0;
       left: 0;
-      width: 252px;
+      width: 240px;
       display: flex;
       flex-direction: column;
-      padding: 22px 13px 16px;
+      padding: 24px 16px;
       background: var(--sidebar);
       color: white;
     }
@@ -72,64 +72,26 @@
     .brand {
       display: flex;
       align-items: center;
-      min-height: 62px;
-      padding: 3px 11px 18px;
+      margin-bottom: 24px;
+      padding: 0 8px;
     }
 
     .brand-logo {
       color: white;
-      letter-spacing: -.06em;
-      font-size: 25px;
+      letter-spacing: -.05em;
+      font-size: 22px;
       line-height: 1;
     }
 
-    .brand-logo strong { font-weight: 850; }
-    .brand-logo span { color: #b8b8b8; font-weight: 350; }
-
-    /* TENANT SELECTOR */
-    .tenant-container {
-      padding: 0 11px 18px;
-      margin-bottom: 12px;
-      border-bottom: 1px solid rgba(255,255,255,.12);
-    }
-    .tenant-label {
-      display: block;
-      color: #8c8c8c;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-    .tenant-select {
-      width: 100%;
-      padding: 8px 10px;
-      border: 1px solid rgba(255,255,255,.15);
-      border-radius: 8px;
-      background: rgba(255,255,255,.07);
-      color: white;
-      font-size: 12px;
-      font-weight: 600;
-      outline: none;
-      cursor: pointer;
-      transition: border .2s, background .2s;
-    }
-    .tenant-select:focus {
-      border-color: rgba(255,255,255,.35);
-      background: rgba(255,255,255,.12);
-    }
-    .tenant-select option {
-      background: #171717;
-      color: white;
-      padding: 8px;
-    }
+    .brand-logo strong { font-weight: 800; }
+    .brand-logo span { color: #9ca3af; font-weight: 300; }
 
     .menu-label {
-      padding: 10px 12px 7px;
-      color: #8c8c8c;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: .1em;
+      padding: 12px 8px 6px;
+      color: #4b5563;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .05em;
       text-transform: uppercase;
     }
 
@@ -138,47 +100,46 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 11px 12px;
+      padding: 10px 12px;
       margin: 2px 0;
-      border-radius: 9px;
-      color: #a9a9a9;
+      border-radius: 8px;
+      color: #9ca3af;
       background: transparent;
       text-align: left;
       font-size: 13px;
       font-weight: 600;
-      transition: .18s ease;
+      transition: .15s ease;
     }
 
     .nav-button:hover {
       color: white;
-      background: rgba(255,255,255,.07);
+      background: rgba(255,255,255,.05);
     }
 
     .nav-button.active {
-      color: #111;
-      background: #fff;
+      color: white;
+      background: var(--primary);
     }
 
     .nav-icon {
-      width: 19px;
+      width: 16px;
       text-align: center;
-      font-size: 16px;
+      font-size: 15px;
       font-style: normal;
     }
 
     .sidebar-footer {
       margin-top: auto;
       padding-top: 16px;
-      border-top: 1px solid rgba(255,255,255,.11);
+      border-top: 1px solid rgba(255,255,255,.08);
     }
 
     .user-box {
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 10px;
-      border-radius: 10px;
-      color: #d6d6d6;
+      padding: 8px;
+      color: #d1d5db;
       font-size: 12px;
     }
 
@@ -186,9 +147,9 @@
       display: grid;
       place-items: center;
       border-radius: 50%;
-      background: #fff;
-      color: #111;
-      font-weight: 800;
+      background: #e5e7eb;
+      color: #1f2937;
+      font-weight: 700;
     }
 
     .avatar {
@@ -198,13 +159,13 @@
     }
 
     .user-box strong { color: white; font-size: 13px; }
-    .user-box small { color: #939393; }
+    .user-box small { color: #6b7280; }
 
     /* MAIN */
     .main {
       min-height: 100vh;
-      margin-left: 252px;
-      padding: 32px 36px 44px;
+      margin-left: 240px;
+      padding: 24px 32px;
     }
 
     .view { display: none; }
@@ -214,18 +175,18 @@
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 28px;
+      gap: 16px;
+      margin-bottom: 24px;
     }
 
     .page-title h1 {
       margin: 0;
-      font-size: 27px;
-      letter-spacing: -.04em;
+      font-size: 24px;
+      letter-spacing: -.03em;
     }
 
     .page-title p {
-      margin: 7px 0 0;
+      margin: 6px 0 0;
       color: var(--muted);
       font-size: 14px;
     }
@@ -241,37 +202,37 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 7px;
-      padding: 10px 14px;
-      border-radius: 9px;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 8px;
       font-size: 13px;
-      font-weight: 750;
-      transition: .18s ease;
+      font-weight: 600;
+      transition: .15s ease;
     }
 
-    .button:hover { transform: translateY(-1px); }
     .button-primary { color: white; background: var(--primary); }
     .button-primary:hover { background: var(--primary-hover); }
     .button-secondary { border: 1px solid var(--border); background: white; color: var(--text); }
-    .button-secondary:hover { background: #f7f7f7; }
+    .button-secondary:hover { background: #f9fafb; }
     .button-danger { color: white; background: var(--danger); }
     .button-success { color: white; background: var(--success); }
-    .button-small { padding: 7px 10px; font-size: 12px; }
+    .button-small { padding: 6px 10px; font-size: 12px; }
 
     .icon-button {
-      width: 35px;
-      height: 35px;
+      width: 34px;
+      height: 34px;
       display: inline-grid;
       place-items: center;
       border: 1px solid var(--border);
-      border-radius: 9px;
+      border-radius: 8px;
       background: white;
       color: var(--text);
-      font-size: 15px;
+      font-size: 14px;
     }
 
-    .icon-button:hover { background: #f5f5f5; }
+    .icon-button:hover { background: #f9fafb; }
     .icon-button.danger { color: var(--danger); }
+    .icon-button.danger:hover { background: #fee2e2; }
 
     .panel, .metric-card {
       border: 1px solid var(--border);
@@ -287,96 +248,96 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
-    .panel-header h2 { margin: 0; font-size: 16px; letter-spacing: -.025em; }
-    .panel-subtitle { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
+    .panel-header h2 { margin: 0; font-size: 15px; letter-spacing: -.02em; }
+    .panel-subtitle { margin: 2px 0 0; color: var(--muted); font-size: 12px; }
 
     .dashboard-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(150px, 1fr));
-      gap: 14px;
-      margin-bottom: 18px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
     }
 
-    .metric-card { padding: 18px; }
-    .metric-label { color: var(--muted); font-size: 12px; font-weight: 650; }
+    .metric-card { padding: 16px; }
+    .metric-label { color: var(--muted); font-size: 12px; font-weight: 600; }
     .metric-value {
-      margin: 9px 0 5px;
-      font-size: 25px;
-      font-weight: 800;
-      letter-spacing: -.04em;
+      margin: 8px 0 4px;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -.03em;
     }
 
-    .metric-note { color: var(--muted); font-size: 11px; font-weight: 600; }
+    .metric-note { color: var(--muted); font-size: 11px; }
     .metric-note.danger { color: var(--danger); }
     .metric-note.success { color: var(--success); }
 
     .content-grid {
       display: grid;
-      grid-template-columns: 1.45fr 1fr;
-      gap: 18px;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 20px;
     }
 
-    .progress-row { margin: 17px 0; }
+    .progress-row { margin: 16px 0; }
     .progress-top {
       display: flex;
       justify-content: space-between;
       gap: 10px;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       font-size: 12px;
     }
 
     .progress-track {
-      height: 8px;
+      height: 6px;
       overflow: hidden;
       border-radius: 99px;
-      background: #ededed;
+      background: #e5e7eb;
     }
 
     .progress-bar {
       height: 100%;
       border-radius: inherit;
-      background: #171717;
+      background: var(--primary);
     }
 
     .badge {
       display: inline-flex;
       align-items: center;
       width: fit-content;
-      padding: 4px 8px;
+      padding: 3px 8px;
       border-radius: 999px;
-      font-size: 10px;
-      font-weight: 800;
+      font-size: 11px;
+      font-weight: 600;
       white-space: nowrap;
     }
 
-    .badge-green { color: #087846; background: #dbf7e8; }
-    .badge-red { color: #b72e2e; background: #ffe4e4; }
-    .badge-blue { color: #245bc4; background: #e3edff; }
-    .badge-yellow { color: #a15c00; background: #fff1d4; }
-    .badge-gray { color: #656565; background: #eeeeee; }
+    .badge-green { color: #065f46; background: #d1fae5; }
+    .badge-red { color: #991b1b; background: #fee2e2; }
+    .badge-blue { color: #1e40af; background: #dbeafe; }
+    .badge-yellow { color: #92400e; background: #fef3c7; }
+    .badge-gray { color: #374151; background: #f3f4f6; }
 
     .activity-item {
       display: flex;
       align-items: flex-start;
       gap: 10px;
-      padding: 13px 0;
+      padding: 12px 0;
       border-bottom: 1px solid var(--border);
     }
 
     .activity-item:last-child { border-bottom: 0; }
 
     .activity-icon {
-      width: 33px;
-      height: 33px;
+      width: 28px;
+      height: 28px;
       display: grid;
       flex: 0 0 auto;
       place-items: center;
-      border-radius: 9px;
-      background: #f1f1f1;
-      font-size: 15px;
+      border-radius: 6px;
+      background: #f3f4f6;
+      font-size: 13px;
     }
 
     .activity-info { min-width: 0; flex: 1; }
@@ -389,7 +350,7 @@
     }
 
     .activity-info small {
-      margin-top: 4px;
+      margin-top: 2px;
       color: var(--muted);
       font-size: 11px;
     }
@@ -399,54 +360,54 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
-      margin-bottom: 17px;
+      gap: 12px;
+      margin-bottom: 20px;
     }
 
     .search-input {
-      min-width: 245px;
-      padding: 10px 12px;
+      min-width: 240px;
+      padding: 8px 12px;
       font-size: 13px;
     }
 
     .filter, .view-toggle {
       width: auto;
-      padding: 9px 11px;
+      padding: 8px 12px;
       border: 1px solid var(--border);
-      border-radius: 9px;
-      color: #555;
+      border-radius: 8px;
+      color: #374151;
       background: white;
       font-size: 12px;
-      font-weight: 650;
+      font-weight: 500;
     }
 
     .filter.active, .view-toggle.active {
-      border-color: #171717;
+      border-color: var(--primary);
       color: white;
-      background: #171717;
+      background: var(--primary);
     }
 
     /* SALES RHYTHM */
-    .conversion-list { display: grid; gap: 12px; }
+    .conversion-list { display: grid; gap: 10px; }
 
     .conversion-row {
       padding: 12px;
       border: 1px solid var(--border);
-      border-radius: 11px;
-      background: #fcfcfc;
+      border-radius: 8px;
+      background: #f9fafb;
     }
 
     .conversion-top {
       display: flex;
       justify-content: space-between;
       gap: 12px;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       font-size: 12px;
     }
 
     .conversion-top strong { font-size: 12px; }
     .conversion-meta {
-      margin-top: 7px;
+      margin-top: 6px;
       color: var(--muted);
       font-size: 10px;
     }
@@ -454,9 +415,9 @@
     /* PIPELINE */
     .pipeline-manager {
       display: none;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       padding: 16px;
-      border: 1px dashed #bcbcbc;
+      border: 1px dashed #d1d5db;
       border-radius: var(--radius);
       background: #fafafa;
     }
@@ -472,16 +433,16 @@
     }
 
     .stage-editor-card {
-      min-width: 205px;
-      padding: 11px;
+      min-width: 200px;
+      padding: 10px;
       border: 1px solid var(--border);
-      border-radius: 11px;
+      border-radius: 8px;
       background: white;
     }
 
     .stage-editor-card strong {
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       overflow: hidden;
       font-size: 12px;
       text-overflow: ellipsis;
@@ -491,142 +452,177 @@
     .stage-editor-actions {
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
     }
 
     .stage-add-between {
-      width: 36px;
-      min-width: 36px;
-      height: 36px;
+      width: 32px;
+      min-width: 32px;
+      height: 32px;
       align-self: center;
       display: grid;
       place-items: center;
-      border: 1px dashed #a7a7a7;
+      border: 1px dashed #9ca3af;
       border-radius: 50%;
       background: white;
-      color: #444;
-      font-size: 20px;
-      font-weight: 500;
+      color: #374151;
+      font-size: 16px;
     }
 
     .stage-add-between:hover {
       color: white;
-      background: #171717;
-      border-color: #171717;
+      background: var(--primary);
+      border-color: var(--primary);
     }
 
+    /* KANBAN HORIZONTAL (PIPEDIRECT LOOK-AND-FEEL) */
     .kanban-board {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(235px, 1fr));
+      display: flex;
       gap: 12px;
       overflow-x: auto;
-      padding-bottom: 10px;
+      padding-bottom: 16px;
+      align-items: flex-start;
+      flex-wrap: nowrap; /* Impede a quebra de linha. Sempre horizontal! */
     }
 
     .kanban-column {
-      min-height: 515px;
-      padding: 10px;
+      width: 280px;
+      min-width: 280px;
+      flex-shrink: 0;
+      min-height: calc(100vh - 240px);
+      padding: 12px;
       border: 1px solid var(--border);
-      border-radius: 13px;
-      background: #eeeeef;
+      border-radius: var(--radius);
+      background: #f3f4f6; /* Fundo cinza claro para destacar a coluna */
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
     .column-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 6px 4px 13px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e5e7eb;
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 700;
     }
 
     .column-title {
-      max-width: 170px;
+      max-width: 180px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      text-transform: uppercase;
+      font-size: 11px;
+      color: #374151;
     }
 
     .column-total {
       display: block;
-      margin-top: 3px;
+      margin-top: 2px;
       color: var(--muted);
-      font-size: 10px;
-      font-weight: 600;
+      font-size: 11px;
+      font-weight: 500;
     }
 
     .column-count {
-      padding: 3px 8px;
-      border-radius: 99px;
-      color: #555;
-      background: white;
-      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #4b5563;
+      background: #e5e7eb;
+      font-size: 11px;
     }
 
+    /* PIPEDRIVE CLEAN DEAL CARD */
     .deal-card {
-      margin-bottom: 9px;
-      padding: 13px;
-      border: 1px solid #e4e4e4;
-      border-radius: 11px;
+      padding: 12px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
       background: white;
-      box-shadow: 0 2px 6px rgba(0,0,0,.035);
-      cursor: pointer;
-      transition: .18s ease;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      cursor: grab;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
 
     .deal-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 18px rgba(0,0,0,.08);
-    }
-
-    .deal-card-top, .deal-card-footer {
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
+      border-color: #9ca3af;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
     }
 
     .deal-card h3 {
-      margin: 0 0 5px;
+      margin: 0;
       font-size: 13px;
-      letter-spacing: -.015em;
+      font-weight: 700;
+      color: #111827;
+      line-height: 1.4;
     }
 
     .deal-card p {
       margin: 0;
-      overflow: hidden;
       color: var(--muted);
       font-size: 11px;
+      overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
 
     .deal-value {
-      margin-top: 14px;
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    .deal-no-value {
-      color: #9a9a9a;
       font-size: 12px;
-      font-weight: 650;
+      font-weight: 700;
+      color: #111827;
+      margin-top: 4px;
     }
 
-    .next-activity {
-      margin-top: 11px;
-      padding-top: 10px;
-      overflow: hidden;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
+    .deal-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .deal-card-tag {
+      font-size: 9px;
+      padding: 1px 5px;
+      background: #f3f4f6;
+      border-radius: 4px;
+      color: #4b5563;
+      font-weight: 600;
+    }
+
+    .deal-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid #f3f4f6;
+    }
+
+    .deal-card-owner {
       font-size: 10px;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
 
-    .next-activity.overdue {
-      color: var(--danger);
-      font-weight: 800;
+    /* Pipedrive indicator dots */
+    .activity-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
     }
+    .activity-dot.green { background-color: var(--success); }
+    .activity-dot.red { background-color: var(--danger); }
+    .activity-dot.yellow { background-color: var(--warning); }
+    .activity-dot.gray { background-color: #cbd5e1; }
 
     .pipeline-list {
       overflow: hidden;
@@ -646,7 +642,7 @@
     table { width: 100%; border-collapse: collapse; }
 
     th, td {
-      padding: 14px 15px;
+      padding: 12px 16px;
       border-bottom: 1px solid var(--border);
       text-align: left;
       font-size: 12px;
@@ -654,25 +650,26 @@
 
     th {
       color: var(--muted);
-      background: #fbfbfb;
-      font-size: 10px;
-      letter-spacing: .06em;
+      background: #f9fafb;
+      font-size: 11px;
+      letter-spacing: .05em;
       text-transform: uppercase;
+      font-weight: 600;
     }
 
     tr:last-child td { border-bottom: 0; }
-    tbody tr:hover { background: #fcfcfc; }
+    tbody tr:hover { background: #f9fafb; }
 
     .link-button {
       padding: 0;
-      color: var(--text);
+      color: var(--primary);
       background: transparent;
-      font-weight: 750;
+      font-weight: 600;
       text-align: left;
     }
 
     .empty {
-      padding: 35px;
+      padding: 32px;
       color: var(--muted);
       text-align: center;
       font-size: 13px;
@@ -682,7 +679,7 @@
     .agenda-layout {
       display: grid;
       grid-template-columns: 280px 1fr;
-      gap: 18px;
+      gap: 20px;
     }
 
     .calendar-mini { padding: 16px; }
@@ -691,27 +688,27 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .calendar-title {
       font-size: 13px;
-      font-weight: 800;
+      font-weight: 700;
       text-transform: capitalize;
     }
 
     .weekdays, .days-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      gap: 3px;
+      gap: 2px;
     }
 
     .weekdays span {
-      padding-bottom: 6px;
+      padding-bottom: 4px;
       color: var(--muted);
       text-align: center;
       font-size: 10px;
-      font-weight: 800;
+      font-weight: 700;
     }
 
     .calendar-day {
@@ -719,23 +716,23 @@
       position: relative;
       display: grid;
       place-items: center;
-      border-radius: 7px;
+      border-radius: 6px;
       background: transparent;
-      color: #444;
+      color: #374151;
       font-size: 11px;
     }
 
-    .calendar-day:hover { background: #ededed; }
+    .calendar-day:hover { background: #f3f4f6; }
     .calendar-day.empty-day { pointer-events: none; }
-    .calendar-day.today { border: 1px solid #171717; font-weight: 800; }
-    .calendar-day.selected { color: white; background: #171717; }
+    .calendar-day.today { border: 1px solid var(--text); font-weight: 700; }
+    .calendar-day.selected { color: white; background: var(--primary); }
 
     .calendar-day.has-activity::after {
       content: "";
       position: absolute;
-      bottom: 4px;
-      width: 3px;
-      height: 3px;
+      bottom: 3px;
+      width: 4px;
+      height: 4px;
       border-radius: 50%;
       background: var(--info);
     }
@@ -745,21 +742,21 @@
     .agenda-summary {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-top: 18px;
+      gap: 6px;
+      margin-top: 16px;
     }
 
     .agenda-summary div {
-      padding: 9px;
-      border-radius: 9px;
-      background: #f5f5f5;
+      padding: 8px;
+      border-radius: 8px;
+      background: #f3f4f6;
       font-size: 10px;
     }
 
     .agenda-summary strong {
       display: block;
-      margin-top: 4px;
-      font-size: 16px;
+      margin-top: 2px;
+      font-size: 14px;
     }
 
     .agenda-main { min-width: 0; }
@@ -769,12 +766,12 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      margin-bottom: 13px;
+      margin-bottom: 12px;
     }
 
     .agenda-date-label {
-      font-size: 15px;
-      font-weight: 800;
+      font-size: 14px;
+      font-weight: 700;
       text-transform: capitalize;
     }
 
@@ -782,41 +779,41 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-      margin-bottom: 15px;
+      margin-bottom: 16px;
     }
 
     .chart-card {
-      padding: 13px;
+      padding: 12px;
       border: 1px solid var(--border);
-      border-radius: 11px;
+      border-radius: 8px;
       background: white;
     }
 
     .chart-card span {
       color: var(--muted);
       font-size: 10px;
-      font-weight: 700;
+      font-weight: 600;
     }
 
     .chart-card strong {
       display: block;
-      margin: 6px 0 8px;
-      font-size: 21px;
+      margin: 4px 0 6px;
+      font-size: 18px;
     }
 
     /* TEAM */
     .team-grid {
       display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 18px;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 20px;
     }
 
     .team-row {
       display: grid;
-      grid-template-columns: 1.4fr repeat(4, 1fr);
+      grid-template-columns: 1.5fr repeat(4, 1fr);
       gap: 8px;
       align-items: center;
-      padding: 12px 0;
+      padding: 10px 0;
       border-bottom: 1px solid var(--border);
       font-size: 12px;
     }
@@ -826,15 +823,15 @@
     .team-person {
       display: flex;
       align-items: center;
-      gap: 9px;
-      font-weight: 750;
+      gap: 8px;
+      font-weight: 600;
     }
 
     .small-avatar {
-      width: 27px;
-      height: 27px;
-      background: #e9e9e9;
-      font-size: 10px;
+      width: 24px;
+      height: 24px;
+      background: #e5e7eb;
+      font-size: 9px;
     }
 
     /* MODALS */
@@ -843,210 +840,207 @@
       position: fixed;
       z-index: 100;
       inset: 0;
-      padding: 22px;
+      padding: 24px;
       overflow: auto;
-      background: rgba(0,0,0,.53);
+      background: rgba(0,0,0,.5);
     }
 
     .modal-backdrop.open { display: block; }
     #activityModal { z-index: 130; }
 
     .modal {
-      width: min(1050px, 100%);
-      margin: 25px auto;
+      width: min(950px, 100%);
+      margin: 20px auto;
       overflow: hidden;
-      border-radius: 17px;
+      border-radius: 12px;
       background: white;
-      box-shadow: 0 28px 90px rgba(0,0,0,.27);
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
     }
 
-    .modal.small-modal { width: min(530px, 100%); }
+    .modal.small-modal { width: min(500px, 100%); }
 
     .modal-header {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
       gap: 16px;
-      padding: 21px 24px;
+      padding: 16px 24px;
       border-bottom: 1px solid var(--border);
     }
 
     .modal-header h2 {
       margin: 0;
-      font-size: 19px;
-      letter-spacing: -.03em;
+      font-size: 18px;
+      letter-spacing: -.02em;
     }
 
     .modal-header p {
-      margin: 6px 0 0;
+      margin: 4px 0 0;
       color: var(--muted);
       font-size: 12px;
     }
 
-    .modal-body { padding: 23px 24px; }
+    .modal-body { padding: 20px 24px; }
 
     .close-button {
-      width: 34px;
-      height: 34px;
+      width: 32px;
+      height: 32px;
       display: grid;
       flex: 0 0 auto;
       place-items: center;
-      border-radius: 9px;
-      background: #f1f1f1;
-      color: #333;
-      font-size: 21px;
+      border-radius: 6px;
+      background: #f3f4f6;
+      color: #374151;
+      font-size: 18px;
     }
 
     .form-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
+      gap: 12px;
     }
 
     .field {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 4px;
     }
 
     .field.full { grid-column: 1 / -1; }
-    .field label { font-size: 11px; font-weight: 800; }
+    .field label { font-size: 11px; font-weight: 700; color: #374151; }
 
     .field input, .field select, .field textarea {
-      padding: 10px 11px;
+      padding: 8px 10px;
       font-size: 13px;
     }
 
-    .field textarea { min-height: 90px; }
+    .field textarea { min-height: 80px; }
 
     .modal-actions {
       display: flex;
       flex-wrap: wrap;
       justify-content: flex-end;
-      gap: 9px;
-      margin-top: 22px;
+      gap: 8px;
+      margin-top: 18px;
     }
 
     .modal-content {
       display: grid;
-      grid-template-columns: 295px 1fr;
-      min-height: 510px;
+      grid-template-columns: 280px 1fr;
+      min-height: 480px;
     }
 
     .deal-details {
-      padding: 21px;
+      padding: 16px 20px;
       border-right: 1px solid var(--border);
-      background: #fafafa;
+      background: #f9fafb;
     }
 
     .detail-title {
-      margin: 19px 0 8px;
+      margin: 16px 0 6px;
       color: var(--muted);
       font-size: 10px;
-      font-weight: 800;
-      letter-spacing: .08em;
+      font-weight: 700;
+      letter-spacing: .05em;
       text-transform: uppercase;
     }
 
     .detail-value {
-      margin-bottom: 13px;
+      margin-bottom: 10px;
       font-size: 12px;
-      line-height: 1.5;
+      line-height: 1.4;
     }
 
     .detail-value strong { font-size: 11px; }
-    .detail-actions { display: grid; gap: 7px; }
+    .detail-actions { display: grid; gap: 6px; }
 
     .stage-line {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 13px;
+      gap: 4px;
+      margin-top: 10px;
     }
 
     .stage {
-      padding: 6px 8px;
-      border-radius: 7px;
-      color: #777;
-      background: #eeeeee;
-      font-size: 10px;
-      font-weight: 800;
+      padding: 4px 6px;
+      border-radius: 4px;
+      color: #4b5563;
+      background: #e5e7eb;
+      font-size: 9px;
+      font-weight: 700;
     }
 
     .stage.current {
       color: white;
-      background: #171717;
+      background: var(--primary);
     }
 
-    .timeline { padding: 22px; }
+    .timeline { padding: 20px; }
 
     .timeline-event {
       position: relative;
-      padding: 0 0 20px 23px;
-      border-left: 1px solid #dedede;
+      padding: 0 0 16px 20px;
+      border-left: 1px solid #d1d5db;
     }
 
     .timeline-event::before {
       content: "";
       position: absolute;
       top: 1px;
-      left: -5px;
-      width: 8px;
-      height: 8px;
-      border: 2px solid white;
+      left: -4px;
+      width: 7px;
+      height: 7px;
+      border: 1px solid white;
       border-radius: 50%;
-      background: #171717;
+      background: var(--primary);
     }
 
     .timeline-event strong, .timeline-event small { display: block; }
     .timeline-event strong { font-size: 12px; }
 
     .timeline-event small {
-      margin-top: 4px;
+      margin-top: 2px;
       color: var(--muted);
       font-size: 11px;
-      line-height: 1.45;
     }
 
     .whatsapp-box {
-      padding: 12px;
-      margin-top: 14px;
-      border: 1px solid #ccebdc;
-      border-radius: 10px;
-      background: #f1fcf5;
+      padding: 10px;
+      margin-top: 12px;
+      border: 1px solid #a7f3d0;
+      border-radius: 8px;
+      background: #ecfdf5;
     }
 
     .whatsapp-box strong {
       display: block;
-      margin-bottom: 5px;
-      color: #087846;
+      margin-bottom: 4px;
+      color: #047857;
       font-size: 11px;
     }
 
     .whatsapp-box p {
-      margin: 0 0 9px;
-      color: #357058;
+      margin: 0 0 8px;
+      color: #065f46;
       font-size: 10px;
       line-height: 1.4;
     }
 
-    @media (max-width: 1100px) {
-      .sidebar { width: 72px; padding: 19px 8px; }
-      .brand { justify-content: center; padding: 4px 0 20px; }
-      .brand-logo { font-size: 0; }
-      .brand-logo strong, .brand-logo span, .menu-label,
-      .nav-button span:not(.nav-icon), .user-box > div:last-child,
-      .tenant-container { display: none; }
-      .nav-button { justify-content: center; padding: 12px; }
+    @media (max-width: 1000px) {
+      .sidebar { width: 64px; padding: 16px 8px; }
+      .brand { justify-content: center; padding: 0; }
+      .brand-logo { display: none; }
+      .menu-label, .nav-button span:not(.nav-icon), .user-box > div:last-child { display: none; }
+      .nav-button { justify-content: center; padding: 10px; }
       .sidebar-footer { display: flex; justify-content: center; }
-      .user-box { padding: 5px; }
-      .main { margin-left: 72px; }
+      .user-box { padding: 4px; }
+      .main { margin-left: 64px; }
       .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
       .content-grid, .team-grid { grid-template-columns: 1fr; }
     }
 
-    @media (max-width: 760px) {
-      .main { margin-left: 0; padding: 20px 14px 35px; }
+    @media (max-width: 768px) {
+      .main { margin-left: 0; padding: 16px; }
 
       .sidebar {
         position: static;
@@ -1054,25 +1048,18 @@
         min-height: auto;
         flex-direction: row;
         align-items: center;
-        padding: 10px;
+        padding: 8px;
         overflow-x: auto;
       }
 
-      .brand {
-        min-height: 0;
-        padding: 0 12px 0 2px;
-        margin: 0 4px 0 0;
-        border: 0;
-      }
-
-      .brand-logo { display: none; }
-      .menu-label, .sidebar-footer, .tenant-container { display: none; }
+      .brand { margin: 0 12px 0 0; }
+      .menu-label, .sidebar-footer { display: none; }
 
       .nav-button {
         width: auto;
         flex: 0 0 auto;
         margin: 0;
-        padding: 10px;
+        padding: 8px;
       }
 
       .nav-button span:not(.nav-icon) { display: none; }
@@ -1089,10 +1076,9 @@
       .deal-details { border-right: 0; border-bottom: 1px solid var(--border); }
       .form-grid { grid-template-columns: 1fr; }
       .field.full { grid-column: auto; }
-      .modal-backdrop { padding: 10px; }
-      .modal { margin: 8px auto; }
+      .modal-backdrop { padding: 8px; }
+      .modal { margin: 4px auto; }
       .search-input { min-width: 100%; }
-      .team-row { min-width: 650px; }
     }
   </style>
 </head>
@@ -1104,16 +1090,6 @@
         <div class="brand-logo">
           <strong>Sales</strong><span>Mates</span>
         </div>
-      </div>
-
-      <!-- Tenant Select -->
-      <div class="tenant-container">
-        <label class="tenant-label">Organização / Tenant</label>
-        <select id="tenantSelect" class="tenant-select" onchange="changeTenant(this.value)">
-          <option value="all">Todas as Contas</option>
-          <option value="matriz">Matriz Curitiba</option>
-          <option value="filial">Filial São Paulo</option>
-        </select>
       </div>
 
       <div class="menu-label">Operação</div>
@@ -1345,19 +1321,19 @@
               <div class="chart-card">
                 <span>Pendentes no período</span>
                 <strong id="chartPending">0</strong>
-                <div class="progress-track"><div id="chartPendingBar" class="progress-bar" style="width:0%;background:#3977e8"></div></div>
+                <div class="progress-track"><div id="chartPendingBar" class="progress-bar" style="width:0%;background:#3b82f6"></div></div>
               </div>
 
               <div class="chart-card">
                 <span>Vencidas no período</span>
                 <strong id="chartOverdue">0</strong>
-                <div class="progress-track"><div id="chartOverdueBar" class="progress-bar" style="width:0%;background:#e84a4a"></div></div>
+                <div class="progress-track"><div id="chartOverdueBar" class="progress-bar" style="width:0%;background:#ef4444"></div></div>
               </div>
 
               <div class="chart-card">
                 <span>Concluídas no período</span>
                 <strong id="chartCompleted">0</strong>
-                <div class="progress-track"><div id="chartCompletedBar" class="progress-bar" style="width:0%;background:#17a36b"></div></div>
+                <div class="progress-track"><div id="chartCompletedBar" class="progress-bar" style="width:0%;background:#10b981"></div></div>
               </div>
             </div>
 
@@ -1622,36 +1598,59 @@
         <div class="topbar">
           <div class="page-title">
             <h1>Configurações</h1>
-            <p>Estrutura preparada para administrar a operação SalesMates.</p>
+            <p>Estrutura comercial e controle da equipe.</p>
           </div>
         </div>
 
         <section class="panel">
           <div class="panel-header">
             <div>
-              <h2>Integrações e campos padrão</h2>
-              <p class="panel-subtitle">Base pronta para conexão futura com Supabase e WhatsApp Business API.</p>
+              <h2>Metas da operação</h2>
+              <p class="panel-subtitle">Defina o objetivo mensal comercial de vendas.</p>
             </div>
           </div>
 
           <div class="form-grid">
             <div class="field">
-              <label>Meta mensal da operação</label>
+              <label>Meta mensal da operação (R$)</label>
               <input id="goalInput" type="number" min="0" value="80000" />
-            </div>
-
-            <div class="field">
-              <label>Canal de WhatsApp</label>
-              <select>
-                <option>Preparado para integração futura</option>
-                <option>WhatsApp Business API</option>
-                <option>Cloud API da Meta</option>
-              </select>
             </div>
           </div>
 
           <div class="modal-actions">
-            <button class="button button-primary" onclick="saveGoal()">Salvar configurações</button>
+            <button class="button button-primary" onclick="saveGoal()">Salvar meta</button>
+          </div>
+        </section>
+
+        <!-- NOVO PAINEL DE VENDEDORES -->
+        <section class="panel" style="margin-top: 24px;">
+          <div class="panel-header">
+            <div>
+              <h2>Gerenciar Vendedores (Equipe)</h2>
+              <p class="panel-subtitle">Adicione ou remova membros da equipe de vendas da sua conta.</p>
+            </div>
+          </div>
+
+          <div style="max-width: 500px; margin-bottom: 20px;">
+            <div class="field">
+              <label>Nome do Novo Vendedor</label>
+              <div style="display: flex; gap: 8px;">
+                <input id="newOwnerName" placeholder="Ex.: Lucas Oliveira" />
+                <button class="button button-primary" onclick="addOwner()">＋ Adicionar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-wrap" style="max-width: 500px;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Vendedor</th>
+                  <th style="width: 80px; text-align: right;">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="ownersTableBody"></tbody>
+            </table>
           </div>
         </section>
       </section>
@@ -1740,7 +1739,7 @@
             </div>
 
             <div class="field full">
-              <label>Tags</label>
+              <label>Tags (separadas por vírgula)</label>
               <input id="dealTags" placeholder="Ex.: prioridade, inbound, indústria" />
             </div>
 
@@ -1968,8 +1967,6 @@
       { name: "Proposta aceita", probability: 100 }
     ];
 
-    const owners = ["Victor", "Gustavo", "Ana"];
-
     const defaultDeals = [
       {
         id: 1,
@@ -1985,7 +1982,6 @@
         source: "Site",
         tags: "inbound, prioridade",
         status: "open",
-        tenant: "matriz",
         createdAt: "2026-07-23T08:30:00",
         timeline: [
           { title: "Negócio criado", description: "Oportunidade incluída por Victor.", date: "2026-07-23T08:30:00" }
@@ -2005,7 +2001,6 @@
         source: "WhatsApp",
         tags: "prospecção",
         status: "open",
-        tenant: "filial",
         createdAt: "2026-07-20T10:20:00",
         timeline: [
           { title: "WhatsApp enviado", description: "Apresentação comercial enviada ao contato.", date: "2026-07-20T10:20:00" }
@@ -2025,7 +2020,6 @@
         source: "Indicação",
         tags: "saúde, decisor",
         status: "open",
-        tenant: "matriz",
         createdAt: "2026-07-17T09:00:00",
         timeline: [
           { title: "Reunião realizada", description: "Necessidade identificada: CRM para equipe de 12 vendedores.", date: "2026-07-22T16:00:00" }
@@ -2045,7 +2039,6 @@
         source: "Prospecção ativa",
         tags: "construção",
         status: "open",
-        tenant: "filial",
         createdAt: "2026-07-15T15:20:00",
         timeline: [
           { title: "Proposta enviada", description: "Proposta comercial enviada por e-mail e WhatsApp.", date: "2026-07-22T10:00:00" }
@@ -2065,7 +2058,6 @@
         source: "Evento",
         tags: "alta prioridade",
         status: "open",
-        tenant: "matriz",
         createdAt: "2026-07-10T11:10:00",
         timeline: [
           { title: "Negociação em fechamento", description: "Cliente solicitou ajuste de condições comerciais.", date: "2026-07-22T14:00:00" }
@@ -2083,7 +2075,6 @@
         date: "2026-07-23T14:00",
         priority: "Alta",
         description: "Validar participantes da reunião de diagnóstico.",
-        tenant: "matriz",
         status: "Agendada"
       },
       {
@@ -2095,7 +2086,6 @@
         date: "2026-07-22T10:00",
         priority: "Alta",
         description: "Inserir condições comerciais revisadas.",
-        tenant: "filial",
         status: "Agendada"
       },
       {
@@ -2107,7 +2097,6 @@
         date: "2026-07-23T16:30",
         priority: "Média",
         description: "Confirmar retorno da proposta revisada.",
-        tenant: "matriz",
         status: "Agendada"
       },
       {
@@ -2119,17 +2108,28 @@
         date: "2026-07-23T09:30",
         priority: "Baixa",
         description: "",
-        tenant: "matriz",
         status: "Concluída"
       }
     ];
 
-    // Bloco de carregamento seguro e higienização dos dados do LocalStorage
     let stages = DEFAULT_STAGES;
     let deals = defaultDeals;
     let activities = defaultActivities;
     let forecastGoal = 80000;
-    let currentTenant = localStorage.getItem("salesmates_tenant_v3") || "all";
+    let owners = ["Victor", "Gustavo", "Ana"];
+
+    // Carregamento dos dados do LocalStorage
+    try {
+      const storedOwners = localStorage.getItem("salesmates_owners");
+      if (storedOwners) {
+        const parsed = JSON.parse(storedOwners);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          owners = parsed;
+        }
+      }
+    } catch(e) {
+      console.error(e);
+    }
 
     try {
       const storedStages = localStorage.getItem("salesmates_stages_v3");
@@ -2150,7 +2150,6 @@
         }
       }
     } catch (e) {
-      console.error("Erro ao processar etapas, restaurando padrão:", e);
       stages = DEFAULT_STAGES;
     }
     if (!stages || stages.length === 0) stages = DEFAULT_STAGES;
@@ -2164,7 +2163,6 @@
         }
       }
     } catch (e) {
-      console.error("Erro ao carregar negócios:", e);
       deals = defaultDeals;
     }
 
@@ -2177,7 +2175,6 @@
         }
       }
     } catch (e) {
-      console.error("Erro ao carregar atividades:", e);
       activities = defaultActivities;
     }
 
@@ -2190,7 +2187,6 @@
         }
       }
     } catch (e) {
-      console.error("Erro ao carregar meta:", e);
       forecastGoal = 80000;
     }
 
@@ -2199,23 +2195,6 @@
     let agendaView = "day";
     let pipelineView = "kanban";
     let currentDetailDealId = null;
-
-    // Helper functions para controle e filtro de Tenants (Multi-organização)
-    function getTenantDeals() {
-      if (currentTenant === "all") return deals;
-      return deals.filter(deal => !deal.tenant || deal.tenant === currentTenant);
-    }
-
-    function getTenantActivities() {
-      if (currentTenant === "all") return activities;
-      return activities.filter(act => !act.tenant || act.tenant === currentTenant);
-    }
-
-    function changeTenant(value) {
-      currentTenant = value;
-      localStorage.setItem("salesmates_tenant_v3", value);
-      refreshAll();
-    }
 
     function stageNames() {
       return stages.map((stage) => stage ? stage.name : "").filter(Boolean);
@@ -2246,18 +2225,6 @@
           deal.stage = stages[0] ? stages[0].name : DEFAULT_STAGES[0].name;
           deal.probability = stages[0] ? stages[0].probability : DEFAULT_STAGES[0].probability;
         }
-        
-        // Garante que todo negócio legado tenha pelo menos uma unidade/tenant atrelada
-        if (!deal.tenant) {
-          deal.tenant = "matriz";
-        }
-      });
-
-      // Garante que todas atividades legadas tenham uma unidade/tenant atrelada
-      activities.forEach((act) => {
-        if (act && !act.tenant) {
-          act.tenant = "matriz";
-        }
       });
     }
 
@@ -2266,6 +2233,7 @@
       localStorage.setItem("salesmates_deals_v3", JSON.stringify(deals));
       localStorage.setItem("salesmates_activities_v3", JSON.stringify(activities));
       localStorage.setItem("salesmates_goal_v3", String(forecastGoal));
+      localStorage.setItem("salesmates_owners", JSON.stringify(owners));
     }
 
     function escapeHTML(value) {
@@ -2279,7 +2247,7 @@
 
     function currency(value) {
       if (value === null || value === undefined || value === "" || Number(value) <= 0) {
-        return "Valor a definir";
+        return "R$ a definir";
       }
 
       return new Intl.NumberFormat("pt-BR", {
@@ -2337,7 +2305,7 @@
     }
 
     function getDealActivities(dealId) {
-      return getTenantActivities().filter((activity) => activity && Number(activity.dealId) === Number(dealId));
+      return activities.filter((activity) => activity && Number(activity.dealId) === Number(dealId));
     }
 
     function getActivityStatus(activity) {
@@ -2408,7 +2376,7 @@
     function dealValueHTML(deal) {
       return Number(deal.value) > 0
         ? `<div class="deal-value">${currencyNumber(deal.value)}</div>`
-        : `<div class="deal-value deal-no-value">Valor a definir</div>`;
+        : `<div class="deal-value" style="color:#9ca3af;font-weight:500;">R$ a definir</div>`;
     }
 
     function fillOwnerOptions() {
@@ -2428,6 +2396,57 @@
         const select = document.getElementById(id);
         if (select) select.innerHTML = options;
       });
+    }
+
+    // Gerenciador Visual de Vendedores da Equipe (Configurações)
+    function renderOwnersList() {
+      const tbody = document.getElementById("ownersTableBody");
+      if (!tbody) return;
+
+      tbody.innerHTML = owners.map((owner) => `
+        <tr>
+          <td>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span class="small-avatar">${owner.charAt(0)}</span>
+              <strong>${escapeHTML(owner)}</strong>
+            </div>
+          </td>
+          <td style="text-align: right;">
+            <button class="icon-button danger" title="Remover Vendedor" onclick="removeOwner('${escapeHTML(owner)}')">×</button>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function addOwner() {
+      const input = document.getElementById("newOwnerName");
+      const name = input?.value.trim();
+      if (!name) return;
+
+      if (owners.includes(name)) {
+        alert("Este vendedor já está cadastrado.");
+        return;
+      }
+
+      owners.push(name);
+      saveData();
+      input.value = "";
+      refreshAll();
+      renderOwnersList();
+    }
+
+    function removeOwner(name) {
+      if (owners.length <= 1) {
+        alert("Você deve manter pelo menos um vendedor cadastrado.");
+        return;
+      }
+
+      if (confirm(`Tem certeza que deseja remover "${name}" da equipe comercial?`)) {
+        owners = owners.filter((o) => o !== name);
+        saveData();
+        refreshAll();
+        renderOwnersList();
+      }
     }
 
     function refreshAll() {
@@ -2462,6 +2481,7 @@
       if (viewId === "settings") {
         const goalInput = document.getElementById("goalInput");
         if (goalInput) goalInput.value = forecastGoal;
+        renderOwnersList();
       }
     }
 
@@ -2473,7 +2493,7 @@
       const container = document.getElementById(containerId);
       if (!container) return;
 
-      const openDeals = getTenantDeals().filter((deal) => deal && deal.status === "open");
+      const openDeals = deals.filter((deal) => deal && deal.status === "open");
 
       container.innerHTML = stages.map((stage, index) => {
         if (!stage) return "";
@@ -2506,7 +2526,7 @@
             </div>
 
             <div class="progress-track">
-              <div class="progress-bar" style="width:${conversion}%;background:${index % 2 ? "#3977e8" : "#171717"}"></div>
+              <div class="progress-bar" style="width:${conversion}%;background:${index % 2 ? "var(--primary)" : "#111827"}"></div>
             </div>
 
             <div class="conversion-meta">
@@ -2520,17 +2540,15 @@
 
     function renderDashboard() {
       const currentDay = dateKey(CURRENT_DATE);
-      const tenantActs = getTenantActivities();
-      const tenantDeals = getTenantDeals();
 
-      const completedToday = tenantActs.filter((activity) =>
+      const completedToday = activities.filter((activity) =>
         getActivityStatus(activity) === "Concluída" && dateKey(activity.date) === currentDay
       ).length;
 
-      const pending = tenantActs.filter((activity) => getActivityStatus(activity) === "Agendada").length;
-      const overdue = tenantActs.filter((activity) => getActivityStatus(activity) === "Atrasada").length;
+      const pending = activities.filter((activity) => getActivityStatus(activity) === "Agendada").length;
+      const overdue = activities.filter((activity) => getActivityStatus(activity) === "Atrasada").length;
 
-      const weightedForecast = tenantDeals
+      const weightedForecast = deals
         .filter((deal) => deal.status === "open")
         .reduce((total, deal) => {
           return total + Number(deal.value || 0) * (Number(deal.probability || 0) / 100);
@@ -2543,7 +2561,7 @@
 
       renderConversionRows("conversionDashboard");
 
-      const nextActivities = [...tenantActs]
+      const nextActivities = [...activities]
         .filter((activity) => !["Concluída", "Cancelada"].includes(getActivityStatus(activity)))
         .sort((a, b) => new Date(a.date) - new Date(b.date))
         .slice(0, 4);
@@ -2574,7 +2592,7 @@
       const status = document.getElementById("pipelineStatus")?.value || "open";
       const lossReason = document.getElementById("pipelineLossReason")?.value || "";
 
-      return getTenantDeals().filter((deal) => {
+      return deals.filter((deal) => {
         if (!deal) return false;
         const matchesStatus = status === "all" || deal.status === status;
 
@@ -2611,7 +2629,7 @@
 
       const filteredDeals = getFilteredPipelineDeals();
 
-      board.style.display = pipelineView === "kanban" ? "grid" : "none";
+      board.style.display = pipelineView === "kanban" ? "flex" : "none";
       list.style.display = pipelineView === "list" ? "block" : "none";
 
       if (pipelineView === "list") {
@@ -2636,13 +2654,13 @@
                   <tr onclick="openDealDetail(${deal.id})" style="cursor:pointer">
                     <td>
                       <strong>${escapeHTML(deal.company)}</strong><br>
-                      <small style="color:#737373">${escapeHTML(deal.contact || "Sem contato")}</small>
+                      <small style="color:#6b7280">${escapeHTML(deal.contact || "Sem contato")}</small>
                     </td>
                     <td>${badgeForStatus(dealStatusLabel(deal.status))}</td>
                     <td>${escapeHTML(deal.stage)}</td>
                     <td>${escapeHTML(deal.owner)}</td>
                     <td>${currency(deal.value)}</td>
-                    <td class="${nextStatus === "Atrasada" ? "next-activity overdue" : ""}">
+                    <td style="color:${nextStatus === "Atrasada" ? "var(--danger)" : "inherit"}">
                       ${next ? `${nextStatus === "Atrasada" ? "Vencida: " : ""}${escapeHTML(next.title)}` : "Sem atividade"}
                     </td>
                   </tr>
@@ -2679,6 +2697,19 @@
               const next = getNextActivity(deal.id);
               const nextStatus = next ? getActivityStatus(next) : null;
 
+              // Indicador redondo de Atividades (Pipedrive-style)
+              let dotClass = "gray"; // Sem atividades pendentes
+              if (nextStatus === "Atrasada") {
+                dotClass = "red"; // Vencido
+              } else if (next) {
+                // Se tem atividade hoje/futura
+                const isToday = dateKey(next.date) === dateKey(CURRENT_DATE);
+                dotClass = isToday ? "yellow" : "green";
+              }
+
+              // Organização das tags
+              const tagsArray = deal.tags ? deal.tags.split(",").map(t => t.trim()).filter(Boolean) : [];
+
               return `
                 <article
                   class="deal-card"
@@ -2686,32 +2717,38 @@
                   ondragstart="dragDeal(event, ${deal.id})"
                   onclick="openDealDetail(${deal.id})"
                 >
-                  <div class="deal-card-top">
-                    <div style="min-width:0">
-                      <h3>${escapeHTML(deal.company)}</h3>
-                      <p>${escapeHTML(deal.contact || "Sem contato informado")}</p>
-                    </div>
-
-                    <span title="${nextStatus === "Atrasada" ? "Atividade vencida" : next ? "Atividade agendada" : "Sem atividade"}">
-                      ${nextStatus === "Atrasada" ? "●" : next ? "◌" : "○"}
-                    </span>
+                  <div>
+                    <h3>${escapeHTML(deal.company)}</h3>
+                    <p style="margin-top: 2px;">${escapeHTML(deal.contact || "Sem contato")}</p>
                   </div>
 
                   ${dealValueHTML(deal)}
 
-                  <div class="deal-card-footer" style="margin-top:10px;align-items:center">
-                    <span class="badge badge-gray">${deal.probability}%</span>
-                    <small style="color:#737373;font-size:10px">${escapeHTML(deal.owner)}</small>
-                  </div>
+                  ${tagsArray.length ? `
+                    <div class="deal-card-tags">
+                      ${tagsArray.map(tag => `<span class="deal-card-tag">${escapeHTML(tag)}</span>`).join("")}
+                    </div>
+                  ` : ""}
 
-                  <div class="next-activity ${nextStatus === "Atrasada" ? "overdue" : ""}">
-                    ${next ? `${nextStatus === "Atrasada" ? "Vencida · " : "Próxima · "}${escapeHTML(next.title)}` : "Sem próxima atividade"}
+                  <div class="deal-card-footer">
+                    <div class="deal-card-owner">
+                      <span class="small-avatar" style="width: 18px; height: 18px; font-size: 8px;">
+                        ${deal.owner ? deal.owner.charAt(0) : "V"}
+                      </span>
+                      <span>${escapeHTML(deal.owner)}</span>
+                    </div>
+
+                    <!-- Pipedrive activity indicator dot -->
+                    <span 
+                      class="activity-dot ${dotClass}" 
+                      title="${next ? `Próxima: ${next.title} (${formatDate(next.date)})` : 'Sem atividades programadas'}"
+                    ></span>
                   </div>
                 </article>
               `;
             }).join("")}
 
-            ${!stageDeals.length ? `<div style="padding:16px 5px;color:#8b8b8b;font-size:11px;text-align:center">Sem negócios</div>` : ""}
+            ${!stageDeals.length ? `<div style="padding:16px 5px;color:#9ca3af;font-size:11px;text-align:center">Nenhum negócio</div>` : ""}
           </div>
         `;
       }).join("");
@@ -2762,7 +2799,7 @@
         return `
           <div class="stage-editor-card">
             <strong title="${escapeHTML(stage.name)}">${escapeHTML(stage.name)}</strong>
-            <small style="display:block;margin-bottom:9px;color:#737373;font-size:10px">
+            <small style="display:block;margin-bottom:9px;color:#6b7280;font-size:10px">
               Probabilidade sugerida: ${stage.probability}%
             </small>
 
@@ -2898,12 +2935,10 @@
         html += `<span class="calendar-day empty-day"></span>`;
       }
 
-      const tenantActs = getTenantActivities();
-
       for (let day = 1; day <= lastDate; day++) {
         const thisDate = new Date(year, month, day, 12, 0, 0);
         const key = dateKey(thisDate);
-        const hasActivity = tenantActs.some((activity) => dateKey(activity.date) === key);
+        const hasActivity = activities.some((activity) => dateKey(activity.date) === key);
         const selected = dateKey(selectedDate) === key;
         const today = dateKey(CURRENT_DATE) === key;
 
@@ -3017,9 +3052,7 @@
       const statusFilter = document.getElementById("activityStatusFilter")?.value || "";
       const search = document.getElementById("activitySearch")?.value.trim().toLowerCase() || "";
 
-      const tenantActs = getTenantActivities();
-
-      const filtered = tenantActs
+      const filtered = activities
         .map((activity) => ({ ...activity, calculatedStatus: getActivityStatus(activity) }))
         .filter((activity) => {
           const deal = getDeal(activity.dealId);
@@ -3040,10 +3073,10 @@
 
       document.getElementById("agendaDateLabel").textContent = getAgendaLabel();
 
-      const periodActivities = tenantActs.filter((activity) => isInAgendaPeriod(activity.date));
-      const scheduled = tenantActs.filter((activity) => getActivityStatus(activity) === "Agendada").length;
-      const overdue = tenantActs.filter((activity) => getActivityStatus(activity) === "Atrasada").length;
-      const completed = tenantActs.filter((activity) => getActivityStatus(activity) === "Concluída").length;
+      const periodActivities = activities.filter((activity) => isInAgendaPeriod(activity.date));
+      const scheduled = activities.filter((activity) => getActivityStatus(activity) === "Agendada").length;
+      const overdue = activities.filter((activity) => getActivityStatus(activity) === "Atrasada").length;
+      const completed = activities.filter((activity) => getActivityStatus(activity) === "Concluída").length;
 
       document.getElementById("agendaScheduled").textContent = scheduled;
       document.getElementById("agendaOverdue").textContent = overdue;
@@ -3069,7 +3102,7 @@
               <tr>
                 <td>
                   <strong>${escapeHTML(activity.title)}</strong><br>
-                  <small style="color:#737373">${escapeHTML(activity.priority)} prioridade</small>
+                  <small style="color:#6b7280">${escapeHTML(activity.priority)} prioridade</small>
                 </td>
                 <td>${escapeHTML(activity.type)}</td>
                 <td>
@@ -3118,7 +3151,7 @@
     function renderForecast() {
       const owner = document.getElementById("forecastOwnerFilter")?.value || "";
 
-      const openDeals = getTenantDeals().filter((deal) => {
+      const openDeals = deals.filter((deal) => {
         return deal && deal.status === "open" && (!owner || deal.owner === owner);
       });
 
@@ -3151,7 +3184,7 @@
             <strong>${Math.round(goalProgress)}%</strong>
           </div>
           <div class="progress-track">
-            <div class="progress-bar" style="width:${goalProgress}%;background:${weighted >= forecastGoal ? "#17a36b" : "#171717"}"></div>
+            <div class="progress-bar" style="width:${goalProgress}%;background:${weighted >= forecastGoal ? "var(--success)" : "var(--primary)"}"></div>
           </div>
         </div>
 
@@ -3190,7 +3223,7 @@
             </div>
 
             <div class="progress-track">
-              <div class="progress-bar" style="width:${impact}%;background:#3977e8"></div>
+              <div class="progress-bar" style="width:${impact}%;background:var(--info)"></div>
             </div>
 
             <div class="conversion-meta">
@@ -3208,7 +3241,7 @@
               <tr>
                 <td>
                   <button class="link-button" onclick="openDealDetail(${deal.id})">${escapeHTML(deal.company)}</button><br>
-                  <small style="color:#737373">${escapeHTML(deal.contact || "Sem contato")}</small>
+                  <small style="color:#6b7280">${escapeHTML(deal.contact || "Sem contato")}</small>
                 </td>
                 <td>${escapeHTML(deal.owner)}</td>
                 <td>${escapeHTML(deal.stage)}</td>
@@ -3244,17 +3277,14 @@
     }
 
     function renderTeam() {
-      const tenantDeals = getTenantDeals();
-      const tenantActs = getTenantActivities();
-
-      const openDeals = tenantDeals.filter((deal) => deal && deal.status === "open");
+      const openDeals = deals.filter((deal) => deal && deal.status === "open");
       const pipeline = openDeals.reduce((total, deal) => total + Number(deal.value || 0), 0);
 
-      const periodActivities = tenantActs.filter(activityMatchesTeamPeriod);
+      const periodActivities = activities.filter(activityMatchesTeamPeriod);
       const pending = periodActivities.filter((activity) => getActivityStatus(activity) === "Agendada").length;
       const overdue = periodActivities.filter((activity) => getActivityStatus(activity) === "Atrasada").length;
 
-      const won = tenantDeals
+      const won = deals
         .filter((deal) => deal && deal.status === "won")
         .reduce((sum, deal) => sum + Number(deal.value || 0), 0);
 
@@ -3264,7 +3294,7 @@
       document.getElementById("teamWon").textContent = currencyNumber(won);
 
       document.getElementById("teamRanking").innerHTML = `
-        <div class="team-row" style="color:#737373;font-size:10px;font-weight:800;text-transform:uppercase">
+        <div class="team-row" style="color:#6b7280;font-size:10px;font-weight:700;text-transform:uppercase">
           <div>Comercial</div>
           <div>Pipeline</div>
           <div>Atividades</div>
@@ -3291,7 +3321,7 @@
               </div>
               <div>${currencyNumber(ownerPipeline)}</div>
               <div>${ownerActivities.length}</div>
-              <div>${ownerOverdue ? `<span style="color:#e84a4a;font-weight:800">${ownerOverdue}</span>` : "0"}</div>
+              <div>${ownerOverdue ? `<span style="color:var(--danger);font-weight:700">${ownerOverdue}</span>` : "0"}</div>
               <div><strong>${currencyNumber(ownerForecast)}</strong></div>
             </div>
           `;
@@ -3323,7 +3353,7 @@
     function renderReports() {
       renderConversionRows("reportsConversion");
 
-      const losses = getTenantDeals().filter((deal) => deal && (deal.status === "lost" || deal.status === "churn"));
+      const losses = deals.filter((deal) => deal && (deal.status === "lost" || deal.status === "churn"));
       const reasons = {};
 
       losses.forEach((deal) => {
@@ -3342,7 +3372,7 @@
                 <strong>${count}</strong>
               </div>
               <div class="progress-track">
-                <div class="progress-bar" style="width:${(count / max) * 100}%;background:#e84a4a"></div>
+                <div class="progress-bar" style="width:${(count / max) * 100}%;background:var(--danger)"></div>
               </div>
             </div>
           `).join("")
@@ -3388,14 +3418,14 @@
         document.getElementById("dealEmail").value = deal.email || "";
         document.getElementById("dealValue").value = deal.value || "";
         document.getElementById("dealProbability").value = deal.probability || 25;
-        document.getElementById("dealOwner").value = deal.owner || "Victor";
+        document.getElementById("dealOwner").value = deal.owner || (owners[0] || "Victor");
         document.getElementById("dealCloseDate").value = deal.closeDate || "";
         document.getElementById("dealSource").value = deal.source || "";
         document.getElementById("dealTags").value = deal.tags || "";
         document.getElementById("dealNote").value = "";
       } else {
         document.getElementById("dealProbability").value = stages[0] ? stages[0].probability : 10;
-        document.getElementById("dealOwner").value = "Victor";
+        document.getElementById("dealOwner").value = owners[0] || "Victor";
         document.getElementById("dealNote").value = "";
       }
 
@@ -3486,7 +3516,6 @@
           source,
           tags,
           status: "open",
-          tenant: currentTenant === "all" ? "matriz" : currentTenant,
           createdAt: new Date().toISOString(),
           timeline: [
             {
@@ -3524,7 +3553,7 @@
       if (form) form.reset();
       fillOwnerOptions();
 
-      const activeDeals = getTenantDeals().filter((deal) => deal && deal.status === "open");
+      const activeDeals = deals.filter((deal) => deal && deal.status === "open");
 
       select.innerHTML = activeDeals.length
         ? activeDeals.map((deal) => `
@@ -3537,7 +3566,7 @@
       const selectedDeal = getDeal(dealId);
       const ownerInput = document.getElementById("activityOwner");
       if (ownerInput) {
-        ownerInput.value = selectedDeal?.owner || "Victor";
+        ownerInput.value = selectedDeal?.owner || owners[0] || "Victor";
       }
 
       const defaultDate = new Date(CURRENT_DATE);
@@ -3567,7 +3596,6 @@
         priority: document.getElementById("activityPriority").value,
         owner: document.getElementById("activityOwner").value,
         description: document.getElementById("activityDescription").value.trim(),
-        tenant: currentTenant === "all" ? "matriz" : currentTenant,
         status: "Agendada"
       };
 
@@ -3831,7 +3859,7 @@
       forecastGoal = value;
       saveData();
       refreshAll();
-      alert("Configurações salvas com sucesso.");
+      alert("Meta mensal atualizada com sucesso.");
     }
 
     function closeModal(id) {
@@ -3847,22 +3875,15 @@
       });
     });
 
-    // Inicialização protegida e segura da aplicação
+    // Inicialização da aplicação
     try {
       migrateOldDeals();
       saveData();
       fillOwnerOptions();
-      
-      const tenantSelectEl = document.getElementById("tenantSelect");
-      if (tenantSelectEl) {
-        tenantSelectEl.value = currentTenant;
-      }
-      
       renderCalendar();
       refreshAll();
     } catch (e) {
-      console.error("Erro crítico de inicialização, limpando dados parciais para recuperação automática:", e);
-      // Fallback em caso extremo de dados completamente corrompidos
+      console.error("Erro crítico de inicialização:", e);
       localStorage.removeItem("salesmates_stages_v3");
       stages = DEFAULT_STAGES;
       saveData();
